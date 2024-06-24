@@ -38,8 +38,8 @@ To start the application, follow these steps:
 1. **Clone the repository** (if you haven't already):
 
     ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/NikolaOgnjenovic/GeniusClone
+    cd GeniusClone
     ```
 
 2. **Build and run the application using Docker Compose**:
@@ -49,6 +49,28 @@ To start the application, follow these steps:
     ```
 
 This command will build the Docker images and start the containers for the backend, frontend, database, and pgAdmin.
+
+### Developing the application
+
+While working on the application, run the backend and frontend locally and run the database using Docker Compose.
+
+1. **Run the database using Docker Compose:**
+  ```sh
+    docker-compose up --build db
+  ```
+
+2. **Run the backend using an IDE, or in your terminal:**
+  ```sh
+    cd backend/genius-clone
+    ./gradlew bootRun
+  ```
+
+3. **Run the frontend using an IDE, or in your terminal:**
+  ```sh
+    cd ../../frontend
+    npm install
+    npm start
+  ```
 
 ### Accessing the Services
 

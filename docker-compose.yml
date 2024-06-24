@@ -14,14 +14,14 @@ services:
       - db
 
   frontend:
-    image: node:14
+    image: node:20
     container_name: frontend
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "4200:4200"
-    command: ["sh", "-c", "npm install && npm start"]
+    command: ["sh", "-c", "npm install && npm start -- --host 0.0.0.0"]
     depends_on:
       - backend
 
