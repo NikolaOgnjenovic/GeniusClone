@@ -2,10 +2,12 @@ package com.mmul.geniusclone.models;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue
@@ -20,6 +22,17 @@ public class User {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    public User() {
+        this.roles = new HashSet<>();
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.roles = new HashSet<>();
+        this.roles.add(Role.USER);
+    }
 
     public UUID getId() {
         return id;

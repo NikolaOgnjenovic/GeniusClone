@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.css */
+
+/* Base Colors */
+:root {
+  --primary-color: #1F2544;    /* Dark Blue */
+  --secondary-color: #474F7A;  /* Slate Blue */
+  --accent-color: #81689D;     /* Purple */
+  --highlight-color: #FFD0EC;  /* Light Pink */
+}
+
+/* Global Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-color);
+  color: var(--highlight-color);
+}
+
+a {
+  color: var(--highlight-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Utility Classes */
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Button Styles */
+button {
+  background-color: var(--accent-color);
+  border: none;
+  color: var(--highlight-color);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Text Field Styles */
+input[type="text"], input[type="password"], input[type="email"], textarea {
+  width: 50%; /* Adjust this value as needed */
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"], textarea:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  color: var(--primary-color);
+}
