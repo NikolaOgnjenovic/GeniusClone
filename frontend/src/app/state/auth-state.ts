@@ -32,7 +32,6 @@ export class AuthState {
   login(request: LoginRequest): void {
     this.authService.login(request).subscribe({
       next: (response) => {
-        console.table(response);
         const user = this.mapResponseToUser(response);
         this.storeCurrentUser(user);
         this.router.navigate(['/']);
