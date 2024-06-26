@@ -1,4 +1,4 @@
-package com.mmul.geniusclone.dtos.auth.post;
+package com.mmul.geniusclone.dtos.artist.post;
 
 import java.time.LocalDate;
 

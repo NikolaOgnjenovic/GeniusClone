@@ -1,6 +1,8 @@
 package com.mmul.geniusclone.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,8 +17,9 @@ public class Artist extends Performer {
         birthday = artistBirthday;
     }
 
-    @ManyToOne
-    private Band band;
+    @JsonIgnoreProperties("members")
+    @ManyToMany(mappedBy = "members")
+    private List<Band> memberOf;
 
     public Artist() {
 
@@ -47,12 +50,19 @@ public class Artist extends Performer {
         this.birthday = birthday;
     }
 
-    public Band getBand() {
-        return band;
+    public List<Band> getMemberOf() {
+        return memberOf;
     }
 
-    public void setBand(Band band) {
-        this.band = band;
+    public void setMemberOf(List<Band> bands) {
+        this.memberOf = bands;
     }
 
+    public void addMembership(Band band){
+        this.memberOf.add(band);
+    }
+
+    public void removeMembership(Band band){
+        this.memberOf.remove(band);
+    }
 }

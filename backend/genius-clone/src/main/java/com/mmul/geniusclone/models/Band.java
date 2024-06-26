@@ -1,5 +1,6 @@
 package com.mmul.geniusclone.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mmul.geniusclone.models.Artist;
 import com.mmul.geniusclone.models.Performer;
 import jakarta.persistence.*;
@@ -17,7 +18,13 @@ public class Band extends Performer {
         name = bandName;
     }
 
-    @OneToMany
+    @JsonIgnoreProperties("bands")
+    @ManyToMany
+    @JoinTable(
+            name = "band_artist",
+            joinColumns = @JoinColumn(name = "band_id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id")
+    )
     private List<Artist> members;
 
     public Band() {
