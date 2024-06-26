@@ -13,12 +13,18 @@ public class Review {
     @GeneratedValue
     @Id
     private UUID id;
+    UUID userId;
+
+    UUID songId;
 
     short value;
 
     String description;
 
-    public Review(short value, String description) {
+
+    public Review(UUID userId, UUID songId, short value, String description) {
+        this.userId = userId;
+        this.songId = songId;
         this.value = value;
         this.description = description;
     }
@@ -48,5 +54,21 @@ public class Review {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public UUID getSongId() {
+        return songId;
+    }
+
+    public void setSongId(UUID songId) {
+        this.songId = songId;
     }
 }
