@@ -2,11 +2,10 @@ package com.mmul.geniusclone.controllers.band;
 
 
 import com.mmul.geniusclone.dtos.band.post.PostBandRequest;
-import com.mmul.geniusclone.dtos.band.put.PutBandUpdateRequest;
+import com.mmul.geniusclone.dtos.band.put.UpdateBandRequest;
 import com.mmul.geniusclone.models.Band;
 import com.mmul.geniusclone.services.band.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/band")
+@RequestMapping("/api/v1/bands")
 public class BandController {
     @Autowired
     private BandService bandService;
@@ -25,13 +24,13 @@ public class BandController {
     }
 
     @GetMapping("/{id}")
-    public Band getBand(@PathVariable UUID id) {
+    public Band getById(@PathVariable UUID id) {
         return bandService.getById(id);
     }
 
     @PostMapping
-    public void createArtist(@RequestBody PostBandRequest request) {
-        bandService.create(request);
+    public Band createBand(@RequestBody PostBandRequest request) {
+        return bandService.create(request);
     }
 
     @DeleteMapping("/{id}")
@@ -49,10 +48,8 @@ public class BandController {
         return bandService.removeArtistFromBand(bandId, artistId);
     }
 
-    @PutMapping("/update/{id}")
-    public Band updateSong(@PathVariable UUID id,
-                                             @RequestBody PutBandUpdateRequest request) {
-        
+    @PutMapping("/{id}")
+    public Band updateBand(@PathVariable UUID id, @RequestBody UpdateBandRequest request) {
         return bandService.update(id, request);
     }
 }

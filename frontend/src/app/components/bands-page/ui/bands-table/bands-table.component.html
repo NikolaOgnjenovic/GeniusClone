@@ -1,0 +1,27 @@
+<table class="bands-table">
+  <thead>
+  <tr>
+    <th>Band Name</th>
+    <th>Artists</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let band of bands">
+    <td>{{ band.name }}</td>
+    <td>
+      <ul>
+        <li *ngFor="let artist of band.members">
+          {{ artist.name }} {{ artist.surname }}
+        </li>
+      </ul>
+    </td>
+    <td>
+      <div class="button-container">
+        <button (click)="onUpdate(band)">Update</button>
+        <button (click)="onDelete(band)">Delete</button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
