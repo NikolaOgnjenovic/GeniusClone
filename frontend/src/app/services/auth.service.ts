@@ -10,7 +10,7 @@ import {LoginResponse} from "../models/auth/login-response";
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = 'http://localhost:8080/api/v1/auth';
 
   constructor(private readonly http: HttpClient) {}
 
