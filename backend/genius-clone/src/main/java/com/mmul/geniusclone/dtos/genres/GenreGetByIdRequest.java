@@ -1,2 +1,6 @@
-package com.mmul.geniusclone.dtos.genres;public record GenreGetByIdRequest() {
+package com.mmul.geniusclone.dtos.genres;
+
+import java.util.UUID;
+
+public record GenreGetByIdRequest(UUID id) {
 }
