@@ -1,3 +1,23 @@
-<div>
-  <app-bands-table [bands]="bands"></app-bands-table>
-</div>
+<button class="create-button" (click)="onCreateBand()">Create</button>
+<app-bands-table
+  [bands]="bands"
+  (update)="onUpdateBand($event)"
+  (delete)="onDeleteBand($event)"
+/>
+<app-create-band-modal
+  *ngIf="showCreationModal"
+  (close)="onCloseCreationModal()"
+  (create)="onCreate($event)"
+/>
+<app-update-band-modal
+  *ngIf="showUpdateModal"
+  [band]="selectedBand"
+  (close)="onCloseUpdateModal()"
+  (update)="onUpdate($event)"
+/>
+<app-delete-band-modal
+  *ngIf="showDeleteModal"
+  [band]="selectedBand"
+  (close)="onCloseDeleteModal()"
+  (delete)="onDelete()"
+/>

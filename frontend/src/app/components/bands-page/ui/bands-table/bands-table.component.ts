@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Band} from "../../../../models/as-is/band";
 import {NgForOf} from "@angular/common";
 
@@ -12,6 +12,15 @@ import {NgForOf} from "@angular/common";
   styleUrl: './bands-table.component.css'
 })
 export class BandsTableComponent {
-  @Input()
-  bands: Band[] = [];
+  @Input() bands: Band[] = [];
+  @Output() update = new EventEmitter<Band>();
+  @Output() delete = new EventEmitter<Band>();
+
+  onUpdate(band: Band): void {
+    this.update.emit(band);
+  }
+
+  onDelete(band: Band): void {
+    this.delete.emit(band);
+  }
 }
