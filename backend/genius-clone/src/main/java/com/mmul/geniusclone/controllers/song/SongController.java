@@ -18,7 +18,7 @@ public class SongController {
     @Autowired
     private SongService songService;
 
-    @PostMapping("")
+    @PostMapping()
     public ResponseEntity<String> uploadSong(@RequestBody SongDTO song) {
         try {
             songService.saveSong(song);
@@ -28,7 +28,7 @@ public class SongController {
         }
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateSong(@PathVariable UUID id,
                                              @RequestBody SongDTO song) {
         try {
