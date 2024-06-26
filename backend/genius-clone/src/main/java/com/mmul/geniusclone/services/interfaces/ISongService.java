@@ -2,7 +2,6 @@ package com.mmul.geniusclone.services.interfaces;
 
 import com.mmul.geniusclone.models.Song;
 import com.mmul.geniusclone.dtos.song.SongDTO;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
