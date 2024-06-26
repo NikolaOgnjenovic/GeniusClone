@@ -1,9 +1,6 @@
 package com.mmul.geniusclone.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -13,6 +10,7 @@ public class Genre {
     @GeneratedValue
     @Id
     private UUID id;
+    @Column(unique = true)
     String name;
 
     public Genre(String name) {
