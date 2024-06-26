@@ -10,21 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
     private IAuthService authService;
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/register")
     public ResponseEntity<RegistrationResponse> register(@RequestBody RegistrationRequest request) {
         RegistrationResponse response = authService.registerUser(request);
         return ResponseEntity.ok(response);
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
         LoginResponse response = authService.loginUser(request);
