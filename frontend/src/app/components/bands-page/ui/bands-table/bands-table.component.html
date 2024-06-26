@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <th>Band Name</th>
+    <th>Artists</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let band of bands">
+    <td>{{ band.name }}</td>
+    <td>
+      <ul>
+        <li *ngFor="let artist of band.members">
+          {{ artist.name }} {{ artist.surname }}
+        </li>
+      </ul>
+    </td>
+  </tr>
+  </tbody>
+</table>

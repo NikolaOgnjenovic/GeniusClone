@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/band")
+@RequestMapping("/api/v1/bands")
 public class BandController {
     @Autowired
     private BandService bandService;
@@ -50,8 +50,7 @@ public class BandController {
     }
 
     @PutMapping("/update/{id}")
-    public Band updateSong(@PathVariable UUID id,
-                                             @RequestBody PutBandUpdateRequest request) {
+    public Band updateSong(@PathVariable UUID id, @RequestBody PutBandUpdateRequest request) {
         
         return bandService.update(id, request);
     }

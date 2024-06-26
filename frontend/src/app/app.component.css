@@ -1,0 +1,12 @@
+.content-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar {
+  width: 15vw;
+}
+
+.content {
+  padding: 5rem;
+}
