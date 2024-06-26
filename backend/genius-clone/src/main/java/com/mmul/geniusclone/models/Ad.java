@@ -7,15 +7,17 @@ import java.util.UUID;
 @Entity
 @Table(name = "ads")
 public class Ad {
-    @Id
     @GeneratedValue
+    @Id
     private UUID id;
     private String link;
-    private Byte[] image;
+    private byte[] image;
+    private UUID genreId;
 
-    public Ad(String link, Byte[] image) {
+    public Ad(String link, byte[] image, UUID genreId) {
         this.link = link;
         this.image = image;
+        this.genreId = genreId;
     }
 
     public Ad() {
@@ -38,12 +40,19 @@ public class Ad {
         this.link = link;
     }
 
-    public Byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
+    public UUID getGenreId() {
+        return genreId;
+    }
+
+    public void setGenreId(UUID genreId) {
+        this.genreId = genreId;
+    }
 }
