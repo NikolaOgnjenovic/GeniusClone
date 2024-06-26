@@ -1,0 +1,30 @@
+nav {
+  background-color: var(--secondary-color);
+  width: 100%;
+}
+
+nav h1 {
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+nav ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+nav ul li a:hover {
+  background-color: var(--highlight-color);
+}

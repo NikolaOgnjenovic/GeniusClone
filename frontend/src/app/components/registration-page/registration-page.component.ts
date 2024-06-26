@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import {Component} from '@angular/core';
 import {RegistrationRequest} from "../../models/auth/registration-request";
 import {FormsModule} from "@angular/forms";
+import {AuthState} from "../../state/auth-state";
 
 @Component({
   selector: 'app-registration-page',
@@ -13,19 +13,10 @@ import {FormsModule} from "@angular/forms";
   styleUrl: './registration-page.component.css'
 })
 export class RegistrationPageComponent {
-  title = 'Registration Page';
-
-  constructor(private authService: AuthService) {}
+  constructor(private authState: AuthState) {}
 
   register(email: string, password: string): void {
     const request: RegistrationRequest = { email, password };
-    this.authService.register(request).subscribe({
-      next: (response) => {
-        console.log('Registration successful:', response);
-      },
-      error: (error) => {
-        console.error('Registration error:', error);
-      }
-    });
+    this.authState.register(request);
   }
 }

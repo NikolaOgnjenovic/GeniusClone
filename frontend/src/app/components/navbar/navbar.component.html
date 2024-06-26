@@ -1,9 +1,11 @@
 <nav>
+  <h1>GeniusClone</h1>
   <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/playlists">Playlists</a></li>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/register">Register</a></li>
-    <li><a href="/admin">Admin controls</a></li>
+    <li *ngIf="authState.getCurrentUser()"><a href="/">Home</a></li>
+    <li *ngIf="authState.getCurrentUser()"><a href="/playlists">Playlists</a></li>
+    <li *ngIf="!authState.getCurrentUser()"><a href="/login">Login</a></li>
+    <li *ngIf="!authState.getCurrentUser()"><a href="/register">Register</a></li>
+    <li *ngIf="authState.getCurrentUser()"><a href="/admin">Admin controls</a></li>
+    <li *ngIf="authState.getCurrentUser()"><a (click)="logout()">Logout</a></li>
   </ul>
 </nav>
