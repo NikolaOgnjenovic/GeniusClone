@@ -1,4 +1,6 @@
-import javax.persistence.*;
+package com.mmul.geniusclone.models;
+import jakarta.persistence.*;
+
 import java.util.UUID;
 
 @Entity

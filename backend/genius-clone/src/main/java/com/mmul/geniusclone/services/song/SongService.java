@@ -1,3 +1,9 @@
+package com.mmul.geniusclone.services.song;
+
+import com.mmul.geniusclone.dtos.song.SongDTO;
+import com.mmul.geniusclone.models.Song;
+import com.mmul.geniusclone.repositories.song.SongRepository;
+import com.mmul.geniusclone.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +27,7 @@ public class SongService implements ISongService {
     @Override
     public Song updateSong(UUID id, SongDTO songDTO) throws IOException {
         Song song = songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
-        Song updatedSong = songDTo.toSong();
+        Song updatedSong = songDTO.toSong();
         updatedSong.setId(song.getId());
         return songRepository.save(updatedSong);
     }

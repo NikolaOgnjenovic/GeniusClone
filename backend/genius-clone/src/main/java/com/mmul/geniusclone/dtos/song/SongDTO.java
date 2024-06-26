@@ -1,3 +1,7 @@
+package com.mmul.geniusclone.dtos.song;
+
+import com.mmul.geniusclone.models.Song;
+
 public class SongDTO {
 
 
@@ -31,7 +35,7 @@ public class SongDTO {
         this.title = title;
     }
 
-    Song toSong() {
+    public Song toSong() {
         return new Song(this.songData, this.isPendingReview, this.title);
     }
 }
