@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public interface SongService {
 
-    Song saveSong(MultipartFile file, String title) throws IOException;
+    Song saveSong(SongDTO songDTO) throws IOException;
 
-    Song updateSong(UUID id, MultipartFile file, String title, boolean isPendingReview) throws IOException;
+    Song updateSong(UUId id, SongDTO songDTO) throws IOException;
 
     Song getSong(UUID id);
 
