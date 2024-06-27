@@ -7,4 +7,6 @@ public interface IReviewService {
     ReviewDeleteResponse delete(ReviewDeleteRequest request);
     ReviewGetAllResponse getAll();
     ReviewGetByIdResponse getById(ReviewGetByIdRequest request);
+    ReviewGetByUserIdResponse getByUserId(ReviewGetByUserIdRequest request);
+    ReviewGetBySongIdResponse getBySongId(ReviewGetBySongIdRequest request);
 }

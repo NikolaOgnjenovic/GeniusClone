@@ -52,4 +52,18 @@ public class ReviewService implements IReviewService{
                                         review.getValue(),
                                         review.getDescription());
     }
+
+    @Override
+    public ReviewGetByUserIdResponse getByUserId(ReviewGetByUserIdRequest request) {
+        List<Review> reviews = reviewRepository.findByUserId(request.userId());
+
+        return new ReviewGetByUserIdResponse(reviews);
+    }
+
+    @Override
+    public ReviewGetBySongIdResponse getBySongId(ReviewGetBySongIdRequest request) {
+        List<Review> reviews = reviewRepository.findBySongId(request.songId());
+
+        return new ReviewGetBySongIdResponse(reviews);
+    }
 }
