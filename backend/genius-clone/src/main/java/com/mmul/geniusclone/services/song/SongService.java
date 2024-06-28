@@ -19,13 +19,13 @@ public class SongService implements ISongService {
     private SongRepository songRepository;
 
     @Override
-    public Song saveSong(SongDTO songDTO) throws IOException {
+    public Song create(SongDTO songDTO) {
         Song song = songDTO.toSong();
         return songRepository.save(song);
     }
 
     @Override
-    public Song updateSong(UUID id, SongDTO songDTO) throws IOException {
+    public Song update(UUID id, SongDTO songDTO) throws IOException {
         Song song = songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
         Song updatedSong = songDTO.toSong();
         updatedSong.setId(song.getId());
@@ -33,17 +33,17 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public Song getSong(UUID id) {
+    public Song getById(UUID id) {
         return songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
     }
 
     @Override
-    public List<Song> getAllSongs() {
+    public List<Song> getAll() {
         return songRepository.findAll();
     }
 
     @Override
-    public void deleteSong(UUID id) {
+    public void delete(UUID id) {
         songRepository.deleteById(id);
     }
 }

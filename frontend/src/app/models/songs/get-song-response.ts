@@ -1,6 +1,6 @@
 export interface GetSongResponse {
     id: string;
-    songData: ArrayBuffer;
+    songData: string;
     isPendingReview: boolean;
     title: string;
 }

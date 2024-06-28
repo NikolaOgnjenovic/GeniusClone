@@ -1,5 +1,5 @@
 export interface CreateSongRequest {
-    songData: ArrayBuffer;
+    songData: string;
     isPendingReview: boolean;
     title: string;
 }

@@ -1,1 +1,24 @@
-<p>songs-page works!</p>
+<button class="create-button" (click)="onCreateSong()">Create</button>
+<app-songs-table
+  [songs]="songs"
+  (update)="onUpdateSong($event)"
+  (delete)="onDeleteSong($event)"
+/>
+<app-create-song-modal
+  *ngIf="showCreationModal"
+  (close)="onCloseCreationModal()"
+  (create)="onCreate($event)"
+/>
+<!-- <app-update-song-modal
+  *ngIf="showUpdateModal"
+  [band]="selectedSong"
+  (close)="onCloseUpdateModal()"
+  (update)="onUpdate($event)"
+/>
+<app-delete-song-modal
+  *ngIf="showDeleteModal"
+  [band]="selectedSong"
+  (close)="onCloseDeleteModal()"
+  (delete)="onDelete()"
+/> -->
+

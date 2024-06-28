@@ -9,13 +9,13 @@ import java.util.UUID;
 
 public interface ISongService {
 
-    Song saveSong(SongDTO songDTO) throws IOException;
+    Song create(SongDTO songDTO) throws IOException;
 
-    Song updateSong(UUID id, SongDTO songDTO) throws IOException;
+    Song update(UUID id, SongDTO songDTO) throws IOException;
 
-    Song getSong(UUID id);
+    Song getById(UUID id);
 
-    List<Song> getAllSongs();
+    List<Song> getAll();
 
-    void deleteSong(UUID id);
+    void delete(UUID id);
 }
