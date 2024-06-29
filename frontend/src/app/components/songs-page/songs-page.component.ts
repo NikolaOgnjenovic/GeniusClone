@@ -5,6 +5,9 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { CreateSongRequest } from '../../models/songs/create-song-request';
 import { CreateSongModalComponent } from './ui/create-song-modal/create-song-modal.component';
 import { SongsTableComponent } from './ui/songs-table/songs-table.component';
+import { DeleteSongModalComponent } from './ui/delete-song-modal/delete-song-modal.component';
+import { UpdateSongModalComponent } from './ui/update-song-modal/update-song-modal.component';
+import { UpdateSongRequest } from '../../models/songs/update-song-request';
 
 @Component({
   selector: 'app-songs-page',
@@ -13,6 +16,8 @@ import { SongsTableComponent } from './ui/songs-table/songs-table.component';
     CommonModule,
     SongsTableComponent,
     CreateSongModalComponent,
+    DeleteSongModalComponent,
+    UpdateSongModalComponent,
     AsyncPipe
   ],
   templateUrl: './songs-page.component.html',
@@ -20,9 +25,9 @@ import { SongsTableComponent } from './ui/songs-table/songs-table.component';
 })
 export class SongsPageComponent {
   songs: Song[] = [];
-  SelectedSong!: Song;
+  selectedSong!: Song;
   showUpdateModal: boolean = false;
-  shoWDeleteModal: boolean = false;
+  showDeleteModal: boolean = false;
   showCreationModal: boolean = false;
 
   constructor(private songService: SongsService) {}
@@ -52,11 +57,38 @@ export class SongsPageComponent {
     this.showCreationModal = false;
   }
 
-  onUpdateSong(song: Song) {
-
+  onDeleteSong(song: Song) {
+    this.showDeleteModal = true
+    this.selectedSong = song;
   }
 
-  onDeleteSong(song: Song) {
+  onCloseDeleteModal() {
+    this.showDeleteModal = false;
+  }
 
+  onDelete() {
+    this.songService.delete(this.selectedSong.id).subscribe(() => {
+      this.songs = this.songs.filter(s => s.id !== this.selectedSong.id);
+    });
+    this.showDeleteModal = false;
+  }
+
+  onUpdateSong(song: Song) {
+    this.selectedSong = song;
+    this.showUpdateModal = true;
+  }
+
+  onCloseUpdateModal() {
+    this.showUpdateModal = false;
+  }
+
+  onUpdate(updateSongRequest: UpdateSongRequest) {
+    this.songService.update(this.selectedSong.id,updateSongRequest).subscribe(response => {
+      if (response) {
+        const index = this.songs.findIndex(s => s.id ===response.id);
+        this.songs[index] = response;
+      }
+    });
+    this.showUpdateModal = false;
   }
 }

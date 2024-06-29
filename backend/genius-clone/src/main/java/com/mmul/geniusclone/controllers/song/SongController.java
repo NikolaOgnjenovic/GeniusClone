@@ -23,14 +23,10 @@ public class SongController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable UUID id,
-                                             @RequestBody SongDTO song) {
-        try {
-            songService.update(id, song);
-            return ResponseEntity.ok("Song updated successfully!");
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body("Failed to update song.");
-        }
+    public Song update(@PathVariable UUID id,
+                                             @RequestBody SongDTO song) throws IOException {
+            return songService.update(id, song);
+
     }
 
     @GetMapping("/{id}")
@@ -46,8 +42,7 @@ public class SongController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable UUID id) {
+    public void delete(@PathVariable UUID id) {
         songService.delete(id);
-        return ResponseEntity.ok("Song deleted successfully!");
     }
 }

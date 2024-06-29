@@ -6,7 +6,7 @@
         <input id="title" formControlName="title" type="text" />
 
         <label for="data">Upload File</label>
-        <input id="data" type="file" />
+        <input id="data" formControlName="data" type="file" />
         <div class="button-row">
           <button type="button" (click)="onCancel()">Cancel</button>
           <button type="button" (click)="onCreate()">Create</button>

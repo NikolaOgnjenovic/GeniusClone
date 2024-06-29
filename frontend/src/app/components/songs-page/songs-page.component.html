@@ -9,16 +9,16 @@
   (close)="onCloseCreationModal()"
   (create)="onCreate($event)"
 />
-<!-- <app-update-song-modal
+<app-update-song-modal
   *ngIf="showUpdateModal"
-  [band]="selectedSong"
+  [song]="selectedSong"
   (close)="onCloseUpdateModal()"
   (update)="onUpdate($event)"
 />
 <app-delete-song-modal
   *ngIf="showDeleteModal"
-  [band]="selectedSong"
+  [song]="selectedSong"
   (close)="onCloseDeleteModal()"
   (delete)="onDelete()"
-/> -->
+/>
 

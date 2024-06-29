@@ -28,4 +28,9 @@ export class SongsService {
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  convertBufferToStirng(buffer: ArrayBuffer): string {
+    const decoder = new TextDecoder('utf-8');
+    return decoder.decode(buffer);
+  }
 }
