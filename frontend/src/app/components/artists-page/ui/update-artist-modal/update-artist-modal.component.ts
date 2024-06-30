@@ -47,7 +47,8 @@ export class UpdateArtistModalComponent {
     const request: UpdateArtistRequst = {
       name: this.updateArtistForm.value.name,
       surname: this.updateArtistForm.value.surname,
-      birthday: this.updateArtistForm.value.birthday
+      birthday: this.updateArtistForm.value.birthday,
+      bands: []
     }
     this.update.emit(request);
   }

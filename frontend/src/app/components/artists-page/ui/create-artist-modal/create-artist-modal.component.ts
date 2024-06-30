@@ -33,7 +33,8 @@ export class CreateArtistModalComponent {
     const request: CreateArtistRequest = {
       name: this.createArtistForm.value.name,
       surname: this.createArtistForm.value.surname,
-      birthday: this.createArtistForm.value.birthday
+      birthday: this.createArtistForm.value.birthday,
+      bands: []
     }
     this.create.emit(request);
   }

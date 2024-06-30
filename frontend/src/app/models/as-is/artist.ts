@@ -5,5 +5,5 @@ export interface Artist {
   name: string;
   surname: string;
   birthday: string;
-  band: Band;
+  bands: Band[];
 }

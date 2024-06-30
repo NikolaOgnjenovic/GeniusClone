@@ -5,5 +5,5 @@ export interface GetArtistResponse {
     name: string;
     surname: string;
     birthday: string;
-    band: Band;
+    bands: Band[];
 }
