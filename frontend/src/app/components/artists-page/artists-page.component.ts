@@ -4,7 +4,9 @@ import { Artist } from '../../models/as-is/artist';
 import { ArtistService } from '../../services/artist.service';
 import { CreateArtistRequest } from '../../models/as-is/artists/create-artist-request';
 import { CreateArtistModalComponent } from './ui/create-artist-modal/create-artist-modal.component';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { UpdateArtistModalComponent } from './ui/update-artist-modal/update-artist-modal.component';
+import { DeleteArtistModalComponent } from './ui/delete-artist-modal/delete-artist-modal.component';
 
 @Component({
   selector: 'app-artists-page',
@@ -12,7 +14,10 @@ import { CommonModule } from '@angular/common';
   imports: [
     ArtistsTableComponent,
     CreateArtistModalComponent,
-    CommonModule
+    CommonModule,
+    AsyncPipe,
+    UpdateArtistModalComponent,
+    DeleteArtistModalComponent
   ],
   templateUrl: './artists-page.component.html',
   styleUrl: './artists-page.component.css'
@@ -34,7 +39,10 @@ export class ArtistsPageComponent {
 
   onUpdateArtist(artist: Artist) {}
 
-  onDeleteArtist(artist: Artist) {}
+  onDeleteArtist(artist: Artist) {
+    this.selectedArtist = artist;
+    this.showDeleteModal = true;
+  }
 
   onCreateArtist() {
     this.showCreationModal = true;
@@ -52,4 +60,15 @@ export class ArtistsPageComponent {
     });
     this.showCreationModal = false;
   }
+
+  onCloseDeleteModal() {
+    this.showDeleteModal = false;
+  }
+
+  onDelete() {
+    this.artistService.delete(this.selectedArtist.id).subscribe(()=> {
+        this.artists.filter(a => a.id !== this.selectedArtist.id)
+    })
+    this.showDeleteModal = false;
+  }     
 }

@@ -17,8 +17,6 @@ export class ArtistsTableComponent {
   @Output() delete = new EventEmitter<Artist>();
   @Output() update = new EventEmitter<Artist>();
 
-  constructor() {}
-
   onUpdate(artist: Artist) {
     this.update.emit(artist);
   }

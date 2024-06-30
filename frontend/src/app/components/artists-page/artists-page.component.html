@@ -11,3 +11,10 @@
 (create)="onCreate($event)"
 />
 
+<app-delete-artist-modal
+*ngIf="showDeleteModal"
+[artist]="selectedArtist"
+(close)="onCloseDeleteModal()"
+(delete)="onDelete()"
+/>
+
