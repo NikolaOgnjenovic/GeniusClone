@@ -30,8 +30,8 @@ public class ArtistController {
     }
 
     @PostMapping
-    public void createArtist(@RequestBody PostArtistRequest request) {
-        artistService.create(request);
+    public Artist createArtist(@RequestBody PostArtistRequest request) {
+        return artistService.create(request);
     }
 
     @DeleteMapping("/{id}")
@@ -39,7 +39,7 @@ public class ArtistController {
         artistService.delete(id);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public Artist updateSong(@PathVariable UUID id,
                                              @RequestBody PutArtistUpdateRequest request) {
 

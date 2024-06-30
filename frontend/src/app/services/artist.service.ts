@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateArtistRequest} from '../models/as-is/artists/create-artist-request';
-import { GetArtistResponse } from '../models/as-is/artists/get-artist-response';
-import { GetArtistsReponses } from '../models/as-is/artists/get-artists-response';
+import { CreateArtistRequest} from '../models/artists/create-artist-request';
+import { GetArtistResponse } from '../models/artists/get-artist-response';
+import { GetArtistsReponses } from '../models/artists/get-artists-response';
 import { Observable } from 'rxjs';
 import { Artist } from '../models/as-is/artist';
-import { UpdateArtistRequst } from '../models/as-is/artists/update-artist-request';
+import { UpdateArtistRequst } from '../models/artists/update-artist-request';
 
 @Injectable({
   providedIn: 'root'

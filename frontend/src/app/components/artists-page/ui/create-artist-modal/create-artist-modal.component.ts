@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { CreateArtistRequest } from '../../../../models/as-is/artists/create-artist-request';
+import { CreateArtistRequest } from '../../../../models/artists/create-artist-request';
 
 @Component({
   selector: 'app-create-artist-modal',

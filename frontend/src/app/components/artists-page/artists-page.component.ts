@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ArtistsTableComponent } from './ui/artists-table/artists-table.component';
 import { Artist } from '../../models/as-is/artist';
 import { ArtistService } from '../../services/artist.service';
-import { CreateArtistRequest } from '../../models/as-is/artists/create-artist-request';
+import { CreateArtistRequest } from '../../models/artists/create-artist-request';
 import { CreateArtistModalComponent } from './ui/create-artist-modal/create-artist-modal.component';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { UpdateArtistModalComponent } from './ui/update-artist-modal/update-artist-modal.component';
 import { DeleteArtistModalComponent } from './ui/delete-artist-modal/delete-artist-modal.component';
+import { UpdateArtistRequst } from '../../models/artists/update-artist-request';
 
 @Component({
   selector: 'app-artists-page',
@@ -25,7 +26,7 @@ import { DeleteArtistModalComponent } from './ui/delete-artist-modal/delete-arti
 export class ArtistsPageComponent {
   artists: Artist[] = [];
   selectedArtist!: Artist;
-  showUpdatemodal: boolean = false;
+  showUpdateModal: boolean = false;
   showCreationModal: boolean = false;
   showDeleteModal: boolean = false;
 
@@ -37,7 +38,11 @@ export class ArtistsPageComponent {
     });
   }
 
-  onUpdateArtist(artist: Artist) {}
+  onUpdateArtist(artist: Artist) {
+    this.selectedArtist = artist;
+    console.log(this.selectedArtist);
+    this.showUpdateModal = true;
+  }
 
   onDeleteArtist(artist: Artist) {
     this.selectedArtist = artist;
@@ -67,8 +72,22 @@ export class ArtistsPageComponent {
 
   onDelete() {
     this.artistService.delete(this.selectedArtist.id).subscribe(()=> {
-        this.artists.filter(a => a.id !== this.selectedArtist.id)
+        this.artists = this.artists.filter(a => a.id !== this.selectedArtist.id)
     })
     this.showDeleteModal = false;
-  }     
+  }   
+  
+  onCloseUpdateModal() {
+    this.showUpdateModal = false;
+  }
+
+  onUpdate(request: UpdateArtistRequst) {
+    this.artistService.update(this.selectedArtist.id, request).subscribe((response:Artist) => {
+      if (response) {
+        const index = this.artists.findIndex(a => a.id === this.selectedArtist.id);
+        this.artists[index] = response;
+      }
+    });
+    this.showUpdateModal = false;
+  }
 }

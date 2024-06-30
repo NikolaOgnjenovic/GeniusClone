@@ -18,3 +18,10 @@
 (delete)="onDelete()"
 />
 
+<app-update-artist-modal
+*ngIf="showUpdateModal"
+[artist]="selectedArtist"
+(close)="onCloseUpdateModal()"
+(update)="onUpdate($event)"
+/>
+

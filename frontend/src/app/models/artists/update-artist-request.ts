@@ -1,4 +1,4 @@
-import { Band } from "../band";
+import { Band } from "../as-is/band";
 
 export interface UpdateArtistRequst {
     name: string;

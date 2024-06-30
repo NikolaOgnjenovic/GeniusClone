@@ -18,6 +18,7 @@ export class ArtistsTableComponent {
   @Output() update = new EventEmitter<Artist>();
 
   onUpdate(artist: Artist) {
+    console.log(1);
     this.update.emit(artist);
   }
 
