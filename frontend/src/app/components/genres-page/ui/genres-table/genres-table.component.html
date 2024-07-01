@@ -1,1 +1,20 @@
-<p>genres-table works!</p>
+<table class="genres-table">
+    <thead>
+    <tr>
+      <th>Genre Name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let genre of genres">
+      <td>{{ genre.name }}</td>
+      <td>
+        <div class="button-container">
+          <button (click)="onUpdate(genre)">Update</button>
+          <button (click)="onDelete(genre)">Delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  

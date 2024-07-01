@@ -23,10 +23,8 @@ public class SongController {
     }
 
     @PutMapping("/{id}")
-    public Song update(@PathVariable UUID id,
-                                             @RequestBody SongDTO song) throws IOException {
+    public Song update(@PathVariable UUID id, @RequestBody SongDTO song) throws IOException {
             return songService.update(id, song);
-
     }
 
     @GetMapping("/{id}")

@@ -1,1 +1,14 @@
-<p>update-genre-modal works!</p>
+<div class="modal-overlay">
+    <div class="modal-content">
+      <h2>Update Genre</h2>
+      <form [formGroup]="updateGenreForm">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" />
+        <div class="button-row">
+          <button type="button" (click)="onCancel()">Cancel</button>
+          <button type="button" (click)="onUpdate()">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
