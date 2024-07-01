@@ -1,12 +1,16 @@
 package com.mmul.geniusclone.controllers.genres;
 
 import com.mmul.geniusclone.dtos.genres.*;
+import com.mmul.geniusclone.dtos.song.SongDTO;
+import com.mmul.geniusclone.models.Genre;
+import com.mmul.geniusclone.models.Song;
 import com.mmul.geniusclone.services.interfaces.IGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -45,6 +49,11 @@ public class GenreController {
             return ResponseEntity.notFound().build();
         }
 
+    }
+
+    @PutMapping("/{id}")
+    public Genre update(@PathVariable UUID id, @RequestBody GenreUpdateRequest request) throws IOException {
+        return genreService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
