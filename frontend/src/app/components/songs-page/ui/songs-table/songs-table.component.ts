@@ -13,6 +13,7 @@ export class SongsTableComponent {
   @Input() songs: Song[] = [];
   @Output() update = new EventEmitter<Song>();
   @Output() delete = new EventEmitter<Song>();
+  @Output() navigate = new EventEmitter<Song>();
 
   onUpdate(song: Song): void {
     this.update.emit(song);
@@ -20,5 +21,9 @@ export class SongsTableComponent {
 
   onDelete(song: Song): void {
     this.delete.emit(song);
+  }
+
+  onNavigate(song: Song) {
+    this.navigate.emit(song);
   }
 }

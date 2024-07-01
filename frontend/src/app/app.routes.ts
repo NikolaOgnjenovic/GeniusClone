@@ -5,6 +5,7 @@ import {BandsPageComponent} from "./components/bands-page/bands-page.component";
 import { SongsPageComponent } from './components/songs-page/songs-page.component';
 import { ArtistsPageComponent } from './components/artists-page/artists-page.component';
 import { GenresPageComponent } from './components/genres-page/genres-page.component';
+import { SongPageComponent } from './components/songs-page/ui/song-page/song-page.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'bands', component: BandsPageComponent },
   {path: 'songs', component: SongsPageComponent},
   {path: 'artists', component: ArtistsPageComponent},
-  {path: 'genres', component: GenresPageComponent}
+  {path: 'genres', component: GenresPageComponent},
+  {path: 'song', component: SongPageComponent}
 ];

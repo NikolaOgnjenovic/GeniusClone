@@ -8,6 +8,7 @@ import { SongsTableComponent } from './ui/songs-table/songs-table.component';
 import { DeleteSongModalComponent } from './ui/delete-song-modal/delete-song-modal.component';
 import { UpdateSongModalComponent } from './ui/update-song-modal/update-song-modal.component';
 import { UpdateSongRequest } from '../../models/songs/update-song-request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-songs-page',
@@ -30,7 +31,7 @@ export class SongsPageComponent {
   showDeleteModal: boolean = false;
   showCreationModal: boolean = false;
 
-  constructor(private songService: SongsService) {}
+  constructor(private songService: SongsService, private router: Router) {}
 
   ngOnInit(): void {
     this.songService.getAll().subscribe((response: Song[]) => {
@@ -90,5 +91,9 @@ export class SongsPageComponent {
       }
     });
     this.showUpdateModal = false;
+  }
+
+  onNavigateSong(song: Song) {
+    this.router.navigate(['/song'], { state: { song: song } });
   }
 }
