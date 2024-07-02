@@ -5,5 +5,7 @@ export interface Artist {
   name: string;
   surname: string;
   birthday: string;
+  description: string;
+  image: string;
   bands: Band[];
 }
