@@ -1,25 +1,28 @@
 package com.mmul.geniusclone.controllers.band;
 
 
-import com.mmul.geniusclone.dtos.band.post.PostBandRequest;
-import com.mmul.geniusclone.dtos.band.put.UpdateBandRequest;
+import com.mmul.geniusclone.dtos.band.BandAddArtistRequest;
+import com.mmul.geniusclone.dtos.band.BandRemoveArtistRequest;
+import com.mmul.geniusclone.dtos.band.BandCreateRequest;
+import com.mmul.geniusclone.dtos.band.BandUpdateRequest;
 import com.mmul.geniusclone.models.Band;
-import com.mmul.geniusclone.services.band.BandService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mmul.geniusclone.services.interfaces.IBandService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/v1/bands")
 public class BandController {
-    @Autowired
-    private BandService bandService;
+    private final IBandService bandService;
+
+    public BandController(IBandService bandService) {
+        this.bandService = bandService;
+    }
 
     @GetMapping
-    public List<Band> getAllBands() {
+    public List<Band> getAll() {
         return bandService.getAll();
     }
 
@@ -29,27 +32,27 @@ public class BandController {
     }
 
     @PostMapping
-    public Band createBand(@RequestBody PostBandRequest request) {
+    public Band create(@RequestBody BandCreateRequest request) {
         return bandService.create(request);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteArtist(@PathVariable UUID id) {
+    public void deleteById(@PathVariable UUID id) {
         bandService.delete(id);
     }
 
-    @PostMapping("/{bandId}/addArtist/{artistId}")
-    public Band addArtistToBand(@PathVariable UUID bandId, @PathVariable UUID artistId) {
-        return bandService.addArtistToBand(bandId, artistId);
+    @PostMapping("/{bandId}")
+    public Band addArtistToBand(@PathVariable UUID bandId, @RequestBody BandAddArtistRequest request) {
+        return bandService.addArtistToBand(bandId, request.artistId());
     }
 
-    @DeleteMapping("/{bandId}/removeArtist/{artistId}")
-    public Band removeArtistFromBand(@PathVariable UUID bandId, @PathVariable UUID artistId) {
-        return bandService.removeArtistFromBand(bandId, artistId);
+    @DeleteMapping("/{bandId}")
+    public Band removeArtistFromBand(@PathVariable UUID bandId, @RequestBody BandRemoveArtistRequest request) {
+        return bandService.removeArtistFromBand(bandId, request.artistId());
     }
 
     @PutMapping("/{id}")
-    public Band updateBand(@PathVariable UUID id, @RequestBody UpdateBandRequest request) {
+    public Band update(@PathVariable UUID id, @RequestBody BandUpdateRequest request) {
         return bandService.update(id, request);
     }
 }

@@ -1,15 +1,10 @@
 package com.mmul.geniusclone.services.albums;
 
-import com.mmul.geniusclone.dtos.albums.post.PostAlbumRequest;
-import com.mmul.geniusclone.dtos.albums.put.PutAlbumUpdateRequest;
-import com.mmul.geniusclone.dtos.artist.post.PostArtistRequest;
-import com.mmul.geniusclone.dtos.artist.put.PutArtistUpdateRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
-import com.mmul.geniusclone.models.Artist;
-import com.mmul.geniusclone.models.Band;
 import com.mmul.geniusclone.models.Performer;
 import com.mmul.geniusclone.repositories.albums.AlbumRepository;
-import com.mmul.geniusclone.repositories.artist.ArtistRepository;
 import com.mmul.geniusclone.repositories.band.BandRepository;
 import com.mmul.geniusclone.repositories.performers.PerformerRepository;
 import com.mmul.geniusclone.services.interfaces.IAlbumService;
@@ -43,12 +38,12 @@ public class AlbumService implements IAlbumService {
     }
 
     @Override
-    public Album create(PostAlbumRequest request) {
-        return albumRepository.save(new Album(request.title(),request.releaseDate(),request.coverArt()));
+    public Album create(AlbumCreateRequest request) {
+        return albumRepository.save(new Album(request.title(),request.releaseDate(), request.coverArt()));
     }
 
     @Override
-    public Album update(UUID id, PutAlbumUpdateRequest request) {
+    public Album update(UUID id, AlbumUpdateRequest request) {
         Album album = albumRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
         album.setTitle(request.title());
         album.setReleaseDate(request.releaseDate());

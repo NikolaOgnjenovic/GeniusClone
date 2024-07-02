@@ -1,11 +1,11 @@
 package com.mmul.geniusclone.controllers.song;
 
-import com.mmul.geniusclone.dtos.song.SongDTO;
+import com.mmul.geniusclone.dtos.song.SongCreateRequest;
+import com.mmul.geniusclone.dtos.song.SongUpdateRequest;
 import com.mmul.geniusclone.models.Song;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mmul.geniusclone.services.interfaces.ISongService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.mmul.geniusclone.services.song.SongService;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
@@ -13,18 +13,20 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/songs")
 public class SongController {
+    private final ISongService songService;
 
-    @Autowired
-    private SongService songService;
+    public SongController(ISongService songService) {
+        this.songService = songService;
+    }
 
     @PostMapping
-    public Song create(@RequestBody SongDTO song) {
-        return songService.create(song);
+    public Song create(@RequestBody SongCreateRequest request) throws IOException {
+        return songService.create(request);
     }
 
     @PutMapping("/{id}")
-    public Song update(@PathVariable UUID id, @RequestBody SongDTO song) throws IOException {
-            return songService.update(id, song);
+    public Song update(@PathVariable UUID id, @RequestBody SongUpdateRequest request) throws IOException {
+        return songService.update(id, request);
     }
 
     @GetMapping("/{id}")
@@ -40,7 +42,7 @@ public class SongController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable UUID id) {
+    public void deleteById(@PathVariable UUID id) {
         songService.delete(id);
     }
 }

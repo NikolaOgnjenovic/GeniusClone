@@ -1,48 +1,46 @@
 package com.mmul.geniusclone.controllers.artist;
 
 
-import com.mmul.geniusclone.dtos.artist.post.PostArtistRequest;
-import com.mmul.geniusclone.dtos.artist.put.PutArtistUpdateRequest;
+import com.mmul.geniusclone.dtos.artist.ArtistCreateRequest;
+import com.mmul.geniusclone.dtos.artist.ArtistUpdateRequest;
 import com.mmul.geniusclone.models.Artist;
-import com.mmul.geniusclone.services.artist.ArtistService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.mmul.geniusclone.services.interfaces.IArtistService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/artist")
+@RequestMapping("/api/v1/artists")
 public class ArtistController {
-    @Autowired
-    private ArtistService artistService;
+    private final IArtistService artistService;
+
+    public ArtistController(IArtistService artistService) {
+        this.artistService = artistService;
+    }
 
     @GetMapping
-    public List<Artist> getAllArtists() {
+    public List<Artist> getAll() {
         return artistService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Artist getArtist(@PathVariable UUID id) {
+    public Artist getById(@PathVariable UUID id) {
         return artistService.getById(id);
     }
 
     @PostMapping
-    public Artist createArtist(@RequestBody PostArtistRequest request) {
+    public Artist create(@RequestBody ArtistCreateRequest request) {
         return artistService.create(request);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteArtist(@PathVariable UUID id) {
+    public void deleteById(@PathVariable UUID id) {
         artistService.delete(id);
     }
 
     @PutMapping("/{id}")
-    public Artist updateSong(@PathVariable UUID id,
-                                             @RequestBody PutArtistUpdateRequest request) {
-
+    public Artist update(@PathVariable UUID id, @RequestBody ArtistUpdateRequest request) {
         return artistService.update(id, request);
     }
 }

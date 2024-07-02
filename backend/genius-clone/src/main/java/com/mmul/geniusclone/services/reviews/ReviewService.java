@@ -54,16 +54,16 @@ public class ReviewService implements IReviewService{
     }
 
     @Override
-    public ReviewGetByUserIdResponse getByUserId(ReviewGetByUserIdRequest request) {
+    public ReviewGetAllByUserIdResponse getByUserId(ReviewGetAllByUserIdRequest request) {
         List<Review> reviews = reviewRepository.findByUserId(request.userId());
 
-        return new ReviewGetByUserIdResponse(reviews);
+        return new ReviewGetAllByUserIdResponse(reviews);
     }
 
     @Override
-    public ReviewGetBySongIdResponse getBySongId(ReviewGetBySongIdRequest request) {
+    public ReviewGetAllBySongIdResponse getBySongId(ReviewGetAllBySongIdRequest request) {
         List<Review> reviews = reviewRepository.findBySongId(request.songId());
 
-        return new ReviewGetBySongIdResponse(reviews);
+        return new ReviewGetAllBySongIdResponse(reviews);
     }
 }

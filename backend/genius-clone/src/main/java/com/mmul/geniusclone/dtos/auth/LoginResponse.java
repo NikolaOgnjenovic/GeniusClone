@@ -1,4 +1,4 @@
-package com.mmul.geniusclone.dtos.auth.post;
+package com.mmul.geniusclone.dtos.auth;
 
 import com.mmul.geniusclone.models.Role;
 

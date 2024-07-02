@@ -4,5 +4,4 @@ import com.mmul.geniusclone.models.Review;
 
 import java.util.List;
 
-public record ReviewGetByUserIdResponse(List<Review> reviews) {
-}
+public record ReviewGetAllByUserIdResponse(List<Review> reviews) { }

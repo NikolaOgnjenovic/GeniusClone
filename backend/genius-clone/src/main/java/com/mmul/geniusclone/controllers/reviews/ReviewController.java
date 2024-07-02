@@ -2,8 +2,6 @@ package com.mmul.geniusclone.controllers.reviews;
 
 import com.mmul.geniusclone.dtos.reviews.*;
 import com.mmul.geniusclone.services.interfaces.IReviewService;
-import com.mmul.geniusclone.services.interfaces.IReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/review")
+@RequestMapping("/api/v1/reviews")
 public class ReviewController {
-    @Autowired
-    private IReviewService reviewService;
-    
+    private final IReviewService reviewService;
+
+    public ReviewController(IReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
     @PostMapping()
-    public ResponseEntity<ReviewCreateResponse> createReview(@RequestBody ReviewCreateRequest request) {
+    public ResponseEntity<ReviewCreateResponse> create(@RequestBody ReviewCreateRequest request) {
         try {
             ReviewCreateResponse response = reviewService.create(request);
             return ResponseEntity.ok(response);
@@ -27,7 +28,7 @@ public class ReviewController {
     }
 
     @GetMapping()
-    public ResponseEntity<ReviewGetAllResponse> getAllReviews() {
+    public ResponseEntity<ReviewGetAllResponse> getAll() {
         try {
             ReviewGetAllResponse response = reviewService.getAll();
             return ResponseEntity.ok(response);
@@ -37,7 +38,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReviewGetByIdResponse> getReviewById(@PathVariable UUID id) {
+    public ResponseEntity<ReviewGetByIdResponse> getById(@PathVariable UUID id) {
         try {
             ReviewGetByIdRequest request = new ReviewGetByIdRequest(id);
             ReviewGetByIdResponse response = reviewService.getById(request);
@@ -49,7 +50,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ReviewDeleteResponse> deleteReview(@PathVariable UUID id) {
+    public ResponseEntity<ReviewDeleteResponse> deleteById(@PathVariable UUID id) {
         try {
             ReviewDeleteRequest request = new ReviewDeleteRequest(id);
             ReviewDeleteResponse response = reviewService.delete(request);
@@ -59,22 +60,20 @@ public class ReviewController {
         }
     }
 
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<ReviewGetByUserIdResponse> getUsersReviews(@PathVariable UUID userId) {
+    @GetMapping()
+    public ResponseEntity<ReviewGetAllByUserIdResponse> getAllByUser(@RequestBody ReviewGetAllByUserIdRequest request) {
         try {
-            ReviewGetByUserIdRequest request = new ReviewGetByUserIdRequest(userId);
-            ReviewGetByUserIdResponse response = reviewService.getByUserId(request);
+            ReviewGetAllByUserIdResponse response = reviewService.getByUserId(request);
             return ResponseEntity.ok(response);
         } catch (Exception ex) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping("/songs/{songId}")
-    public ResponseEntity<ReviewGetBySongIdResponse> getSongsReviews(@PathVariable UUID songId) {
+    @GetMapping()
+    public ResponseEntity<ReviewGetAllBySongIdResponse> getAllBySong(@RequestBody ReviewGetAllBySongIdRequest request) {
         try {
-            ReviewGetBySongIdRequest request = new ReviewGetBySongIdRequest(songId);
-            ReviewGetBySongIdResponse response = reviewService.getBySongId(request);
+            ReviewGetAllBySongIdResponse response = reviewService.getBySongId(request);
             return ResponseEntity.ok(response);
         } catch (Exception ex) {
             return ResponseEntity.notFound().build();

@@ -1,7 +1,7 @@
 package com.mmul.geniusclone.services.band;
 
-import com.mmul.geniusclone.dtos.band.post.PostBandRequest;
-import com.mmul.geniusclone.dtos.band.put.UpdateBandRequest;
+import com.mmul.geniusclone.dtos.band.BandCreateRequest;
+import com.mmul.geniusclone.dtos.band.BandUpdateRequest;
 import com.mmul.geniusclone.models.Artist;
 import com.mmul.geniusclone.models.Band;
 import com.mmul.geniusclone.repositories.artist.ArtistRepository;
@@ -27,12 +27,12 @@ public class BandService implements IBandService
         return bandRepository.findById(id).orElse(null);
     }
 
-    public Band create(PostBandRequest request) {
+    public Band create(BandCreateRequest request) {
         return bandRepository.save(new Band(request.name()));
     }
 
     @Override
-    public Band update(UUID id, UpdateBandRequest request) {
+    public Band update(UUID id, BandUpdateRequest request) {
         Band band = bandRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
         band.setName(request.name());
         return bandRepository.save(band);
