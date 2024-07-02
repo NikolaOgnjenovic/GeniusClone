@@ -19,7 +19,6 @@ public class Album {
     private String title;
     private LocalDate releaseDate;
 
-    //@Lob
     private String coverArt;
 
     @ManyToMany

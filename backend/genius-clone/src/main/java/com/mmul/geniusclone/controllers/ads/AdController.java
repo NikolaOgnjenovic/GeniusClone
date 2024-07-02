@@ -3,7 +3,6 @@ package com.mmul.geniusclone.controllers.ads;
 
 import com.mmul.geniusclone.dtos.ads.*;
 import com.mmul.geniusclone.services.interfaces.IAdService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/ad")
+@RequestMapping("/api/v1/ads")
 public class AdController {
-    @Autowired
-    private IAdService adService;
+    private final IAdService adService;
+
+    AdController(IAdService adService) {
+        this.adService = adService;
+    }
 
     @PostMapping()
-    public ResponseEntity<AdCreateResponse> createAd(@RequestBody AdCreateRequest request) {
+    public ResponseEntity<AdCreateResponse> create(@RequestBody AdCreateRequest request) {
         try {
             AdCreateResponse response = adService.create(request);
             return ResponseEntity.ok(response);
@@ -28,7 +30,7 @@ public class AdController {
     }
 
     @GetMapping()
-    public ResponseEntity<AdGetAllResponse> getAllAds() {
+    public ResponseEntity<AdGetAllResponse> getAll() {
         try {
             AdGetAllResponse response = adService.getAll();
             return ResponseEntity.ok(response);
@@ -38,7 +40,7 @@ public class AdController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdGetByIdResponse> getAdById(@PathVariable UUID id) {
+    public ResponseEntity<AdGetByIdResponse> getById(@PathVariable UUID id) {
         try {
             AdGetByIdRequest request = new AdGetByIdRequest(id);
             AdGetByIdResponse response = adService.getById(request);
@@ -50,7 +52,7 @@ public class AdController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AdDeleteResponse> deleteAd(@PathVariable UUID id) {
+    public ResponseEntity<AdDeleteResponse> deleteById(@PathVariable UUID id) {
         try {
             AdDeleteRequest request = new AdDeleteRequest(id);
             AdDeleteResponse response = adService.delete(request);

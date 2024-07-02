@@ -1,13 +1,12 @@
 package com.mmul.geniusclone.controllers.auth;
 
 
-import com.mmul.geniusclone.dtos.auth.post.LoginRequest;
-import com.mmul.geniusclone.dtos.auth.post.LoginResponse;
-import com.mmul.geniusclone.dtos.auth.post.RegistrationRequest;
-import com.mmul.geniusclone.dtos.auth.post.RegistrationResponse;
+import com.mmul.geniusclone.dtos.auth.LoginRequest;
+import com.mmul.geniusclone.dtos.auth.LoginResponse;
+import com.mmul.geniusclone.dtos.auth.RegistrationRequest;
+import com.mmul.geniusclone.dtos.auth.RegistrationResponse;
 import com.mmul.geniusclone.exceptions.auth.UserEmailAlreadyExistsException;
 import com.mmul.geniusclone.services.interfaces.IAuthService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
-    @Autowired
-    private IAuthService authService;
+    private final IAuthService authService;
+
+    public AuthController(IAuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<RegistrationResponse> register(@RequestBody RegistrationRequest request) {

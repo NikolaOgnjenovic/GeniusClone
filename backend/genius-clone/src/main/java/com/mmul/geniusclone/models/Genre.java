@@ -6,10 +6,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "genres")
-public class gitGenre {
+public class Genre {
     @GeneratedValue
     @Id
     private UUID id;
+
     @Column(unique = true)
     String name;
 

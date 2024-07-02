@@ -1,61 +1,57 @@
 package com.mmul.geniusclone.controllers.albums;
 
-import com.mmul.geniusclone.dtos.albums.post.PostAlbumRequest;
-import com.mmul.geniusclone.dtos.albums.put.PutAlbumUpdateRequest;
-import com.mmul.geniusclone.dtos.artist.post.PostArtistRequest;
-import com.mmul.geniusclone.dtos.artist.put.PutArtistUpdateRequest;
-import com.mmul.geniusclone.dtos.band.post.PostBandRequest;
-import com.mmul.geniusclone.dtos.band.put.PutBandUpdateRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
-import com.mmul.geniusclone.models.Artist;
-import com.mmul.geniusclone.models.Band;
-import com.mmul.geniusclone.services.albums.AlbumService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/album")
+@RequestMapping("/api/v1/albums")
 public class AlbumController {
-    @Autowired
-    private AlbumService albumService;
+    private final IAlbumService albumService;
+
+    public AlbumController(IAlbumService albumService) {
+        this.albumService = albumService;
+    }
+
+    @PostMapping
+    public void create(@RequestBody AlbumCreateRequest request) {
+        albumService.create(request);
+    }
 
     @GetMapping
-    public List<Album> getAllAlbums() {
+    public List<Album> getAll() {
         return albumService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Album getBand(@PathVariable UUID id) {
+    public Album getById(@PathVariable UUID id) {
         return albumService.getById(id);
     }
 
-    @PostMapping
-    public void createAlbum(@RequestBody PostAlbumRequest request) {
-        albumService.create(request);
-    }
-
     @DeleteMapping("/{id}")
-    public void deleteArtist(@PathVariable UUID id) {
+    public void deleteById(@PathVariable UUID id) {
         albumService.delete(id);
     }
 
-    @PostMapping("/{albumId}/setPerformer/{performerId}")
-    public Album addPerformerToAlbum(@PathVariable UUID albumId, @PathVariable UUID performerId) {
-        return albumService.setPerformer(albumId, performerId);
+    @PostMapping("/{albumId}/performers")
+    public Album addPerformerToAlbum(@PathVariable UUID albumId, @RequestBody AlbumAddPerformerRequest request) {
+        return albumService.addPerformer(albumId, request);
     }
 
-    @DeleteMapping("/{albumId}/removePerformer/{performerId}")
-    public Album removeArtistFromBand(@PathVariable UUID albumId, @PathVariable UUID performerId) {
-        return albumService.removePerformer(albumId, performerId);
+    @DeleteMapping("/{albumId}/performers")
+    public Album removePerformerFromAlbum(@PathVariable UUID albumId, @RequestBody AlbumRemovePerformerRequest request) {
+        return albumService.removePerformer(albumId, request);
     }
 
-    @PutMapping("/update/{id}")
-    public Album updateAlbum(@PathVariable UUID id,
-                           @RequestBody PutAlbumUpdateRequest request) {
-
+    @PutMapping("/{id}")
+    public Album updateAlbum(@PathVariable UUID id, @RequestBody AlbumUpdateRequest request) {
         return albumService.update(id, request);
     }
 }
