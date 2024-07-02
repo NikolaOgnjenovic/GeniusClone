@@ -1,5 +1,6 @@
 package com.mmul.geniusclone.controllers.albums;
 
+
 import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
@@ -53,5 +54,15 @@ public class AlbumController {
     @PutMapping("/{id}")
     public Album updateAlbum(@PathVariable UUID id, @RequestBody AlbumUpdateRequest request) {
         return albumService.update(id, request);
+    }
+
+    @PutMapping("/{albumId}/addGenre/{genreId}")
+    public Album addGenreToAlbum(@PathVariable UUID albumId, @PathVariable UUID genreId) {
+        return albumService.addGenre(albumId, genreId);
+    }
+
+    @DeleteMapping("/{albumId}/removeGenre/{genreId}")
+    public Album removeGenreFromAlbum(@PathVariable UUID albumId, @PathVariable UUID genreId) {
+        return albumService.removeGenre(albumId, genreId);
     }
 }

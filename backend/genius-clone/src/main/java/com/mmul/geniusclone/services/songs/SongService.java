@@ -3,6 +3,7 @@ package com.mmul.geniusclone.services.songs;
 import com.mmul.geniusclone.dtos.song.SongCreateRequest;
 import com.mmul.geniusclone.dtos.song.SongUpdateRequest;
 import com.mmul.geniusclone.models.Song;
+import com.mmul.geniusclone.repositories.albums.AlbumRepository;
 import com.mmul.geniusclone.repositories.songs.SongRepository;
 import com.mmul.geniusclone.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ public class SongService implements ISongService {
 
     @Autowired
     private SongRepository songRepository;
+    @Autowired
+    private AlbumRepository albumRepository;
 
     @Override
     public Song create(SongCreateRequest request) {
-        Song song = new Song(request.link(), false, request.title());
+        Song song = new Song(request.link(), false, request.title(), albumRepository.findById(UUID.fromString(request.albumId())).get());
         return songRepository.save(song);
     }
 
