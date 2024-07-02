@@ -16,12 +16,12 @@ public class ReviewService implements IReviewService{
 
     @Override
     public ReviewCreateResponse create(ReviewCreateRequest request) {
-        Review review = new Review(request.userId(), request.songId(), request.value(), request.description());
+        Review review = new Review(request.user(), request.song(), request.value(), request.description());
         reviewRepository.save(review);
 
         return new ReviewCreateResponse(review.getId(),
-                                        review.getUserId(),
-                                        review.getSongId(),
+                                        review.getUser(),
+                                        review.getSong(),
                                         review.getValue(),
                                         review.getDescription());
     }
@@ -47,8 +47,8 @@ public class ReviewService implements IReviewService{
                 .orElseThrow(() -> new RuntimeException("Review not found"));
 
         return new ReviewGetByIdResponse(review.getId(),
-                                        review.getUserId(),
-                                        review.getSongId(),
+                                        review.getUser(),
+                                        review.getSong(),
                                         review.getValue(),
                                         review.getDescription());
     }
