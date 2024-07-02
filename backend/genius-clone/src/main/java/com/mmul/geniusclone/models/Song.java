@@ -1,10 +1,15 @@
 package com.mmul.geniusclone.models;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "songs")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Song {
 
     @Id
@@ -19,11 +24,17 @@ public class Song {
 
     public Song() { }
 
-    public Song(UUID id, String link, boolean isPendingReview, String title) {
-        this.id = id;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "album_id")
+    private Album album;
+
+    public Song(String link, boolean isPendingReview, String title, Album album) {
         this.link = link;
         this.isPendingReview = isPendingReview;
         this.title = title;
+        this.album = album;
     }
 
     public Song(String link, boolean isPendingReview, String title) {
@@ -62,6 +73,13 @@ public class Song {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }
 

@@ -1,12 +1,18 @@
 package com.mmul.geniusclone.services.albums;
 
+
+import com.mmul.geniusclone.models.*;
+import com.mmul.geniusclone.repositories.albums.AlbumRepository;
+import com.mmul.geniusclone.repositories.band.BandRepository;
+import com.mmul.geniusclone.repositories.genres.GenreRepository;
+
 import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Performer;
-import com.mmul.geniusclone.repositories.albums.AlbumRepository;
+
 import com.mmul.geniusclone.repositories.performers.PerformerRepository;
 import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +30,10 @@ public class AlbumService implements IAlbumService {
 
     @Autowired
     private PerformerRepository performerRepository;
+    @Autowired
+    private BandRepository bandRepository;
+    @Autowired
+    private GenreRepository genreRepository;
 
 
     @Override
@@ -86,6 +96,40 @@ public class AlbumService implements IAlbumService {
             album.setPerformer(null);
 
             performerRepository.save(performer);
+            return albumRepository.save(album);
+        } else {
+            throw new RuntimeException("Performer or Album not found");
+        }
+    }
+
+    @Transactional
+    public Album addGenre(UUID albumId, UUID genreId) {
+        Optional<Genre> genreOpt = genreRepository.findById(genreId);
+        Optional<Album> albumOpt = albumRepository.findById(albumId);
+
+        if (genreOpt.isPresent() && albumOpt.isPresent()) {
+            Genre genre = genreOpt.get();
+            Album album = albumOpt.get();
+
+            album.addGenre(genre);
+
+            return albumRepository.save(album);
+        } else {
+            throw new RuntimeException("Performer or Album not found");
+        }
+    }
+
+    @Transactional
+    public Album removeGenre(UUID albumId, UUID genreId) {
+        Optional<Genre> genreOpt = genreRepository.findById(genreId);
+        Optional<Album> albumOpt = albumRepository.findById(albumId);
+
+        if (genreOpt.isPresent() && albumOpt.isPresent()) {
+            Genre genre = genreOpt.get();
+            Album album = albumOpt.get();
+
+            album.removeGenre(genre);
+
             return albumRepository.save(album);
         } else {
             throw new RuntimeException("Performer or Album not found");
