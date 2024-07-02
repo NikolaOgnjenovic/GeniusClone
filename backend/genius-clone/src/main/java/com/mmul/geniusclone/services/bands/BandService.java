@@ -37,6 +37,7 @@ public class BandService implements IBandService
     public Band update(UUID id, BandUpdateRequest request) {
         Band band = bandRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
         band.setName(request.name());
+        band.setMembers(request.members());
         return bandRepository.save(band);
     }
 

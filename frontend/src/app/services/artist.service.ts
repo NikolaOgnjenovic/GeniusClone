@@ -11,7 +11,7 @@ import { UpdateArtistRequst } from '../models/artists/update-artist-request';
   providedIn: 'root'
 })
 export class ArtistService {
-  baseURL: string = 'http://localhost:8080/api/v1/artist'
+  baseURL: string = 'http://localhost:8080/api/v1/artists'
 
   constructor(private http: HttpClient) { }
 

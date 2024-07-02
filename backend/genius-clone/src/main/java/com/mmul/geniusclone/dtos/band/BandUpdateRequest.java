@@ -1,3 +1,7 @@
 package com.mmul.geniusclone.dtos.band;
 
-public record BandUpdateRequest(String name) { }
+import com.mmul.geniusclone.models.Artist;
+
+import java.util.List;
+
+public record BandUpdateRequest(String name, List<Artist> members) { }

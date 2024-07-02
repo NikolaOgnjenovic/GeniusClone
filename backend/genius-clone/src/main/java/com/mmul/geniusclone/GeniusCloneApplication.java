@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class GeniusCloneApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GeniusCloneApplication.class, args);
+        SpringApplication. run(GeniusCloneApplication.class, args);
     }
 
     @Bean

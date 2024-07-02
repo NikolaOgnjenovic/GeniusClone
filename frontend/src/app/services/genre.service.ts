@@ -10,7 +10,7 @@ import { GetGenresReponse } from '../models/genres/get-genres-response';
   providedIn: 'root'
 })
 export class GenreService {
-  baseUrl: string = "http://localhost:8080/api/v1/genre";
+  baseUrl: string = "http://localhost:8080/api/v1/genres";
 
   constructor(private http: HttpClient) { }
 
