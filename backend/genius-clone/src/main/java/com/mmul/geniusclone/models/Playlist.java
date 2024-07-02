@@ -1,11 +1,16 @@
 package com.mmul.geniusclone.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.UUID;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 public class Playlist {
     @Id
@@ -14,8 +19,7 @@ public class Playlist {
 
     private String name;
 
-    @JsonIgnoreProperties("playlists")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -26,7 +30,7 @@ public class Playlist {
             joinColumns = @JoinColumn(name = "playlist_id"),
             inverseJoinColumns = @JoinColumn(name = "song_id")
     )
-    private List<Song> song;
+    private List<Song> songs;
 
     public Playlist(String name, User user)
     {
@@ -60,15 +64,15 @@ public class Playlist {
         this.user = user;
     }
 
-    public List<Song> getSong() {
-        return song;
+    public List<Song> getSongs() {
+        return songs;
     }
 
-    public void setSong(List<Song> song) {
-        this.song = song;
+    public void setSongs(List<Song> song) {
+        this.songs = song;
     }
 
-    public void addSong(Song song) { this.song.add(song); }
+    public void addSong(Song song) { this.songs.add(song); }
 
-    public void removeSong(Song song) { this.song.remove(song); }
+    public void removeSong(Song song) { this.songs.remove(song); }
 }
