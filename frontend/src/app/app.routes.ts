@@ -5,9 +5,7 @@ import {BandsPageComponent} from "./components/pages/bands-page/bands-page.compo
 import {SongsPageComponent} from "./components/pages/songs-page/songs-page.component";
 import {ArtistsPageComponent} from "./components/pages/artists-page/artists-page.component";
 import {GenresPageComponent} from "./components/pages/genres-page/genres-page.component";
-import {SongDetailsComponent} from "./components/pages/song-details/song-details.component";
-import {BandDetailsComponent} from "./components/pages/band-details/band-details.component";
-import {AlbumDetailsComponent} from "./components/pages/album-details/album-details.component";
+import {AlbumsPageComponent} from "./components/pages/albums-page/albums-page.component";
 
 export const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -17,7 +15,5 @@ export const routes: Routes = [
   {path: 'songs', component: SongsPageComponent},
   {path: 'artists', component: ArtistsPageComponent},
   {path: 'genres', component: GenresPageComponent},
-  {path: 'bands/:id', component: BandDetailsComponent},
-  {path: 'songs/:id', component: SongDetailsComponent},
-  {path: 'albums/:id', component: AlbumDetailsComponent}
+  {path: 'albums', component: AlbumsPageComponent}
 ];

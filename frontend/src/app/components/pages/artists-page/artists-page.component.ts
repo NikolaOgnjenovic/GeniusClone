@@ -6,8 +6,8 @@ import { UpdateArtistModalComponent } from './ui/update-artist-modal/update-arti
 import { DeleteArtistModalComponent } from './ui/delete-artist-modal/delete-artist-modal.component';
 import {Artist} from "../../../models/as-is/artist";
 import {ArtistService} from "../../../services/artist.service";
-import {CreateArtistRequest} from "../../../models/artists/create-artist-request";
-import {UpdateArtistRequst} from "../../../models/artists/update-artist-request";
+import {ArtistCreateRequest} from "../../../models/artists/artist-create-request";
+import {ArtistUpdateRequest} from "../../../models/artists/artist-update-request";
 
 @Component({
   selector: 'app-artists-page',
@@ -57,7 +57,7 @@ export class ArtistsPageComponent {
     this.showCreationModal = false;
   }
 
-  onCreate(request: CreateArtistRequest) {
+  onCreate(request: ArtistCreateRequest) {
     this.artistService.create(request).subscribe((response:Artist) => {
       if (response) {
         this.artists = [...this.artists, response]
@@ -81,7 +81,7 @@ export class ArtistsPageComponent {
     this.showUpdateModal = false;
   }
 
-  onUpdate(request: UpdateArtistRequst) {
+  onUpdate(request: ArtistUpdateRequest) {
     this.artistService.update(this.selectedArtist.id, request).subscribe((response:Artist) => {
       if (response) {
         const index = this.artists.findIndex(a => a.id === this.selectedArtist.id);

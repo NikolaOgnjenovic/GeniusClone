@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import {CreateArtistRequest} from "../../../../../models/artists/create-artist-request";
+import {ArtistCreateRequest} from "../../../../../models/artists/artist-create-request";
 
 @Component({
   selector: 'app-create-artist-modal',
@@ -13,7 +13,7 @@ import {CreateArtistRequest} from "../../../../../models/artists/create-artist-r
 })
 export class CreateArtistModalComponent {
   createArtistForm: FormGroup;
-  @Output() create = new EventEmitter<CreateArtistRequest>();
+  @Output() create = new EventEmitter<ArtistCreateRequest>();
   @Output() close = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder) {
@@ -32,7 +32,7 @@ export class CreateArtistModalComponent {
 
   onCreate() {
     if (this.createArtistForm.valid) {
-      const request: CreateArtistRequest = {
+      const request: ArtistCreateRequest = {
         name: this.createArtistForm.value.name,
         surname: this.createArtistForm.value.surname,
         birthday: this.createArtistForm.value.birthday,

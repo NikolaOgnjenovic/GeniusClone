@@ -39,12 +39,12 @@ public class Album {
     public List<Song> songs;
 
 
-    public Album(String title, LocalDate releaseDate, String coverArt) {
+    public Album(String title, LocalDate releaseDate, String coverArt, List<Genre> genres) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.coverArt = coverArt;
         this.performer = null;
-        this.genres = new ArrayList<>();
+        this.genres = genres;
         this.songs = new ArrayList<>();
     }
 

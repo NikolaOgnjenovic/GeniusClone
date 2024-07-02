@@ -5,9 +5,9 @@ import { DeleteGenreModalComponent } from './ui/delete-genre-modal/delete-genre-
 import { UpdateGenreModalComponent } from './ui/update-genre-modal/update-genre-modal.component';
 import { CreateGenreModalComponent } from './ui/create-genre-modal/create-genre-modal.component';
 import {GenreService} from "../../../services/genre.service";
-import {GetGenresReponse} from "../../../models/genres/get-genres-response";
+import {GetGenresReponse} from "../../../models/genres/genre-get-all-response";
 import {Genre} from "../../../models/as-is/genre";
-import {CreateGenreRequest} from "../../../models/genres/create-genre-request";
+import {GenreCreateRequest} from "../../../models/genres/genre-create-request";
 
 @Component({
   selector: 'app-genres-page',
@@ -49,7 +49,7 @@ export class GenresPageComponent {
   }
 
   onCreate(name: string): void {
-    const request: CreateGenreRequest = { name: name };
+    const request: GenreCreateRequest = { name: name };
     this.genreService.create(request).subscribe((response: Genre) => {
       if (response) {
         this.genres = [...this.genres, response];

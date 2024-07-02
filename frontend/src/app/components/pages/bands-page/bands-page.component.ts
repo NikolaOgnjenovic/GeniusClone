@@ -6,7 +6,7 @@ import {UpdateBandModalComponent} from "./ui/update-band-modal/update-band-modal
 import {DeleteBandModalComponent} from "./ui/delete-band-modal/delete-band-modal.component";
 import {BandService} from "../../../services/band.service";
 import {Band} from "../../../models/as-is/band";
-import {CreateBandRequest} from "../../../models/bands/create-band-request";
+import {BandCreateRequest} from "../../../models/bands/band-create-request";
 import {Artist} from "../../../models/as-is/artist";
 
 @Component({
@@ -49,7 +49,7 @@ export class BandsPageComponent implements OnInit {
   }
 
   onCreate(name: string): void {
-    const request: CreateBandRequest = { name: name };
+    const request: BandCreateRequest = { name: name };
     this.bandService.create(request).subscribe((response: Band) => {
       if (response) {
         this.bands = [...this.bands, response];

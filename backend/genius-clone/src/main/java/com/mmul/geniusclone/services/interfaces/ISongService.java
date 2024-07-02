@@ -10,9 +10,9 @@ import java.util.UUID;
 
 public interface ISongService {
 
-    Song create(SongCreateRequest songDTO) throws IOException;
+    Song create(SongCreateRequest request) throws IOException;
 
-    Song update(UUID id, SongUpdateRequest songDTO) throws IOException;
+    Song update(UUID id, SongUpdateRequest request) throws IOException;
 
     Song getById(UUID id);
 

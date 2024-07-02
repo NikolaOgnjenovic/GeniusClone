@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {Artist} from "../../../../../models/as-is/artist";
-import {UpdateArtistRequst} from "../../../../../models/artists/update-artist-request";
+import {ArtistUpdateRequest} from "../../../../../models/artists/artist-update-request";
 
 @Component({
   selector: 'app-update-artist-modal',
@@ -16,7 +16,7 @@ export class UpdateArtistModalComponent {
 
   @Input() artist!: Artist;
   @Output() close = new EventEmitter<void>();
-  @Output() update = new EventEmitter<UpdateArtistRequst>();
+  @Output() update = new EventEmitter<ArtistUpdateRequest>();
 
   updateArtistForm!: FormGroup;
 
@@ -48,7 +48,7 @@ export class UpdateArtistModalComponent {
 
   onUpdate() {
     if (this.updateArtistForm.valid) {
-      const request: UpdateArtistRequst = {
+      const request: ArtistUpdateRequest = {
         name: this.updateArtistForm.value.name,
         surname: this.updateArtistForm.value.surname,
         birthday: this.updateArtistForm.value.birthday,

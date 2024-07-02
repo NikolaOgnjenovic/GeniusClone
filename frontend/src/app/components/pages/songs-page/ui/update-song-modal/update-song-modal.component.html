@@ -1,13 +1,22 @@
 <div class="modal-overlay">
-    <div class="modal-content">
-        <h2>Update a song {{song.title}}</h2>
-        <form [formGroup]="updateSongForm">
-            <label for="title"> Title</label>
-            <input id="title" formControlName="title" type="text"/>
-            <div class="button-row">
-                <button type="button" (click)="onCancel()">Cancel</button>
-                <button type="button" (click)="onUpdate()">Update</button>
-            </div>
-        </form>
-    </div>
+  <div class="modal-content">
+    <h2>Update Song: {{ song.title }}</h2>
+    <form [formGroup]="updateSongForm">
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" type="text" />
+
+      <label for="album">Select Album</label>
+      <select id="album" formControlName="albumId">
+        <option *ngFor="let album of albums" [value]="album.id">{{ album.title }}</option>
+      </select>
+
+      <label for="link">Link</label>
+      <input id="link" formControlName="link" type="text" />
+
+      <div class="button-row">
+        <button type="button" (click)="onCancel()">Cancel</button>
+        <button type="button" (click)="onUpdate()">Update</button>
+      </div>
+    </form>
+  </div>
 </div>
