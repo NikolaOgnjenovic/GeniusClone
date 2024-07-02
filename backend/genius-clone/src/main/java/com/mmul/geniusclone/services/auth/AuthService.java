@@ -1,9 +1,9 @@
 package com.mmul.geniusclone.services.auth;
 
-import com.mmul.geniusclone.dtos.auth.post.LoginRequest;
-import com.mmul.geniusclone.dtos.auth.post.LoginResponse;
-import com.mmul.geniusclone.dtos.auth.post.RegistrationRequest;
-import com.mmul.geniusclone.dtos.auth.post.RegistrationResponse;
+import com.mmul.geniusclone.dtos.auth.LoginRequest;
+import com.mmul.geniusclone.dtos.auth.LoginResponse;
+import com.mmul.geniusclone.dtos.auth.RegistrationRequest;
+import com.mmul.geniusclone.dtos.auth.RegistrationResponse;
 import com.mmul.geniusclone.exceptions.auth.UserEmailAlreadyExistsException;
 import com.mmul.geniusclone.models.User;
 import com.mmul.geniusclone.repositories.auth.AuthRepository;

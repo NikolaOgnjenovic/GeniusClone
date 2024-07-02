@@ -6,6 +6,7 @@ import com.mmul.geniusclone.models.Performer;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +19,8 @@ public class Band extends Performer {
         name = bandName;
     }
 
-    @JsonIgnoreProperties("memberOf")
+
+    @JsonIgnoreProperties({"memberOf", "albums"})
     @ManyToMany
     @JoinTable(
             name = "band_artist",
