@@ -19,19 +19,17 @@ public class Album {
     private String title;
     private LocalDate releaseDate;
 
-    @Lob
-    private byte[] coverArt;
+    //@Lob
+    private String coverArt;
 
     @ManyToMany
     private List<Genre> genres;
 
-    //@JsonIgnoreProperties("albums")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "performer_id")
-    //@JsonManagedReference
     private Performer performer;
 
-    public Album(String title, LocalDate releaseDate, byte[] coverArt) {
+    public Album(String title, LocalDate releaseDate, String coverArt) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.coverArt = coverArt;
@@ -66,11 +64,11 @@ public class Album {
         this.releaseDate = releaseDate;
     }
 
-    public byte[] getCoverArt() {
+    public String getCoverArt() {
         return coverArt;
     }
 
-    public void setCoverArt(byte[] coverArt) {
+    public void setCoverArt(String coverArt) {
         this.coverArt = coverArt;
     }
 

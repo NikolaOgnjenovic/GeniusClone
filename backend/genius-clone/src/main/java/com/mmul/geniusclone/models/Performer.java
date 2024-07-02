@@ -18,9 +18,7 @@ public abstract class Performer {
     @GeneratedValue
     protected UUID id;
 
-    //@JsonIgnoreProperties("performer")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "performer", cascade = CascadeType.ALL)
-    //@JsonBackReference
     public List<Album> albums;
 
     public UUID getId() {
