@@ -1,0 +1,27 @@
+<button class="create-button" (click)="onCreateArtist()">Create</button>
+<app-artists-table
+[artists]="artists"
+(update)="onUpdateArtist($event)"
+(delete)="onDeleteArtist($event)"
+/>
+
+<app-create-artist-modal
+*ngIf="showCreationModal"
+(close)="onCloseCreationModal()"
+(create)="onCreate($event)"
+/>
+
+<app-delete-artist-modal
+*ngIf="showDeleteModal"
+[artist]="selectedArtist"
+(close)="onCloseDeleteModal()"
+(delete)="onDelete()"
+/>
+
+<app-update-artist-modal
+*ngIf="showUpdateModal"
+[artist]="selectedArtist"
+(close)="onCloseUpdateModal()"
+(update)="onUpdate($event)"
+/>
+

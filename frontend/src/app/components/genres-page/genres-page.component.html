@@ -1,0 +1,23 @@
+<button class="create-button" (click)="onCreateGenre()">Create</button>
+<app-genres-table
+  [genres]="genres"
+  (update)="onUpdateGenre($event)"
+  (delete)="onDeleteGenre($event)"
+/>
+<app-create-genre-modal
+  *ngIf="showCreationModal"
+  (close)="onCloseCreationModal()"
+  (create)="onCreate($event)"
+/>
+<app-update-genre-modal
+  *ngIf="showUpdateModal"
+  [genre]="selectedGenre"
+  (close)="onCloseUpdateModal()"
+  (update)="onUpdate($event)"
+/>
+<app-delete-genre-modal
+  *ngIf="showDeleteModal"
+  [genre]="selectedGenre"
+  (close)="onCloseDeleteModal()"
+  (delete)="onDelete()"
+/>

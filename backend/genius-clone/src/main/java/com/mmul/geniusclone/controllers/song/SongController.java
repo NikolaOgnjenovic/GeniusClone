@@ -5,7 +5,6 @@ import com.mmul.geniusclone.models.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import com.mmul.geniusclone.services.song.SongService;
 import java.io.IOException;
 import java.util.List;
@@ -18,42 +17,30 @@ public class SongController {
     @Autowired
     private SongService songService;
 
-    @PostMapping("")
-    public ResponseEntity<String> uploadSong(@RequestBody SongDTO song) {
-        try {
-            songService.saveSong(song);
-            return ResponseEntity.ok("Song uploaded successfully!");
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body("Failed to upload song.");
-        }
+    @PostMapping
+    public Song create(@RequestBody SongDTO song) {
+        return songService.create(song);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateSong(@PathVariable UUID id,
-                                             @RequestBody SongDTO song) {
-        try {
-            songService.updateSong(id, song);
-            return ResponseEntity.ok("Song updated successfully!");
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body("Failed to update song.");
-        }
+    @PutMapping("/{id}")
+    public Song update(@PathVariable UUID id, @RequestBody SongDTO song) throws IOException {
+            return songService.update(id, song);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Song> getSong(@PathVariable UUID id) {
-        Song song = songService.getSong(id);
+    public ResponseEntity<Song> getById(@PathVariable UUID id) {
+        Song song = songService.getById(id);
         return ResponseEntity.ok(song);
     }
 
     @GetMapping
-    public ResponseEntity<List<Song>> getAllSongs() {
-        List<Song> songs = songService.getAllSongs();
+    public ResponseEntity<List<Song>> getAll() {
+        List<Song> songs = songService.getAll();
         return ResponseEntity.ok(songs);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSong(@PathVariable UUID id) {
-        songService.deleteSong(id);
-        return ResponseEntity.ok("Song deleted successfully!");
+    public void delete(@PathVariable UUID id) {
+        songService.delete(id);
     }
 }

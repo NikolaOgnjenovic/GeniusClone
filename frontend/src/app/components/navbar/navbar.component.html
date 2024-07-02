@@ -1,9 +1,10 @@
 <nav>
   <h1>GeniusClone</h1>
   <ul>
-    <li *ngIf="authState.getCurrentUser()"><a (click)="navigateTo('/')">Home</a></li>
-    <li *ngIf="!authState.getCurrentUser()"><a (click)="navigateTo('/auth/login')">Login</a></li>
-    <li *ngIf="!authState.getCurrentUser()"><a (click)="navigateTo('/auth')">Register</a></li>
+    <li *ngIf="authState.getCurrentUser()" [class.active]="isActive('/')"><a (click)="navigateTo('/')">Home</a></li>
+    <li *ngIf="authState.getCurrentUser()" [class.active]="isActive('/bands')"><a (click)="navigateTo('/bands')">Bands</a></li>
+    <li *ngIf="!authState.getCurrentUser()" [class.active]="isActive('/auth/login')"><a (click)="navigateTo('/auth/login')">Login</a></li>
+    <li *ngIf="!authState.getCurrentUser()" [class.active]="isActive('/auth')"><a (click)="navigateTo('/auth')">Register</a></li>
     <li *ngIf="authState.getCurrentUser()"><a (click)="logout()">Logout</a></li>
   </ul>
 </nav>
