@@ -40,13 +40,12 @@ public class GenreController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenreGetByIdResponse> getById(@PathVariable UUID id) {
+    public Genre getById(@PathVariable UUID id) {
         try {
-            GenreGetByIdRequest request = new GenreGetByIdRequest(id);
-            GenreGetByIdResponse response = genreService.getById(request);
-            return ResponseEntity.ok(response);
+            Genre genre = genreService.getById(id);
+            return genre;
         } catch (Exception ex) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
 
     }

@@ -58,7 +58,7 @@ public class AlbumController {
 
     @PostMapping("/{albumId}/genres")
     public Album addGenreToAlbum(@PathVariable UUID albumId, @RequestBody AlbumAddGenreRequest request) {
-        return albumService.addGenre(albumId, request);
+        return albumService.addGenre(albumId, request.genreId());
     }
 
     @DeleteMapping("/{albumId}/genres/{genreId}")

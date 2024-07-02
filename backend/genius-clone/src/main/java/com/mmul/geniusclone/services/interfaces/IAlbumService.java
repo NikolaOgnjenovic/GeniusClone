@@ -17,6 +17,6 @@ public interface IAlbumService {
     List<Album> getAll();
     Album addPerformer(UUID albumId, AlbumAddPerformerRequest request);
     Album removePerformer(UUID albumId, UUID performerId);
-    Album addGenre(UUID albumId, AlbumAddGenreRequest request);
+    Album addGenre(UUID albumId, UUID genreId);
     Album removeGenre(UUID albumId, UUID genreId);
 }

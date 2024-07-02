@@ -11,6 +11,8 @@ import com.mmul.geniusclone.services.interfaces.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 
 @Service
 public class AuthService implements IAuthService {
@@ -37,6 +39,11 @@ public class AuthService implements IAuthService {
         }
 
         return new LoginResponse(user.getId(), user.getEmail(), user.getRoles());
+    }
+
+    @Override
+    public User getById(UUID id) {
+        return authRepository.findById(id).orElse(null);
     }
 }
 
