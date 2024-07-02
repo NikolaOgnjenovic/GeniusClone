@@ -1,5 +1,6 @@
 package com.mmul.geniusclone.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -12,12 +13,15 @@ public class Ad {
     private UUID id;
     private String link;
     private byte[] image;
-    private UUID genreId;
+    @JsonIgnoreProperties("ads")
+    @ManyToOne
+    @JoinColumn(name = "genre_id", nullable = false)
+    private Genre genre;
 
-    public Ad(String link, byte[] image, UUID genreId) {
+    public Ad(String link, byte[] image, Genre genre) {
         this.link = link;
         this.image = image;
-        this.genreId = genreId;
+        this.genre = genre;
     }
 
     public Ad() {
@@ -48,11 +52,11 @@ public class Ad {
         this.image = image;
     }
 
-    public UUID getGenreId() {
-        return genreId;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenreId(UUID genreId) {
-        this.genreId = genreId;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 }

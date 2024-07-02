@@ -15,10 +15,10 @@ public class AdService implements IAdService {
     private AdRepository adRepository;
     @Override
     public AdCreateResponse create(AdCreateRequest request) {
-        Ad ad = new Ad(request.link(), request.image(), request.genreId());
+        Ad ad = new Ad(request.link(), request.image(), request.genre());
         adRepository.save(ad);
 
-        return new AdCreateResponse(ad.getId(), ad.getLink(), ad.getImage(), ad.getGenreId());
+        return new AdCreateResponse(ad.getId(), ad.getLink(), ad.getImage(), ad.getGenre());
     }
 
     @Override
@@ -41,6 +41,6 @@ public class AdService implements IAdService {
         Ad ad = adRepository.findById(request.id())
                 .orElseThrow(() -> new RuntimeException("Ad not found"));
 
-        return new AdGetByIdResponse(ad.getId(), ad.getLink(), ad.getImage(), ad.getGenreId());
+        return new AdGetByIdResponse(ad.getId(), ad.getLink(), ad.getImage(), ad.getGenre());
     }
 }
