@@ -40,7 +40,6 @@ export class ArtistsPageComponent {
 
   onUpdateArtist(artist: Artist) {
     this.selectedArtist = artist;
-    console.log(this.selectedArtist);
     this.showUpdateModal = true;
   }
 

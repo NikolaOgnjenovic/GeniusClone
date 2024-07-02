@@ -50,6 +50,6 @@ export class UpdateBandModalComponent implements OnInit {
   }
 
   bandContainsArtist(id: string): boolean {
-    return this.band.members.find((artist) => artist.id === id) !== undefined;
+    return this.band.members?.find((artist) => artist.id === id) !== undefined;
   }
 }

@@ -49,7 +49,6 @@ export class SongsPageComponent implements OnInit {
   }
 
   onCreate(createSong: SongCreateRequest) {
-    console.table(createSong);
     this.songService.create(createSong).subscribe((response: Song) => {
       if (response) {
         this.songs = [...this.songs, response];
