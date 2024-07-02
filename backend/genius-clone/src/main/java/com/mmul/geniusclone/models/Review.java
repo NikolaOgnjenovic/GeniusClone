@@ -1,9 +1,7 @@
 package com.mmul.geniusclone.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -13,18 +11,25 @@ public class Review {
     @GeneratedValue
     @Id
     private UUID id;
-    UUID userId;
 
-    UUID songId;
+    @JsonIgnoreProperties("reviews")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
+
+    @JsonIgnoreProperties("reviews")
+    @ManyToOne
+    @JoinColumn(name = "song_id", nullable = false)
+    Song song;
 
     short value;
 
     String description;
 
 
-    public Review(UUID userId, UUID songId, short value, String description) {
-        this.userId = userId;
-        this.songId = songId;
+    public Review(User user, Song song, short value, String description) {
+        this.user = user;
+        this.song = song;
         this.value = value;
         this.description = description;
     }
@@ -56,19 +61,19 @@ public class Review {
         this.description = description;
     }
 
-    public UUID getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(UUID userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public UUID getSongId() {
-        return songId;
+    public Song getSong() {
+        return song;
     }
 
-    public void setSongId(UUID songId) {
-        this.songId = songId;
+    public void setSong(Song song) {
+        this.song = song;
     }
 }

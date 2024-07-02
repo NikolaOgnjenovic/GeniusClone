@@ -1,5 +1,6 @@
 package com.mmul.geniusclone.dtos.reviews;
 
-import java.util.UUID;
+import com.mmul.geniusclone.models.Song;
+import com.mmul.geniusclone.models.User;
 
-public record ReviewCreateRequest(UUID userId, UUID songId, short value, String description) {}
+public record ReviewCreateRequest(User user, Song song, short value, String description) {}
