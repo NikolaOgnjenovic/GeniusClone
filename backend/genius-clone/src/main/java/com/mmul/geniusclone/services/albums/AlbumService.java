@@ -14,7 +14,10 @@ import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Performer;
 
 import com.mmul.geniusclone.repositories.performers.PerformerRepository;
+import com.mmul.geniusclone.services.bands.BandService;
+import com.mmul.geniusclone.services.genres.GenreService;
 import com.mmul.geniusclone.services.interfaces.IAlbumService;
+import com.mmul.geniusclone.services.interfaces.IGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,16 +28,15 @@ import java.util.UUID;
 
 @Service
 public class AlbumService implements IAlbumService {
-    @Autowired
-    private AlbumRepository albumRepository;
+    private final AlbumRepository albumRepository;
+    private final PerformerRepository performerRepository;
+    private final IGenreService genreService;
 
-    @Autowired
-    private PerformerRepository performerRepository;
-    @Autowired
-    private BandRepository bandRepository;
-    @Autowired
-    private GenreRepository genreRepository;
-
+    public AlbumService(AlbumRepository albumRepository, PerformerRepository performerRepository, IGenreService genreService) {
+        this.albumRepository = albumRepository;
+        this.performerRepository = performerRepository;
+        this.genreService = genreService;
+    }
 
     @Override
     public Album getById(UUID id) {
@@ -104,11 +106,10 @@ public class AlbumService implements IAlbumService {
 
     @Transactional
     public Album addGenre(UUID albumId, UUID genreId) {
-        Optional<Genre> genreOpt = genreRepository.findById(genreId);
+        Genre genre = genreService.getById(genreId);
         Optional<Album> albumOpt = albumRepository.findById(albumId);
 
-        if (genreOpt.isPresent() && albumOpt.isPresent()) {
-            Genre genre = genreOpt.get();
+        if (genre!=null && albumOpt.isPresent()) {
             Album album = albumOpt.get();
 
             album.addGenre(genre);
@@ -121,11 +122,10 @@ public class AlbumService implements IAlbumService {
 
     @Transactional
     public Album removeGenre(UUID albumId, UUID genreId) {
-        Optional<Genre> genreOpt = genreRepository.findById(genreId);
+        Genre genre = genreService.getById(genreId);
         Optional<Album> albumOpt = albumRepository.findById(albumId);
 
-        if (genreOpt.isPresent() && albumOpt.isPresent()) {
-            Genre genre = genreOpt.get();
+        if (genre!=null && albumOpt.isPresent()) {
             Album album = albumOpt.get();
 
             album.removeGenre(genre);

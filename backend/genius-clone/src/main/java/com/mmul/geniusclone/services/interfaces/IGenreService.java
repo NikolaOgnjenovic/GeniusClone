@@ -9,6 +9,6 @@ public interface IGenreService {
     GenreCreateResponse create(GenreCreateRequest request);
     GenreDeleteResponse delete(GenreDeleteRequest request);
     GenreGetAllResponse getAll();
-    GenreGetByIdResponse getById(GenreGetByIdRequest request);
+    Genre getById(UUID id);
     Genre update(UUID id, GenreUpdateRequest request);
 }
