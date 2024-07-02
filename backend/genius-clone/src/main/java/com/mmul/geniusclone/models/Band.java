@@ -19,7 +19,8 @@ public class Band extends Performer {
         name = bandName;
     }
 
-    @JsonIgnoreProperties("memberOf")
+
+    @JsonIgnoreProperties({"memberOf", "albums"})
     @ManyToMany
     @JoinTable(
             name = "band_artist",

@@ -18,7 +18,7 @@ public class Artist extends Performer {
         birthday = artistBirthday;
     }
 
-    @JsonIgnoreProperties("members")
+    @JsonIgnoreProperties({"members", "albums"})
     @ManyToMany(mappedBy = "members")
     private List<Band> memberOf;
 

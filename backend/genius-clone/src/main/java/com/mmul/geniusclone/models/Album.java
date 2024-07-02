@@ -1,7 +1,6 @@
 package com.mmul.geniusclone.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -9,6 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class Album {
     @GeneratedValue
     @Id
@@ -23,12 +25,10 @@ public class Album {
     @ManyToMany
     private List<Genre> genres;
 
-    @ManyToOne
-    @JoinTable(
-            name = "album_performer",
-            joinColumns = @JoinColumn(name = "album_id"),
-            inverseJoinColumns = @JoinColumn(name = "performer")
-    )
+    //@JsonIgnoreProperties("albums")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "performer_id")
+    //@JsonManagedReference
     private Performer performer;
 
     public Album(String title, LocalDate releaseDate, byte[] coverArt) {
