@@ -22,4 +22,8 @@ export class NavbarComponent {
   navigateTo(path: string): void {
     this.router.navigate([path]);
   }
+
+  isActive(path: string): boolean {
+    return this.router.isActive(path, true);
+  }
 }

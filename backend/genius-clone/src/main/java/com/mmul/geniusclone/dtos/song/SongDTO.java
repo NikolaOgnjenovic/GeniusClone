@@ -2,20 +2,22 @@ package com.mmul.geniusclone.dtos.song;
 
 import com.mmul.geniusclone.models.Song;
 
+import java.util.Base64;
+
 public class SongDTO {
 
 
-    private byte[] songData;
+    private String songData;
 
     private boolean isPendingReview = false;
 
     private String title;
 
-    public byte[] getSongData() {
+    public String getSongData() {
         return songData;
     }
 
-    public void setSongData(byte[] songData) {
+    public void setSongData(String songData) {
         this.songData = songData;
     }
 
@@ -36,7 +38,7 @@ public class SongDTO {
     }
 
     public Song toSong() {
-        return new Song(this.songData, this.isPendingReview, this.title);
+        return new Song(Base64.getDecoder().decode(this.songData), this.isPendingReview, this.title);
     }
 }
 

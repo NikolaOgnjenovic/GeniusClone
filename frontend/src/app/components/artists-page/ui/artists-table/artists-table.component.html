@@ -1,0 +1,23 @@
+<table class="artists-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Birthday</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let artist of artists">
+            <td> {{artist.name}}</td>
+            <td> {{artist.surname}} </td>
+            <td> {{artist.birthday}} </td>
+            <td>
+                <div class="button-container">
+                    <button (click)="onUpdate(artist)">Update</button>
+                    <button (click)="onDelete(artist)">Delete</button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
