@@ -13,6 +13,7 @@ public class Ad {
     private UUID id;
     private String link;
     private String image;
+
     @JsonIgnoreProperties("ads")
     @ManyToOne
     @JoinColumn(name = "genre_id", nullable = false)

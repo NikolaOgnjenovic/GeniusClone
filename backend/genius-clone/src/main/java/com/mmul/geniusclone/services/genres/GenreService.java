@@ -43,11 +43,8 @@ public class GenreService implements IGenreService {
     }
 
     @Override
-    public GenreGetByIdResponse getById(GenreGetByIdRequest request) {
-        Genre genre = genreRepository.findById(request.id())
-                .orElseThrow(() -> new RuntimeException("Genre not found"));
-
-        return new GenreGetByIdResponse(genre.getId(), genre.getName());
+    public Genre getById(UUID id) {
+        return genreRepository.findById(id).orElseThrow(() -> new RuntimeException("Genre not found"));
     }
 
     @Override
