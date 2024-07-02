@@ -103,4 +103,8 @@ public class Album {
     public void addGenre(Genre genre) {this.genres.add(genre);}
 
     public void removeGenre(Genre genre) {this.genres.remove(genre);}
+
+    public void addSong(Song song){this.songs.add(song);}
+
+    public void removeSong(Song song){this.songs.remove(song);}
 }

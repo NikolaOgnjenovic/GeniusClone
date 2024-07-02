@@ -1,3 +1,5 @@
 package com.mmul.geniusclone.dtos.song;
 
-public record SongCreateRequest(String link, String title) { }
+import java.util.UUID;
+
+public record SongCreateRequest(String link, String title, String albumId) { }
