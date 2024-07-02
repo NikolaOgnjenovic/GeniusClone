@@ -1,12 +1,8 @@
 package com.mmul.geniusclone.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.mmul.geniusclone.models.Artist;
-import com.mmul.geniusclone.models.Performer;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,14 +10,13 @@ import java.util.UUID;
 public class Band extends Performer {
     private String name;
 
-    public Band(String bandName){
+    public Band(String bandName) {
         id = UUID.randomUUID();
         name = bandName;
     }
 
-
     @JsonIgnoreProperties({"memberOf", "albums"})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "band_artist",
             joinColumns = @JoinColumn(name = "band_id"),

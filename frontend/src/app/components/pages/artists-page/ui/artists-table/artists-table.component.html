@@ -1,0 +1,13 @@
+<div class="cards-container">
+  <div *ngFor="let artist of artists" class="card">
+    <img [src]="artist.image" alt="Card image" class="card-img">
+    <div class="card-body">
+      <h5 class="card-title">{{ artist.name }}</h5>
+      <p class="card-text">{{ artist.description }}</p>
+      <div class="button-container">
+        <button (click)="onUpdate(artist)">Update</button>
+        <button (click)="onDelete(artist)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

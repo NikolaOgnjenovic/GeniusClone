@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Band} from "../models/as-is/band";
-import {CreateBandRequest} from "../models/bands/create-band-request";
-import {UpdateBandRequest} from "../models/bands/update-band-request";
+import {BandCreateRequest} from "../models/bands/band-create-request";
+import {BandUpdateRequest} from "../models/bands/band-update-request";
 
 @Injectable({
   providedIn: 'root',
@@ -17,11 +17,11 @@ export class BandService {
     return this.http.get<Band[]>(this.baseUrl);
   }
 
-  create(request: CreateBandRequest): Observable<Band> {
+  create(request: BandCreateRequest): Observable<Band> {
     return this.http.post<Band>(this.baseUrl, request);
   }
 
-  update(id: string, request: UpdateBandRequest): Observable<Band> {
+  update(id: string, request: BandUpdateRequest): Observable<Band> {
     return this.http.put<Band>(`${this.baseUrl}/${id}`, request);
   }
 

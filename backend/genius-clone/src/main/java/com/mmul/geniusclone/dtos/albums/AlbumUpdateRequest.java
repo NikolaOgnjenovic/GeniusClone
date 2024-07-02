@@ -1,6 +1,9 @@
 package com.mmul.geniusclone.dtos.albums;
 
-import java.time.LocalDate;
+import com.mmul.geniusclone.models.Genre;
 
-public record AlbumUpdateRequest(String title, LocalDate releaseDate, String coverArt) {
+import java.time.LocalDate;
+import java.util.List;
+
+public record AlbumUpdateRequest(String title, LocalDate releaseDate, String coverArt, List<Genre> genres) {
 }

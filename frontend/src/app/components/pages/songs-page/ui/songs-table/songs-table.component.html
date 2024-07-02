@@ -1,0 +1,19 @@
+<table class="songs-table">
+    <thead>
+    <tr>
+      <th>song Title</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let song of songs">
+      <td>{{ song.title }}</td>
+      <td>
+        <div class="button-container">
+          <button (click)="onUpdate(song)">Update</button>
+          <button (click)="onDelete(song)">Delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>

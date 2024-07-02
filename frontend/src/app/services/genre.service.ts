@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Genre } from '../models/as-is/genre';
 import { Observable } from 'rxjs';
-import { UpdateGenreRequest } from '../models/genres/update-genre-request';
-import { CreateGenreRequest } from '../models/genres/create-genre-request';
-import { GetGenresReponse } from '../models/genres/get-genres-response';
+import { GenreUpdateRequest } from '../models/genres/genre-update-request';
+import { GenreCreateRequest } from '../models/genres/genre-create-request';
+import { GetGenresReponse } from '../models/genres/genre-get-all-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GenreService {
-  baseUrl: string = "http://localhost:8080/api/v1/genre";
+  baseUrl: string = "http://localhost:8080/api/v1/genres";
 
   constructor(private http: HttpClient) { }
 
@@ -18,11 +18,11 @@ export class GenreService {
     return this.http.get<GetGenresReponse>(this.baseUrl);
   }
 
-  create(request: CreateGenreRequest): Observable<Genre> {
+  create(request: GenreCreateRequest): Observable<Genre> {
     return this.http.post<Genre>(this.baseUrl, request);
   }
 
-  update(id: string, request: UpdateGenreRequest): Observable<Genre> {
+  update(id: string, request: GenreUpdateRequest): Observable<Genre> {
     return this.http.put<Genre>(`${this.baseUrl}/${id}`, request);
   }
 

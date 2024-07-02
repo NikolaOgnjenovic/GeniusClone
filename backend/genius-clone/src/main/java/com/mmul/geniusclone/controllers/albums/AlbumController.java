@@ -1,8 +1,8 @@
 package com.mmul.geniusclone.controllers.albums;
 
 
+import com.mmul.geniusclone.dtos.albums.AlbumAddGenreRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
-import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
@@ -22,8 +22,8 @@ public class AlbumController {
     }
 
     @PostMapping
-    public void create(@RequestBody AlbumCreateRequest request) {
-        albumService.create(request);
+    public Album create(@RequestBody AlbumCreateRequest request) {
+        return albumService.create(request);
     }
 
     @GetMapping
@@ -46,9 +46,9 @@ public class AlbumController {
         return albumService.addPerformer(albumId, request);
     }
 
-    @DeleteMapping("/{albumId}/performers")
-    public Album removePerformerFromAlbum(@PathVariable UUID albumId, @RequestBody AlbumRemovePerformerRequest request) {
-        return albumService.removePerformer(albumId, request);
+    @DeleteMapping("/{albumId}/performers/{id}")
+    public Album removePerformerFromAlbum(@PathVariable UUID albumId,  @PathVariable UUID id) {
+        return albumService.removePerformer(albumId, id);
     }
 
     @PutMapping("/{id}")
@@ -56,12 +56,12 @@ public class AlbumController {
         return albumService.update(id, request);
     }
 
-    @PutMapping("/{albumId}/addGenre/{genreId}")
-    public Album addGenreToAlbum(@PathVariable UUID albumId, @PathVariable UUID genreId) {
-        return albumService.addGenre(albumId, genreId);
+    @PostMapping("/{albumId}/genres")
+    public Album addGenreToAlbum(@PathVariable UUID albumId, @RequestBody AlbumAddGenreRequest request) {
+        return albumService.addGenre(albumId, request.genreId());
     }
 
-    @DeleteMapping("/{albumId}/removeGenre/{genreId}")
+    @DeleteMapping("/{albumId}/genres/{genreId}")
     public Album removeGenreFromAlbum(@PathVariable UUID albumId, @PathVariable UUID genreId) {
         return albumService.removeGenre(albumId, genreId);
     }

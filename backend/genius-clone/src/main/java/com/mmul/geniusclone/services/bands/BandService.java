@@ -9,7 +9,6 @@ import com.mmul.geniusclone.models.Band;
 import com.mmul.geniusclone.repositories.artists.ArtistRepository;
 import com.mmul.geniusclone.repositories.band.BandRepository;
 import com.mmul.geniusclone.services.interfaces.IBandService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +19,13 @@ import java.util.UUID;
 @Service
 public class BandService implements IBandService
 {
-    @Autowired
-    private BandRepository bandRepository;
-    @Autowired
-    private ArtistRepository artistRepository;
+    private final BandRepository bandRepository;
+    private final ArtistRepository artistRepository;
+
+    public BandService(BandRepository bandRepository, ArtistRepository artistRepository) {
+        this.bandRepository = bandRepository;
+        this.artistRepository = artistRepository;
+    }
 
     public Band getById(UUID id) {
         return bandRepository.findById(id).orElse(null);
@@ -34,9 +36,13 @@ public class BandService implements IBandService
     }
 
     @Override
+    @Transactional
     public Band update(UUID id, BandUpdateRequest request) {
-        Band band = bandRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
+        Band band = bandRepository.findById(id).orElseThrow(() -> new RuntimeException("Band not found"));
         band.setName(request.name());
+        for(Artist artist : request.members()) {
+            this.addArtist(id, new BandAddArtistRequest(artist.getId()));
+        }
         return bandRepository.save(band);
     }
 

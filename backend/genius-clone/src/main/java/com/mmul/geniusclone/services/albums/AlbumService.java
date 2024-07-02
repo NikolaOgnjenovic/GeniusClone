@@ -1,24 +1,19 @@
 package com.mmul.geniusclone.services.albums;
 
 
+import com.mmul.geniusclone.dtos.albums.AlbumAddGenreRequest;
 import com.mmul.geniusclone.models.*;
 import com.mmul.geniusclone.repositories.albums.AlbumRepository;
-import com.mmul.geniusclone.repositories.band.BandRepository;
-import com.mmul.geniusclone.repositories.genres.GenreRepository;
 
 import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
-import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Performer;
 
 import com.mmul.geniusclone.repositories.performers.PerformerRepository;
-import com.mmul.geniusclone.services.bands.BandService;
-import com.mmul.geniusclone.services.genres.GenreService;
 import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import com.mmul.geniusclone.services.interfaces.IGenreService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,7 +45,8 @@ public class AlbumService implements IAlbumService {
 
     @Override
     public Album create(AlbumCreateRequest request) {
-        return albumRepository.save(new Album(request.title(),request.releaseDate(), request.coverArt()));
+        Album album = new Album(request.title(), request.releaseDate(), request.coverArt(), request.genres());
+        return albumRepository.save(album);
     }
 
     @Override
@@ -59,7 +55,9 @@ public class AlbumService implements IAlbumService {
         album.setTitle(request.title());
         album.setReleaseDate(request.releaseDate());
         album.setCoverArt(request.coverArt());
-        return albumRepository.save(album);    }
+        album.setGenres(request.genres());
+        return albumRepository.save(album);
+    }
 
     @Override
     public List<Album> getAll() {
@@ -86,8 +84,8 @@ public class AlbumService implements IAlbumService {
     }
 
     @Transactional
-    public Album removePerformer(UUID albumId, AlbumRemovePerformerRequest request) {
-        Optional<Performer> performerOpt = performerRepository.findById(request.performerId());
+    public Album removePerformer(UUID albumId, UUID performerId) {
+        Optional<Performer> performerOpt = performerRepository.findById(performerId);
         Optional<Album> albumOpt = albumRepository.findById(albumId);
 
         if (performerOpt.isPresent() && albumOpt.isPresent()) {

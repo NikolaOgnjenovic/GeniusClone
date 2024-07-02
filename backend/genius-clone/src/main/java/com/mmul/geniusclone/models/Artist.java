@@ -23,7 +23,7 @@ public class Artist extends Performer {
     }
 
     @JsonIgnoreProperties({"members", "albums"})
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany(mappedBy = "members", cascade = CascadeType.ALL)
     private List<Band> memberOf;
 
     public Artist() {

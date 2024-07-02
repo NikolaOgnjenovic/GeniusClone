@@ -1,0 +1,30 @@
+<div class="albums-page">
+  <h2>Albums</h2>
+  <button class="create-button" (click)="onCreateAlbum()">Create</button>
+
+  <app-create-album-modal
+    *ngIf="showCreationModal"
+    (close)="onCloseCreationModal()"
+    (create)="onCreate($event)"
+  ></app-create-album-modal>
+
+  <app-update-album-modal
+    *ngIf="showUpdateModal"
+    [album]="selectedAlbum"
+    (close)="onCloseUpdateModal()"
+    (update)="onUpdate($event)"
+  ></app-update-album-modal>
+
+  <app-delete-album-modal
+    *ngIf="showDeleteModal"
+    [album]="selectedAlbum"
+    (close)="onCloseDeleteModal()"
+    (delete)="onDelete()"
+  ></app-delete-album-modal>
+
+  <app-album-table
+    [albums]="albums"
+    (update)="onUpdateAlbum($event)"
+    (delete)="onDeleteAlbum($event)"
+  ></app-album-table>
+</div>

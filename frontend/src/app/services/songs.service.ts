@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Song } from '../models/as-is/song';
-import { CreateSongRequest } from '../models/songs/create-song-request';
-import { UpdateSongRequest } from '../models/songs/update-song-request';
+import { SongCreateRequest } from '../models/songs/song-create-request';
+import { SongUpdateRequest } from '../models/songs/song-update-request';
 
 @Injectable({
   providedIn: 'root'
@@ -17,20 +17,15 @@ export class SongsService {
     return this.http.get<Song[]>(this.baseUrl);
   }
 
-  create(request: CreateSongRequest): Observable<Song> {
+  create(request: SongCreateRequest): Observable<Song> {
     return this.http.post<Song>(this.baseUrl, request);
   }
 
-  update(id: string, request: UpdateSongRequest): Observable<Song> {
+  update(id: string, request: SongUpdateRequest): Observable<Song> {
     return this.http.put<Song>(`${this.baseUrl}/${id}`, request);
   }
 
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
-
-  convertBufferToStirng(buffer: ArrayBuffer): string {
-    const decoder = new TextDecoder('utf-8');
-    return decoder.decode(buffer);
   }
 }

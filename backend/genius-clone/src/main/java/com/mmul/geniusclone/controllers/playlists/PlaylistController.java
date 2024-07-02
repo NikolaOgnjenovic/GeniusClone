@@ -1,17 +1,11 @@
 package com.mmul.geniusclone.controllers.playlists;
 
 
-import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
-import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
-import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
-import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.dtos.playlists.delete.PlaylistRemoveSongsRequest;
 import com.mmul.geniusclone.dtos.playlists.post.PlaylistCreateRequest;
 import com.mmul.geniusclone.dtos.playlists.put.PlaylistAddSongsRequest;
 import com.mmul.geniusclone.dtos.playlists.put.PlaylistUpdateRequest;
-import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Playlist;
-import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import com.mmul.geniusclone.services.interfaces.IPlaylistService;
 import org.springframework.web.bind.annotation.*;
 
