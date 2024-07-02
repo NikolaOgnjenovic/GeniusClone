@@ -25,7 +25,9 @@ export class UpdateArtistModalComponent {
     this.updateArtistForm = this.fb.group({
       name: [this.artist?.name || "", Validators.required],
       surname: [this.artist?.birthday || "", Validators.required],
-      birthday: [this.artist?.birthday || "", Validators.required]
+      birthday: [this.artist?.birthday || "", Validators.required],
+      description: [this.artist?.description || "", Validators.required],
+      image: [this.artist?.image || "", Validators.required]
     })
   }
 
@@ -34,7 +36,9 @@ export class UpdateArtistModalComponent {
       this.updateArtistForm.patchValue({
         name: this.artist.name,
         surname: this.artist.surname,
-        birthday: this.artist.birthday
+        birthday: this.artist.birthday,
+        description: this.artist.description,
+        image: this.artist.image
       });
     }
   }
@@ -44,12 +48,16 @@ export class UpdateArtistModalComponent {
   }
 
   onUpdate() {
-    const request: UpdateArtistRequst = {
-      name: this.updateArtistForm.value.name,
-      surname: this.updateArtistForm.value.surname,
-      birthday: this.updateArtistForm.value.birthday,
-      bands: []
+    if (this.updateArtistForm.valid) {
+      const request: UpdateArtistRequst = {
+        name: this.updateArtistForm.value.name,
+        surname: this.updateArtistForm.value.surname,
+        birthday: this.updateArtistForm.value.birthday,
+        description: this.updateArtistForm.value.description,
+        image: this.updateArtistForm.value.image,
+        bands: []
+      }
+      this.update.emit(request);
     }
-    this.update.emit(request);
   }
 }
