@@ -12,13 +12,13 @@ public class Ad {
     @Id
     private UUID id;
     private String link;
-    private byte[] image;
+    private String image;
     @JsonIgnoreProperties("ads")
     @ManyToOne
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
 
-    public Ad(String link, byte[] image, Genre genre) {
+    public Ad(String link, String image, Genre genre) {
         this.link = link;
         this.image = image;
         this.genre = genre;
@@ -44,11 +44,11 @@ public class Ad {
         this.link = link;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

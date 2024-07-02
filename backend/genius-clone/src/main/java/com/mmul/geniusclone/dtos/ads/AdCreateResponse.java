@@ -4,5 +4,5 @@ import com.mmul.geniusclone.models.Genre;
 
 import java.util.UUID;
 
-public record AdCreateResponse(UUID id, String link, byte[] image, Genre genre) {
+public record AdCreateResponse(UUID id, String link, String image, Genre genre) {
 }

@@ -11,11 +11,15 @@ public class Artist extends Performer {
     private String name;
     private String surname;
     private LocalDate birthday;
+    private String description;
+    private String image;
 
-    public Artist(String artistName, String artistSurname, LocalDate artistBirthday){
+    public Artist(String artistName, String artistSurname, LocalDate artistBirthday, String description, String image){
         name = artistName;
         surname = artistSurname;
         birthday = artistBirthday;
+        this.description = description;
+        this.image= image;
     }
 
     @JsonIgnoreProperties({"members", "albums"})
@@ -65,5 +69,21 @@ public class Artist extends Performer {
 
     public void removeMembership(Band band){
         this.memberOf.remove(band);
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

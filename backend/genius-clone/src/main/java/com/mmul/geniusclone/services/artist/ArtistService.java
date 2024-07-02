@@ -28,7 +28,7 @@ public class ArtistService implements IArtistService {
 
     @Override
     public Artist create(ArtistCreateRequest request) {
-        return artistRepository.save(new Artist(request.name(),request.surname(),request.birthday()));
+        return artistRepository.save(new Artist(request.name(),request.surname(),request.birthday(), request.description(), request.image()));
     }
 
     @Override
@@ -37,6 +37,8 @@ public class ArtistService implements IArtistService {
         artist.setName(request.name());
         artist.setSurname(request.surname());
         artist.setBirthday(request.birthday());
+        artist.setDescription(request.description());
+        artist.setImage(request.image());
         return artistRepository.save(artist);
     }
 

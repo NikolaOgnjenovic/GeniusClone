@@ -21,7 +21,9 @@ export class CreateArtistModalComponent {
     this.createArtistForm = this.fb.group({
       name: ["", Validators.required],
       surname: ["", Validators.required],
-      birthday: ["", Validators.required]
+      birthday: ["", Validators.required],
+      description: ['', Validators.required],
+      image: ['', Validators.required]
   });
 }
 
@@ -30,12 +32,16 @@ export class CreateArtistModalComponent {
   }
 
   onCreate() {
-    const request: CreateArtistRequest = {
-      name: this.createArtistForm.value.name,
-      surname: this.createArtistForm.value.surname,
-      birthday: this.createArtistForm.value.birthday,
-      bands: []
-    }
-    this.create.emit(request);
+    if (this.createArtistForm.valid) {
+      const request: CreateArtistRequest = {
+        name: this.createArtistForm.value.name,
+        surname: this.createArtistForm.value.surname,
+        birthday: this.createArtistForm.value.birthday,
+        description: this.createArtistForm.value.description,
+        image: this.createArtistForm.value.image,
+        bands: []
+      }
+      this.create.emit(request);
+    }  
   }
 }
