@@ -43,8 +43,8 @@ public class AlbumController {
     }
 
     @PostMapping("/{albumId}/setPerformer/{performerId}")
-    public Album addPerformerToAkbum(@PathVariable UUID albumId, @PathVariable UUID performerId) {
-        return albumService.setPerformer(albumId, albumId);
+    public Album addPerformerToAlbum(@PathVariable UUID albumId, @PathVariable UUID performerId) {
+        return albumService.setPerformer(albumId, performerId);
     }
 
     @DeleteMapping("/{albumId}/removePerformer/{performerId}")

@@ -1,5 +1,6 @@
 package com.mmul.geniusclone.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -22,12 +23,11 @@ public class Album {
     @ManyToMany
     private List<Genre> genres;
 
-    @JsonIgnoreProperties("albums")
     @ManyToOne
     @JoinTable(
             name = "album_performer",
             joinColumns = @JoinColumn(name = "album_id"),
-            inverseJoinColumns = @JoinColumn(name = "performer_id")
+            inverseJoinColumns = @JoinColumn(name = "performer")
     )
     private Performer performer;
 
@@ -35,6 +35,7 @@ public class Album {
         this.title = title;
         this.releaseDate = releaseDate;
         this.coverArt = coverArt;
+        this.performer = null;
     }
 
     public Album() {
