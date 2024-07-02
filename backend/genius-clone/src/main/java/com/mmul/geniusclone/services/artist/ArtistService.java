@@ -3,7 +3,7 @@ package com.mmul.geniusclone.services.artist;
 import com.mmul.geniusclone.dtos.artist.ArtistCreateRequest;
 import com.mmul.geniusclone.dtos.artist.ArtistUpdateRequest;
 import com.mmul.geniusclone.models.Artist;
-import com.mmul.geniusclone.repositories.artist.ArtistRepository;
+import com.mmul.geniusclone.repositories.artists.ArtistRepository;
 import com.mmul.geniusclone.services.interfaces.IArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

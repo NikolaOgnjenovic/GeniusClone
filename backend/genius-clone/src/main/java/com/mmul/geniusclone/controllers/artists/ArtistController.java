@@ -1,4 +1,4 @@
-package com.mmul.geniusclone.controllers.artist;
+package com.mmul.geniusclone.controllers.artists;
 
 
 import com.mmul.geniusclone.dtos.artist.ArtistCreateRequest;

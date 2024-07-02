@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ReviewService implements IReviewService{
@@ -54,15 +55,15 @@ public class ReviewService implements IReviewService{
     }
 
     @Override
-    public ReviewGetAllByUserIdResponse getByUserId(ReviewGetAllByUserIdRequest request) {
-        List<Review> reviews = reviewRepository.findByUserId(request.userId());
+    public ReviewGetAllByUserIdResponse getByUserId(UUID id) {
+        List<Review> reviews = reviewRepository.findByUserId(id);
 
         return new ReviewGetAllByUserIdResponse(reviews);
     }
 
     @Override
-    public ReviewGetAllBySongIdResponse getBySongId(ReviewGetAllBySongIdRequest request) {
-        List<Review> reviews = reviewRepository.findBySongId(request.songId());
+    public ReviewGetAllBySongIdResponse getBySongId(UUID id) {
+        List<Review> reviews = reviewRepository.findBySongId(id);
 
         return new ReviewGetAllBySongIdResponse(reviews);
     }

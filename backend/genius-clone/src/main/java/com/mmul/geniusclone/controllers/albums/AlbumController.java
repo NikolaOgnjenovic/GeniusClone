@@ -1,7 +1,7 @@
 package com.mmul.geniusclone.controllers.albums;
 
 import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
-import com.mmul.geniusclone.dtos.albums.AlbumDeletePerformerRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
@@ -40,14 +40,14 @@ public class AlbumController {
         albumService.delete(id);
     }
 
-    @PostMapping("/{albumId}")
+    @PostMapping("/{albumId}/performers")
     public Album addPerformerToAlbum(@PathVariable UUID albumId, @RequestBody AlbumAddPerformerRequest request) {
-        return albumService.setPerformer(albumId, request.performerId());
+        return albumService.addPerformer(albumId, request);
     }
 
-    @DeleteMapping("/{albumId}")
-    public Album removePerformerFromAlbum(@PathVariable UUID albumId, @RequestBody AlbumDeletePerformerRequest request) {
-        return albumService.removePerformer(albumId, request.performerId());
+    @DeleteMapping("/{albumId}/performers")
+    public Album removePerformerFromAlbum(@PathVariable UUID albumId, @RequestBody AlbumRemovePerformerRequest request) {
+        return albumService.removePerformer(albumId, request);
     }
 
     @PutMapping("/{id}")

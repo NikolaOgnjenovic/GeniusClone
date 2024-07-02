@@ -1,6 +1,8 @@
 package com.mmul.geniusclone.services.interfaces;
 
+import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
 
@@ -13,6 +15,6 @@ public interface IAlbumService {
      Album create(AlbumCreateRequest request);
      Album update(UUID id, AlbumUpdateRequest request);
      List<Album> getAll();
-     Album setPerformer(UUID albumId, UUID performerId);
-     Album removePerformer(UUID albumId, UUID performerId);
+     Album addPerformer(UUID albumId, AlbumAddPerformerRequest request);
+     Album removePerformer(UUID albumId, AlbumRemovePerformerRequest request);
 }

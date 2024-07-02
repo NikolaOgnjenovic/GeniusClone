@@ -1,10 +1,12 @@
-package com.mmul.geniusclone.services.band;
+package com.mmul.geniusclone.services.bands;
 
+import com.mmul.geniusclone.dtos.band.BandAddArtistRequest;
 import com.mmul.geniusclone.dtos.band.BandCreateRequest;
+import com.mmul.geniusclone.dtos.band.BandRemoveArtistRequest;
 import com.mmul.geniusclone.dtos.band.BandUpdateRequest;
 import com.mmul.geniusclone.models.Artist;
 import com.mmul.geniusclone.models.Band;
-import com.mmul.geniusclone.repositories.artist.ArtistRepository;
+import com.mmul.geniusclone.repositories.artists.ArtistRepository;
 import com.mmul.geniusclone.repositories.band.BandRepository;
 import com.mmul.geniusclone.services.interfaces.IBandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +49,9 @@ public class BandService implements IBandService
     }
 
     @Transactional
-    public Band addArtistToBand(UUID bandId, UUID artistId) {
+    public Band addArtist(UUID bandId, BandAddArtistRequest request) {
         Optional<Band> bandOpt = bandRepository.findById(bandId);
-        Optional<Artist> artistOpt = artistRepository.findById(artistId);
+        Optional<Artist> artistOpt = artistRepository.findById(request.artistId());
 
         if (bandOpt.isPresent() && artistOpt.isPresent()) {
             Band band = bandOpt.get();
@@ -66,9 +68,9 @@ public class BandService implements IBandService
     }
 
     @Transactional
-    public Band removeArtistFromBand(UUID bandId, UUID artistId) {
+    public Band removeArtist(UUID bandId, BandRemoveArtistRequest request) {
         Optional<Band> bandOpt = bandRepository.findById(bandId);
-        Optional<Artist> artistOpt = artistRepository.findById(artistId);
+        Optional<Artist> artistOpt = artistRepository.findById(request.artistId());
 
         if (bandOpt.isPresent() && artistOpt.isPresent()) {
             Band band = bandOpt.get();

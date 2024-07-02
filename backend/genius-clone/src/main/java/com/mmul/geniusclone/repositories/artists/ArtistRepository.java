@@ -1,4 +1,4 @@
-package com.mmul.geniusclone.repositories.artist;
+package com.mmul.geniusclone.repositories.artists;
 
 import com.mmul.geniusclone.models.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;

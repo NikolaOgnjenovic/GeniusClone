@@ -1,4 +1,4 @@
-package com.mmul.geniusclone.controllers.song;
+package com.mmul.geniusclone.controllers.songs;
 
 import com.mmul.geniusclone.dtos.song.SongCreateRequest;
 import com.mmul.geniusclone.dtos.song.SongUpdateRequest;

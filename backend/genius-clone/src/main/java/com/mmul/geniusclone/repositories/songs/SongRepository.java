@@ -1,11 +1,9 @@
-package com.mmul.geniusclone.repositories.song;
+package com.mmul.geniusclone.repositories.songs;
 
 import com.mmul.geniusclone.models.Song;
-import com.mmul.geniusclone.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository

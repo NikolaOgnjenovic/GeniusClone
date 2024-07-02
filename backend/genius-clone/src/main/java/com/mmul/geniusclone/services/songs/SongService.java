@@ -1,9 +1,9 @@
-package com.mmul.geniusclone.services.song;
+package com.mmul.geniusclone.services.songs;
 
 import com.mmul.geniusclone.dtos.song.SongCreateRequest;
 import com.mmul.geniusclone.dtos.song.SongUpdateRequest;
 import com.mmul.geniusclone.models.Song;
-import com.mmul.geniusclone.repositories.song.SongRepository;
+import com.mmul.geniusclone.repositories.songs.SongRepository;
 import com.mmul.geniusclone.services.interfaces.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

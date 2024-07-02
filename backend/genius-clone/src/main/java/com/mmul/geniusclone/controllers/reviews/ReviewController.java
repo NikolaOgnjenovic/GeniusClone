@@ -60,20 +60,20 @@ public class ReviewController {
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<ReviewGetAllByUserIdResponse> getAllByUser(@RequestBody ReviewGetAllByUserIdRequest request) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<ReviewGetAllByUserIdResponse> getAllByUser(@PathVariable UUID id) {
         try {
-            ReviewGetAllByUserIdResponse response = reviewService.getByUserId(request);
+            ReviewGetAllByUserIdResponse response = reviewService.getByUserId(id);
             return ResponseEntity.ok(response);
         } catch (Exception ex) {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @GetMapping()
-    public ResponseEntity<ReviewGetAllBySongIdResponse> getAllBySong(@RequestBody ReviewGetAllBySongIdRequest request) {
+    @GetMapping("/song/{id}")
+    public ResponseEntity<ReviewGetAllBySongIdResponse> getAllBySong(@PathVariable UUID id) {
         try {
-            ReviewGetAllBySongIdResponse response = reviewService.getBySongId(request);
+            ReviewGetAllBySongIdResponse response = reviewService.getBySongId(id);
             return ResponseEntity.ok(response);
         } catch (Exception ex) {
             return ResponseEntity.notFound().build();

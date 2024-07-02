@@ -1,4 +1,4 @@
-package com.mmul.geniusclone.controllers.band;
+package com.mmul.geniusclone.controllers.bands;
 
 
 import com.mmul.geniusclone.dtos.band.BandAddArtistRequest;
@@ -41,14 +41,14 @@ public class BandController {
         bandService.delete(id);
     }
 
-    @PostMapping("/{bandId}")
+    @PostMapping("/artists/{bandId}")
     public Band addArtistToBand(@PathVariable UUID bandId, @RequestBody BandAddArtistRequest request) {
-        return bandService.addArtistToBand(bandId, request.artistId());
+        return bandService.addArtist(bandId, request);
     }
 
-    @DeleteMapping("/{bandId}")
+    @DeleteMapping("/artists/{bandId}")
     public Band removeArtistFromBand(@PathVariable UUID bandId, @RequestBody BandRemoveArtistRequest request) {
-        return bandService.removeArtistFromBand(bandId, request.artistId());
+        return bandService.removeArtist(bandId, request);
     }
 
     @PutMapping("/{id}")

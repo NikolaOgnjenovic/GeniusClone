@@ -1,11 +1,12 @@
 package com.mmul.geniusclone.services.albums;
 
+import com.mmul.geniusclone.dtos.albums.AlbumAddPerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumCreateRequest;
+import com.mmul.geniusclone.dtos.albums.AlbumRemovePerformerRequest;
 import com.mmul.geniusclone.dtos.albums.AlbumUpdateRequest;
 import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Performer;
 import com.mmul.geniusclone.repositories.albums.AlbumRepository;
-import com.mmul.geniusclone.repositories.band.BandRepository;
 import com.mmul.geniusclone.repositories.performers.PerformerRepository;
 import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,6 @@ public class AlbumService implements IAlbumService {
 
     @Autowired
     private PerformerRepository performerRepository;
-    @Autowired
-    private BandRepository bandRepository;
 
 
     @Override
@@ -56,8 +55,8 @@ public class AlbumService implements IAlbumService {
     }
 
     @Transactional
-    public Album setPerformer(UUID albumId, UUID performerId) {
-        Optional<Performer> performerOpt = performerRepository.findById(performerId);
+    public Album addPerformer(UUID albumId, AlbumAddPerformerRequest request) {
+        Optional<Performer> performerOpt = performerRepository.findById(request.performerId());
         Optional<Album> albumOpt = albumRepository.findById(albumId);
 
         if (performerOpt.isPresent() && albumOpt.isPresent()) {
@@ -75,8 +74,8 @@ public class AlbumService implements IAlbumService {
     }
 
     @Transactional
-    public Album removePerformer(UUID albumId, UUID performerId) {
-        Optional<Performer> performerOpt = performerRepository.findById(performerId);
+    public Album removePerformer(UUID albumId, AlbumRemovePerformerRequest request) {
+        Optional<Performer> performerOpt = performerRepository.findById(request.performerId());
         Optional<Album> albumOpt = albumRepository.findById(albumId);
 
         if (performerOpt.isPresent() && albumOpt.isPresent()) {
