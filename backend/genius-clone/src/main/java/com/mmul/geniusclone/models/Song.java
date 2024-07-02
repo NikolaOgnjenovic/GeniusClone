@@ -1,4 +1,6 @@
 package com.mmul.geniusclone.models;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -11,7 +13,6 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Lob
     private byte[] songData;
 
     private boolean isPendingReview = false;
@@ -20,11 +21,16 @@ public class Song {
 
     public Song() { }
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "album_id")
+    private Album album;
+
     public Song(UUID id, byte[] songData, boolean isPendingReview, String title) {
         this.id = id;
         this.songData = songData;
         this.isPendingReview = isPendingReview;
         this.title = title;
+        this.album = null;
     }
 
     public Song(byte[] songData, boolean isPendingReview, String title) {

@@ -5,7 +5,6 @@ import com.mmul.geniusclone.dtos.albums.put.PutAlbumUpdateRequest;
 import com.mmul.geniusclone.dtos.artist.post.PostArtistRequest;
 import com.mmul.geniusclone.dtos.artist.put.PutArtistUpdateRequest;
 import com.mmul.geniusclone.dtos.band.post.PostBandRequest;
-import com.mmul.geniusclone.dtos.band.put.PutBandUpdateRequest;
 import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Artist;
 import com.mmul.geniusclone.models.Band;
@@ -57,5 +56,15 @@ public class AlbumController {
                            @RequestBody PutAlbumUpdateRequest request) {
 
         return albumService.update(id, request);
+    }
+
+    @PutMapping("/{albumId}/addGenre/{genreId}")
+    public Album addGenreToAlbum(@PathVariable UUID albumId, @PathVariable UUID genreId) {
+        return albumService.addGenre(albumId, genreId);
+    }
+
+    @DeleteMapping("/{albumId}/removeGenre/{genreId}")
+    public Album removeGenreFromAlbum(@PathVariable UUID albumId, @PathVariable UUID genreId) {
+        return albumService.removeGenre(albumId, genreId);
     }
 }
