@@ -10,6 +10,7 @@ public class Genre {
     @GeneratedValue
     @Id
     private UUID id;
+
     @Column(unique = true)
     String name;
 

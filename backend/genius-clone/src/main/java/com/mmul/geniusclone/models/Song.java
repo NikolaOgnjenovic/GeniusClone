@@ -13,7 +13,7 @@ public class Song {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private byte[] songData;
+    private String link;
 
     private boolean isPendingReview = false;
 
@@ -25,16 +25,17 @@ public class Song {
     @JoinColumn(name = "album_id")
     private Album album;
 
-    public Song(UUID id, byte[] songData, boolean isPendingReview, String title) {
+
+    public Song(UUID id, String link, boolean isPendingReview, String title) {
         this.id = id;
-        this.songData = songData;
+        this.link = link;
         this.isPendingReview = isPendingReview;
         this.title = title;
         this.album = null;
     }
 
-    public Song(byte[] songData, boolean isPendingReview, String title) {
-        this.songData = songData;
+    public Song(String link, boolean isPendingReview, String title) {
+        this.link = link;
         this.isPendingReview = isPendingReview;
         this.title = title;
     }
@@ -47,12 +48,12 @@ public class Song {
         this.id = id;
     }
 
-    public byte[] getSongData() {
-        return songData;
+    public String getLink() {
+        return link;
     }
 
-    public void setSongData(byte[] songData) {
-        this.songData = songData;
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public boolean isPendingReview() {
