@@ -22,14 +22,17 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public void create(@RequestBody PlaylistCreateRequest request) {
-        playlistService.create(request);
+    public Playlist create(@RequestBody PlaylistCreateRequest request) {
+        return playlistService.create(request);
     }
 
     @GetMapping
     public List<Playlist> getAll() {
         return playlistService.getAll();
     }
+
+    @GetMapping("/users/{userId}/playlists")
+    public List<Playlist> getByUserId(@PathVariable UUID userId) { return playlistService.getByUserId(userId); }
 
     @GetMapping("/{id}")
     public Playlist getById(@PathVariable UUID id) {

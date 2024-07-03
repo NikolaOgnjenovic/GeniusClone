@@ -69,6 +69,8 @@ export class AuthState {
 
   private mapResponseToUser(user: RegistrationResponse | LoginResponse): User {
     const roles: UserRole[] = user.roles.map((roleStr: string) => UserRole[roleStr as keyof typeof UserRole]);
-    return { ...user, roles };
+    const playlists = 'playlists' in user ? user.playlists : [];
+    return { ...user, roles, playlists };
   }
+  
 }

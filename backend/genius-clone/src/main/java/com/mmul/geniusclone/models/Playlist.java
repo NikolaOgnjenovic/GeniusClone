@@ -38,6 +38,12 @@ public class Playlist {
         this.user = user;
     }
 
+    public Playlist(String name, User user, List<Song> songs) {
+        this.name = name;
+        this.user = user;
+        this.songs = songs;
+    }
+
     public Playlist() {}
 
     public String getName() {
