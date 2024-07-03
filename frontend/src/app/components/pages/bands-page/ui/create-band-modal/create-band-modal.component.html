@@ -4,6 +4,8 @@
     <form [formGroup]="createBandForm">
       <label for="name">Name</label>
       <input id="name" formControlName="name" type="text" />
+      <label for="image">Image</label>
+      <input id="image" formControlName="image" type="text" />
       <div class="button-row">
         <button type="button" (click)="onCancel()">Cancel</button>
         <button type="button" (click)="onCreate()">Create</button>

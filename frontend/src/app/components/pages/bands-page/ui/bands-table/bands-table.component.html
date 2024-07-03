@@ -1,27 +1,12 @@
-<table class="bands-table">
-  <thead>
-  <tr>
-    <th>Band Name</th>
-    <th>Artists</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let band of bands">
-    <td>{{ band.name }}</td>
-    <td>
-      <ul>
-        <li *ngFor="let artist of band.members">
-          {{ artist.name }} {{ artist.surname }}
-        </li>
-      </ul>
-    </td>
-    <td>
+<div class="cards-container">
+  <div *ngFor="let band of bands" class="card">
+    <img [src]="band.image" alt="Card image" class="card-img">
+    <div class="card-body">
+      <h5 class="card-title">{{ band.name }}</h5>
       <div class="button-container">
         <button (click)="onUpdate(band)">Update</button>
         <button (click)="onDelete(band)">Delete</button>
       </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+    </div>
+  </div>
+</div>

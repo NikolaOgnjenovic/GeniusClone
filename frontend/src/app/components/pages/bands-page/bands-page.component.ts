@@ -48,8 +48,7 @@ export class BandsPageComponent implements OnInit {
     this.showCreationModal = false;
   }
 
-  onCreate(name: string): void {
-    const request: BandCreateRequest = { name: name };
+  onCreate(request: BandCreateRequest): void {
     this.bandService.create(request).subscribe((response: Band) => {
       if (response) {
         this.bands = [...this.bands, response];
@@ -68,8 +67,8 @@ export class BandsPageComponent implements OnInit {
     this.showUpdateModal = false;
   }
 
-  onUpdate(updateEvent: { name: string, members: Artist[] }): void {
-    const request = { name: updateEvent.name, members: updateEvent.members };
+  onUpdate(updateEvent: { name: string, members: Artist[], image: string }): void {
+    const request = { name: updateEvent.name, members: updateEvent.members, image: updateEvent.image };
     this.bandService.update(this.selectedBand.id, request).subscribe((response: Band) => {
       if (response) {
         const index = this.bands.findIndex(b => b.id === this.selectedBand.id);

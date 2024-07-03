@@ -18,13 +18,14 @@ import {ArtistService} from "../../../../../services/artist.service";
 export class UpdateBandModalComponent implements OnInit {
   @Input() band!: Band;
   @Output() close = new EventEmitter<void>();
-  @Output() update = new EventEmitter<{ name: string, members: Artist[] }>();
+  @Output() update = new EventEmitter<{ name: string, members: Artist[], image: string }>();
   updateBandForm: FormGroup;
   artists: Artist[] = [];
 
   constructor(private fb: FormBuilder, private readonly artistService: ArtistService) {
     this.updateBandForm = this.fb.group({
       name: [this.band?.name || '', Validators.required],
+      image: [this.band?.image || '', Validators.required],
       artists: [this.band?.members || []]
     });
   }
@@ -33,6 +34,12 @@ export class UpdateBandModalComponent implements OnInit {
     this.artistService.getAll().subscribe((artists: Artist[]) => {
       this.artists = artists;
     });
+
+    this.updateBandForm.patchValue({
+      name: this.band.name,
+      image: this.band.image,
+      artsits: this.band.members
+    })
   }
 
   onCancel(): void {
@@ -44,8 +51,9 @@ export class UpdateBandModalComponent implements OnInit {
       const name = this.updateBandForm.value.name;
       const selectedArtistIds = this.updateBandForm.value.artists;
       const selectedArtists = this.artists.filter(artist => selectedArtistIds.includes(artist.id));
+      const image = this.updateBandForm.value.image;
 
-      this.update.emit({ name: name, members: selectedArtists });
+      this.update.emit({ name: name, members: selectedArtists, image: image });
     }
   }
 
