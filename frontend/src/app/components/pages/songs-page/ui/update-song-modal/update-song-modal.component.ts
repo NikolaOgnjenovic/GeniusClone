@@ -37,6 +37,7 @@ export class UpdateSongModalComponent implements OnInit {
       this.albums = albums;
     });
 
+    console.log(this.song);
     if (this.song) {
       this.updateSongForm.patchValue({
         title: this.song.title,

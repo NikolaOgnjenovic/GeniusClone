@@ -15,6 +15,7 @@ public interface IPlaylistService {
     Playlist create(PlaylistCreateRequest request);
     Playlist update(UUID id, PlaylistUpdateRequest request);
     List<Playlist> getAll();
+    List<Playlist> getByUserId(UUID userId);
     Playlist addSongs(UUID playlistId, PlaylistAddSongsRequest request);
     Playlist removeSongs(UUID playlistId, PlaylistRemoveSongsRequest request);
 }

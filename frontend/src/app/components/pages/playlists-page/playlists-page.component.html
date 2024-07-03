@@ -1,0 +1,15 @@
+<button class="create-button" (click)="onCreatePlaylist()">Create</button>
+<app-playlist-table
+[playlists]="playlists"
+(update)="onUpdatePlaylist($event)"
+(delete)="onDeletePlaylist($event)"
+(visit)="onVisitPlaylist($event)"
+/>
+
+<app-delete-playlist-page
+  *ngIf="showDeleteModal"
+  [playlist]="selectedPlaylist"
+  (close)="onCloseDeleteModal()"
+  (delete)="onDelete()"
+/>
+

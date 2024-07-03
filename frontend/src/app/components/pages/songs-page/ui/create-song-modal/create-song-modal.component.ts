@@ -4,6 +4,7 @@ import {SongCreateRequest} from "../../../../../models/songs/song-create-request
 import {NgForOf} from "@angular/common";
 import {Album} from "../../../../../models/as-is/album";
 import {AlbumService} from "../../../../../services/albums.service";
+import { Song } from '../../../../../models/as-is/song';
 
 @Component({
   selector: 'app-create-song-modal',
@@ -34,6 +35,14 @@ export class CreateSongModalComponent implements  OnInit {
         this.albums = albums;
       }
     );
+  }
+
+  addSong(song: Song) {
+    
+  }
+
+  removeSong(song: Song) {
+    
   }
 
   onCancel(): void {

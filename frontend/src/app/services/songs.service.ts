@@ -28,4 +28,8 @@ export class SongsService {
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
+
+  get(id: string): Observable<Song> {
+    return this.http.get<Song>(`${this.baseUrl}/${id}`);
+  }
 }

@@ -30,9 +30,8 @@ public class SongController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Song> getById(@PathVariable UUID id) {
-        Song song = songService.getById(id);
-        return ResponseEntity.ok(song);
+    public Song getById(@PathVariable UUID id) {
+        return songService.getById(id);
     }
 
     @GetMapping
