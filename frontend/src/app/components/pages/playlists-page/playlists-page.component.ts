@@ -35,6 +35,7 @@ export class PlaylistsPageComponent {
     this.playlistService.getByUserId(this.user.id).subscribe(response => {
       if (response) {
         this.playlists = response;
+        console.log(this.playlists);
       }
     });
   }

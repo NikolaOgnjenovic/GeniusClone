@@ -7,6 +7,7 @@
     <li *ngIf="authState.getCurrentUser()" [class.active]="isActive('/artists')"><a (click)="navigateTo('/artists')">Artists</a></li>
     <li *ngIf="authState.getCurrentUser()" [class.active]="isActive('/genres')"><a (click)="navigateTo('/genres')">Genres</a></li>
     <li *ngIf="authState.getCurrentUser()" [class.active]="isActive('/albums')"><a (click)="navigateTo('/albums')">Albums</a></li>
+    <li *ngIf="authState.getCurrentUser()" [class.active]="isActive('/playlists')"><a (click)="navigateTo('/playlists')">Playlists</a></li>
     <li *ngIf="!authState.getCurrentUser()" [class.active]="isActive('/auth/login')"><a (click)="navigateTo('/auth/login')">Login</a></li>
     <li *ngIf="!authState.getCurrentUser()" [class.active]="isActive('/auth')"><a (click)="navigateTo('/auth')">Register</a></li>
     <li *ngIf="authState.getCurrentUser()"><a (click)="logout()">Logout</a></li>
