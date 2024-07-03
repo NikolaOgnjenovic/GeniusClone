@@ -3,6 +3,9 @@
     <img [src]="band.image" alt="Card image" class="card-img">
     <div class="card-body">
       <h5 class="card-title">{{ band.name }}</h5>
+      <div *ngFor="let member of band.members">
+        <p>{{member.name}}</p>
+      </div>
       <div class="button-container">
         <button (click)="onUpdate(band)">Update</button>
         <button (click)="onDelete(band)">Delete</button>
