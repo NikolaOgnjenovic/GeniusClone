@@ -82,6 +82,9 @@ public class User {
     }
 
     public void addPlaylist(Playlist playlist){
+        if (this.playlists == null) {
+            this.playlists = new ArrayList<>();
+        }
         this.playlists.add(playlist);
     }
     public void removePlaylist(Playlist playlist){this.playlists.remove(playlist);}

@@ -7,6 +7,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { CreatePlaylistPageComponent } from './ui/create-playlist-page/create-playlist-page.component';
 import { PlaylistCreateRequest } from '../../../models/playlists/palylist-create-request';
 import { Router } from '@angular/router';
+import { DeletePlaylistPageComponent } from './ui/delete-playlist-page/delete-playlist-page.component';
 
 @Component({
   selector: 'app-playlists-page',
@@ -15,15 +16,17 @@ import { Router } from '@angular/router';
     PlaylistTableComponent,
     AsyncPipe,
     CreatePlaylistPageComponent,
-    CommonModule
+    CommonModule,
+    DeletePlaylistPageComponent
   ],
   templateUrl: './playlists-page.component.html',
   styleUrl: './playlists-page.component.css'
 })
 export class PlaylistsPageComponent {
   playlists: Playlist[] = [];
-  selectedPlaylist!: Playlist;
   user!: User;
+  showDeleteModal: boolean = false;
+  selectedPlaylist!: Playlist;
 
   constructor(private playlistService: PlaylistService, private router: Router) {}
 
@@ -44,19 +47,30 @@ export class PlaylistsPageComponent {
   }
 
   onUpdatePlaylist(playlist: Playlist) {
-    this.selectedPlaylist = playlist;
+    this.router.navigate(['/playlists/update'], {state: {playlist: playlist, user: this.user}});
   }
 
   onDeletePlaylist(playlist: Playlist) {
     this.selectedPlaylist = playlist;
+    this.showDeleteModal = true;
   }
 
-  onCloseCreationModal() {
+  onCloseDeleteModal() {
+    this.showDeleteModal = false;
   }
 
-  onCreate(request: PlaylistCreateRequest) {}
+  onDelete() {
+    this.playlistService.delete(this.selectedPlaylist.id).subscribe(()=> {
+      this.playlists = this.playlists.filter(p => p.id !== this.selectedPlaylist.id)
+  })
+  this.showDeleteModal = false;
+  }
 
   onCreatePlaylist() {
     this.router.navigate(['/playlists/create'], { state: { user: this.user } });
+  }
+
+  onVisitPlaylist(playlist: Playlist) { 
+    this.router.navigate(['/playlists', playlist.id], {state: {playlist: playlist}});
   }
 }

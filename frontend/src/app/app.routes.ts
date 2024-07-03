@@ -8,6 +8,8 @@ import {GenresPageComponent} from "./components/pages/genres-page/genres-page.co
 import {AlbumsPageComponent} from "./components/pages/albums-page/albums-page.component";
 import { PlaylistsPageComponent } from './components/pages/playlists-page/playlists-page.component';
 import { CreatePlaylistPageComponent } from './components/pages/playlists-page/ui/create-playlist-page/create-playlist-page.component';
+import { UpdatePlaylistPageComponent } from './components/pages/playlists-page/ui/update-playlist-page/update-playlist-page.component';
+import { PlaylistPageComponent } from './components/pages/playlists-page/ui/playlist-page/playlist-page.component';
 
 export const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -19,5 +21,7 @@ export const routes: Routes = [
   {path: 'genres', component: GenresPageComponent},
   {path: 'albums', component: AlbumsPageComponent},
   {path: 'playlists', component: PlaylistsPageComponent},
-  {path: 'playlists/create', component: CreatePlaylistPageComponent}
+  {path: 'playlists/create', component: CreatePlaylistPageComponent},
+  {path: 'playlists/update', component: UpdatePlaylistPageComponent}, 
+  {path: 'playlists/:id', component: PlaylistPageComponent}
 ];

@@ -45,5 +45,10 @@ public class AuthService implements IAuthService {
     public User getById(UUID id) {
         return authRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public User update(User user) {
+        return this.authRepository.save(user);
+    }
 }
 

@@ -16,6 +16,7 @@ export class PlaylistTableComponent {
   @Input() playlists: Playlist[] = [];
   @Output() update = new EventEmitter<Playlist>();
   @Output() delete = new EventEmitter<Playlist>();
+  @Output() visit = new EventEmitter<Playlist>();
   
 
   onUpdate(playlist: Playlist) {
@@ -24,5 +25,9 @@ export class PlaylistTableComponent {
 
   onDelete(playlist: Playlist)  {
     this.delete.emit(playlist);
+  }
+
+  visitPlaylist(playlist: Playlist) {
+    this.visit.emit(playlist);
   }
 }

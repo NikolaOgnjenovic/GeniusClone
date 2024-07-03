@@ -55,7 +55,7 @@ public class PlaylistController {
     }
 
     @PutMapping("/{id}")
-    public Playlist updateAlbum(@PathVariable UUID id, @RequestBody PlaylistUpdateRequest request) {
+    public Playlist update(@PathVariable UUID id, @RequestBody PlaylistUpdateRequest request) {
         return playlistService.update(id, request);
     }
 }

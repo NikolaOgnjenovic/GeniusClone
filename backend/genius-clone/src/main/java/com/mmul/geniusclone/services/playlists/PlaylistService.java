@@ -43,24 +43,40 @@ public class PlaylistService implements IPlaylistService {
 
     @Override
     public void delete(UUID id) {
+        Playlist playlist = playlistRepository.findById(id).get();
+        User user = authService.getById(playlist.getUser().getId());
+        user.removePlaylist(playlist);
+        authService.update(user);
         playlistRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public Playlist create(PlaylistCreateRequest request) {
-        User user  = entityManager.merge(request.user());
-        Playlist playlist = new Playlist(request.name(), user, request.songs());
-        return playlistRepository.save(playlist);
+        User user = authService.getById(request.user().getId());
+        Playlist playlist_req = new Playlist(request.name(), user, request.songs());
+        Playlist playlist = playlistRepository.save(playlist_req);
+        user.addPlaylist(playlist);
+        authService.update(user);
+        return playlist;
     }
 
     @Override
+    @Transactional
     public Playlist update(UUID id, PlaylistUpdateRequest request) {
-        Playlist playlist = playlistRepository.findById(id).orElse(null);
-        playlist.setName(request.name());
-        playlist.setUser(authService.getById(UUID.fromString(request.userId())));
+        User user = authService.getById(request.user().getId());
+        User detachedUser = entityManager.merge(user);
+        Playlist existingPlaylist = playlistRepository.findById(id).get();
 
-        return playlistRepository.save(playlist);
+        detachedUser.removePlaylist(existingPlaylist);
+        existingPlaylist.setName(request.name());
+        existingPlaylist.setSongs(request.songs());
+
+        Playlist updatedPlaylist = playlistRepository.save(existingPlaylist);
+        detachedUser.addPlaylist(updatedPlaylist);
+        authService.update(detachedUser);
+
+        return updatedPlaylist;
     }
 
     @Override

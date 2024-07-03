@@ -12,4 +12,5 @@ public interface IAuthService {
     RegistrationResponse registerUser(RegistrationRequest request);
     LoginResponse loginUser(LoginRequest request);
     User getById(UUID id);
+    User update(User user);
 }

@@ -19,11 +19,12 @@ public class Playlist {
 
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("playlists")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonIgnoreProperties("playlists")
+    @JsonIgnoreProperties("album")
     @ManyToMany
     @JoinTable(
             name = "playlist_song",
@@ -38,7 +39,8 @@ public class Playlist {
         this.user = user;
     }
 
-    public Playlist(String name, User user, List<Song> songs) {
+    public Playlist(String name, User user, List<Song> songs)
+    {
         this.name = name;
         this.user = user;
         this.songs = songs;

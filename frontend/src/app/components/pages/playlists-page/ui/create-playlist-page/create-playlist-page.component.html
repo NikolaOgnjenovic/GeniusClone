@@ -7,7 +7,7 @@
             <button type="button" (click)="onCreate()">Create</button>
         </div>
     </form>
-    <h2>Selected songs for album</h2>
+    <h2>Selected songs for playlist</h2>
     <div class="cards-container">
         <div *ngFor="let song of selectedSongs" class="card" (click)="removeSong(song)">
           <div class="card-body">

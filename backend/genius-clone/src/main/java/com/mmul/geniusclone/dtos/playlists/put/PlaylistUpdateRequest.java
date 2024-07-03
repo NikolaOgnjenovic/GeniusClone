@@ -1,4 +1,9 @@
 package com.mmul.geniusclone.dtos.playlists.put;
 
-public record PlaylistUpdateRequest(String name, String userId) {
+import com.mmul.geniusclone.models.Song;
+import com.mmul.geniusclone.models.User;
+
+import java.util.List;
+
+public record PlaylistUpdateRequest(String name, User user, List<Song> songs) {
 }
