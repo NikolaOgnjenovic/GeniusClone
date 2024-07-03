@@ -24,8 +24,13 @@ public class Band extends Performer {
     )
     private List<Artist> members;
 
-    public Band() {
+    private String image;
 
+    public Band() {}
+
+    public Band(String name, String image) {
+        this.name = name;
+        this.image = image;
     }
 
     public String getName() {
@@ -42,5 +47,13 @@ public class Band extends Performer {
 
     public void setMembers(List<Artist> members) {
         this.members = members;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

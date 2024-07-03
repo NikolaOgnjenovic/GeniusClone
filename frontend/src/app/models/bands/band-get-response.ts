@@ -4,4 +4,5 @@ export interface BandGetResponse {
   id: string;
   name: string;
   members: Artist[];
+  image: string;
 }

@@ -8,6 +8,7 @@ import {BandService} from "../../../services/band.service";
 import {Band} from "../../../models/as-is/band";
 import {BandCreateRequest} from "../../../models/bands/band-create-request";
 import {Artist} from "../../../models/as-is/artist";
+import { ArtistService } from '../../../services/artist.service';
 
 @Component({
   selector: 'app-bands-page',
@@ -30,12 +31,25 @@ export class BandsPageComponent implements OnInit {
   showDeleteModal = false;
   selectedBand!: Band;
 
-  constructor(private readonly bandService: BandService) { }
+  constructor(private readonly bandService: BandService, private readonly artistService: ArtistService) { }
 
   ngOnInit(): void {
     this.bandService.getAll().subscribe((response: Band[]) => {
       if (response) {
         this.bands = response;
+        for(var band of this.bands) {
+          var members: Artist[] = [];
+          for(var member of band.members) {
+            if(typeof member === 'string') {
+              this.artistService.getById(member).subscribe((response: Artist) => {
+                members.push(response);
+              });
+            } else {
+              members.push(member);
+            }
+          }
+          band.members = members;
+        }
       }
     })
   }
@@ -48,8 +62,7 @@ export class BandsPageComponent implements OnInit {
     this.showCreationModal = false;
   }
 
-  onCreate(name: string): void {
-    const request: BandCreateRequest = { name: name };
+  onCreate(request: BandCreateRequest): void {
     this.bandService.create(request).subscribe((response: Band) => {
       if (response) {
         this.bands = [...this.bands, response];
@@ -68,8 +81,8 @@ export class BandsPageComponent implements OnInit {
     this.showUpdateModal = false;
   }
 
-  onUpdate(updateEvent: { name: string, members: Artist[] }): void {
-    const request = { name: updateEvent.name, members: updateEvent.members };
+  onUpdate(updateEvent: { name: string, members: Artist[], image: string }): void {
+    const request = { name: updateEvent.name, members: updateEvent.members, image: updateEvent.image };
     this.bandService.update(this.selectedBand.id, request).subscribe((response: Band) => {
       if (response) {
         const index = this.bands.findIndex(b => b.id === this.selectedBand.id);

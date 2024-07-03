@@ -4,4 +4,5 @@ export interface Band {
   id: string;
   name: string;
   members: Artist[];
+  image: string;
 }

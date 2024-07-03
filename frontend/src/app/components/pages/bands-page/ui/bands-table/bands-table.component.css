@@ -1,48 +1,59 @@
-.bands-table {
+.wrap {
+  height: 100%;
   width: 100%;
-  border-collapse: collapse;
 }
 
-.bands-table th,
-.bands-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 2px solid var(--highlight-color);
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
 }
 
-.bands-table th {
-  text-transform: uppercase;
-  font-size: 2rem;
+.card {
+  width: 300px;
+  border: 1px solid var(--highlight-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: var(--primary-color);
+  transition: transform 0.3s;
 }
 
-.bands-table tr:hover td {
-  color: var(--secondary-color);
-  background-color: var(--highlight-color);
-
-  button {
-    color: var(--secondary-color);
-    border: 2px solid var(--secondary-color);
-  }
+.card:hover {
+  transform: scale(1.05);
 }
 
-.bands-table td {
-  vertical-align: top;
+.card-img {
+  width: 100%;
+  height: auto;
+  transition: filter 0.3s;
 }
 
-.bands-table ul {
-  margin: 0;
-  padding: 0;
+.card-img:hover {
+  filter: brightness(80%);
 }
 
-.bands-table li {
-  list-style: none;
-  margin-bottom: 5px;
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin: 0 0 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
 }
 
 .button-container {
   display: flex;
   justify-content: flex-end;
-  gap: 2rem;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 button {
@@ -54,4 +65,10 @@ button {
   font-size: 1rem;
   text-transform: uppercase;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: var(--highlight-color);
+  color: #ffffff;
 }

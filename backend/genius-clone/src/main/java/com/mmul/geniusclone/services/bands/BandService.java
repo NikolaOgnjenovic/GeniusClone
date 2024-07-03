@@ -32,7 +32,7 @@ public class BandService implements IBandService
     }
 
     public Band create(BandCreateRequest request) {
-        return bandRepository.save(new Band(request.name()));
+        return bandRepository.save(new Band(request.name(), request.image()));
     }
 
     @Override
@@ -40,6 +40,7 @@ public class BandService implements IBandService
     public Band update(UUID id, BandUpdateRequest request) {
         Band band = bandRepository.findById(id).orElseThrow(() -> new RuntimeException("Band not found"));
         band.setName(request.name());
+        band.setImage(request.image());
         for(Artist artist : request.members()) {
             this.addArtist(id, new BandAddArtistRequest(artist.getId()));
         }
