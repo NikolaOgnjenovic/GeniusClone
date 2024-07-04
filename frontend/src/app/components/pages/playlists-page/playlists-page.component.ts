@@ -51,7 +51,6 @@ export class PlaylistsPageComponent {
   }
 
   onDeletePlaylist(playlist: Playlist) {
-    console.log(playlist);
     this.selectedPlaylist = playlist;
     this.showDeleteModal = true;
   }
@@ -71,8 +70,7 @@ export class PlaylistsPageComponent {
     this.router.navigate(['/playlists/create'], { state: { user: this.user } });
   }
 
-  onVisitPlaylist(playlist: Playlist) { 
-    console.log(playlist);
+  onVisitPlaylist(playlist: Playlist) {
     this.router.navigate(['/playlists', playlist.id], {state: {playlist: playlist}});
   }
 }

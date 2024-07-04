@@ -40,10 +40,26 @@ export class UpdatePlaylistPageComponent {
     }
     this.SongService.getAll().subscribe((response) => {
       this.songs = response;
-      for(var song of this.playlist.songs) {
-        for(var realSong of this.songs) {
-          if (song.id === realSong.id) {
-            this.addSong(realSong);
+      var newSongs = [];
+      for(var song of this.songs) {
+        if (typeof song.album === 'string') {
+          for(var foundSong of newSongs) {
+            if (foundSong.album.id === song.album) {
+              var populatedSong: Song;
+              populatedSong = song;
+              populatedSong.album = foundSong.album;
+              newSongs.push(populatedSong);
+            }
+          }
+        } else {
+          newSongs.push(song);
+        }
+      }
+      this.songs = newSongs;
+      for (var selectedSong  of this.playlist.songs) {
+        for (var previousSong of this.songs) {
+          if (selectedSong.id === previousSong.id) {
+            this.addSong(previousSong);
           }
         }
       }
@@ -55,7 +71,6 @@ export class UpdatePlaylistPageComponent {
   }
 
   ngOnChanges() {
-    console.log(this.playlist.name);
     this.updatePlaylistForm.patchValue({
       name: this.playlist.name,
       image: this.playlist.image
@@ -79,12 +94,21 @@ export class UpdatePlaylistPageComponent {
   }
 
   onUpdate() {
-    if (!this.updatePlaylistForm.valid) 
+    if (!this.updatePlaylistForm.valid)
       return;
+    var songsToAdd: Song[] = [];
+    this.selectedSongs.forEach(song => {
+      var newSong = JSON.parse(JSON.stringify(song));
+      // @ts-ignore
+      delete newSong.album;
+      // @ts-ignore
+      newSong.album = undefined;
+      songsToAdd.push(newSong)
+    });
     const request: PlaylistUpdateRequest = {
       name: this.updatePlaylistForm.value.name,
       user: this.user,
-      songs: this.selectedSongs,
+      songs: songsToAdd,
       image: this.updatePlaylistForm.value.image
     }
     this.playlistService.update(this.playlist.id, request).subscribe(response => {
