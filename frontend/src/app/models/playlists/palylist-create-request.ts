@@ -5,4 +5,5 @@ export interface PlaylistCreateRequest {
     name: string;
     user: User;
     songs: Song[];
+    image: string;
 }

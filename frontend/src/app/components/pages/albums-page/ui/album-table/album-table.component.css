@@ -27,7 +27,8 @@
 
 .card-img {
   width: 100%;
-  height: auto;
+  height: 50%;
+  object-fit: cover;
   transition: filter 0.3s;
 }
 

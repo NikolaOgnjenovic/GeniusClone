@@ -28,7 +28,8 @@ export class UpdatePlaylistPageComponent {
 
   constructor(private playlistService: PlaylistService, private SongService: SongsService, private fb: FormBuilder, private router: Router) {
     this.updatePlaylistForm = this.fb.group({
-    name: [this.playlist?.name, Validators.required]
+    name: [this.playlist?.name, Validators.required],
+    image: [this.playlist?.image, Validators.required]
     });
   }
 
@@ -48,14 +49,16 @@ export class UpdatePlaylistPageComponent {
       }
     })
     this.updatePlaylistForm.patchValue({
-      name: this.playlist.name
+      name: this.playlist.name,
+      image: this.playlist.image
     });
   }
 
   ngOnChanges() {
     console.log(this.playlist.name);
     this.updatePlaylistForm.patchValue({
-      name: this.playlist.name
+      name: this.playlist.name,
+      image: this.playlist.image
     });
   }
 
@@ -81,7 +84,8 @@ export class UpdatePlaylistPageComponent {
     const request: PlaylistUpdateRequest = {
       name: this.updatePlaylistForm.value.name,
       user: this.user,
-      songs: this.selectedSongs
+      songs: this.selectedSongs,
+      image: this.updatePlaylistForm.value.image
     }
     this.playlistService.update(this.playlist.id, request).subscribe(response => {
       if (response) {

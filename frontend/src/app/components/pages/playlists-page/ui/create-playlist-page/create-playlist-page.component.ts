@@ -30,7 +30,8 @@ export class CreatePlaylistPageComponent {
   constructor(private playlistService: PlaylistService, private SongService: SongsService,
      private fb: FormBuilder, private router: Router, private albumService: AlbumService) {
     this.createPlaylistForm = this.fb.group({
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    image: ['', Validators.required]
     });
   }
 
@@ -81,7 +82,8 @@ export class CreatePlaylistPageComponent {
     const request: PlaylistCreateRequest = {
       name: this.createPlaylistForm.value.name,
       user: this.user,
-      songs: this.selectedSongs
+      songs: this.selectedSongs,
+      image: this.createPlaylistForm.value.image
     }
     this.playlistService.create(request).subscribe(response => {
       if (response) {
