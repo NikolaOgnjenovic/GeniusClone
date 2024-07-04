@@ -29,7 +29,7 @@ public class Song {
 
 
     @JsonIgnoreProperties("songs")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "album_id")
     private Album album;
 

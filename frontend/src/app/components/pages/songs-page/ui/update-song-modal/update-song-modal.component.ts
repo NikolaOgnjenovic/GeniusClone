@@ -38,12 +38,12 @@ export class UpdateSongModalComponent implements OnInit {
       this.albums = albums;
     });
 
-    console.log(this.song);
     if (this.song) {
       this.updateSongForm.patchValue({
         title: this.song.title,
         albumId: this.song.album.id,
-        link: this.song.link
+        link: this.song.link,
+        image: this.song.image
       });
     }
   }

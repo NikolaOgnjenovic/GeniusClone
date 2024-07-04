@@ -36,6 +36,23 @@ export class SongsPageComponent implements OnInit {
     this.songService.getAll().subscribe((response: Song[]) => {
       if (response) {
         this.songs = response;
+        var song: Song;
+        var newSongs: Song[] = [];
+        for(var song of this.songs) {
+          var newSong: Song;
+          if (typeof song.album === 'string') {
+            for(var addedSong of this.songs) {
+              if (addedSong.album.id === song.album) {
+                newSong = song;
+                newSong.album = addedSong.album;
+                newSongs.push(newSong);
+              }
+            }
+          } else {
+            newSongs.push(song);
+          }
+        }
+        this.songs = newSongs;
       }
     })
   }
