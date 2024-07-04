@@ -1,12 +1,14 @@
 <table class="songs-table">
     <thead>
     <tr>
+      <th></th>
       <th>song Title</th>
       <th></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let song of songs">
+      <td><img [src]="song.image" alt="Picture"></td>
       <td>{{ song.title }}</td>
       <td>
         <div class="button-container">

@@ -15,7 +15,6 @@
       <select multiple formControlName="genres" id="genres">
         <option *ngFor="let genre of genres" [value]="genre">{{ genre.name }}</option>
       </select>
-
       <div class="button-row">
         <button type="button" (click)="onCancel()">Cancel</button>
         <button type="button" (click)="onUpdate()">Update</button>

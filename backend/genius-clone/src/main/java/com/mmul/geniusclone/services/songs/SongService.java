@@ -23,14 +23,14 @@ public class SongService implements ISongService {
 
     @Override
     public Song create(SongCreateRequest request) {
-        Song song = new Song(request.link(), false, request.title(), albumRepository.findById(request.albumId()).get());
+        Song song = new Song(request.link(), false, request.title(), request.image(), albumRepository.findById(request.albumId()).get());
         return songRepository.save(song);
     }
 
     @Override
     public Song update(UUID id, SongUpdateRequest request) throws IOException {
         Song song = songRepository.findById(id).orElseThrow(() -> new RuntimeException("Song not found"));
-        Song updatedSong = new Song(request.link(), false, request.title());
+        Song updatedSong = new Song(request.link(), false, request.title(), request.image());
         updatedSong.setId(song.getId());
         updatedSong.setAlbum(albumRepository.findById(request.albumId()).get());
         return songRepository.save(updatedSong);

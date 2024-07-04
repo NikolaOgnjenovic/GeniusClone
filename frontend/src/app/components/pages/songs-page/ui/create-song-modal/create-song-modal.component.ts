@@ -26,7 +26,8 @@ export class CreateSongModalComponent implements  OnInit {
     this.createSongForm = this.fb.group({
       title: ['', Validators.required],
       albumId: ['', Validators.required],
-      link: ['', Validators.required]
+      link: ['', Validators.required],
+      image: ['', Validators.required]
     });
   }
 
@@ -53,7 +54,8 @@ export class CreateSongModalComponent implements  OnInit {
     const request: SongCreateRequest = {
       link: this.createSongForm.value.link,
       title: this.createSongForm.value.title,
-      albumId: this.createSongForm.value.albumId
+      albumId: this.createSongForm.value.albumId,
+      image: this.createSongForm.value.image
     };
     this.create.emit(request);
   }

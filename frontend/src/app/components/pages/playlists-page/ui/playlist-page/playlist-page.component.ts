@@ -17,7 +17,7 @@ import { Song } from '../../../../../models/as-is/song';
 export class PlaylistPageComponent {
 
   playlist!: Playlist;
-  
+
   constructor(private router: Router, private songsService: SongsService) {}
 
   ngOnInit() {

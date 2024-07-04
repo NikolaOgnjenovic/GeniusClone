@@ -3,4 +3,5 @@ export interface SongGetResponse {
     songData: string;
     isPendingReview: boolean;
     title: string;
+    image: string;
 }

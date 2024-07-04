@@ -6,4 +6,5 @@ export interface Song {
   isPendingReview: boolean;
   album: Album;
   title: string;
+  image: string;
 }

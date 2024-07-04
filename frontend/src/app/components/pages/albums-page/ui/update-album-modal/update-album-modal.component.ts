@@ -1,17 +1,20 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import { Album } from "../../../../../models/as-is/album";
 import { AlbumUpdateRequest } from "../../../../../models/albums/album-update-request";
 import { GenreService } from "../../../../../services/genre.service";
 import { Genre } from "../../../../../models/as-is/genre";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf, CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-update-album-modal',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    NgIf,
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './update-album-modal.component.html',
   styleUrl: './update-album-modal.component.css'
