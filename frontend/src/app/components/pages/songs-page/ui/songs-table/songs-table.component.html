@@ -2,7 +2,9 @@
     <thead>
     <tr>
       <th></th>
-      <th>song Title</th>
+      <th>Song Title</th>
+      <th>Album</th>
+      <th>Performer</th>
       <th></th>
     </tr>
     </thead>
@@ -10,6 +12,8 @@
     <tr *ngFor="let song of songs">
       <td><img [src]="song.image" alt="Picture"></td>
       <td>{{ song.title }}</td>
+      <td>{{ song.album.title }}</td>
+      <td>{{ song.album.performer.name }}</td>
       <td>
         <div class="button-container">
           <button (click)="onUpdate(song)">Update</button>

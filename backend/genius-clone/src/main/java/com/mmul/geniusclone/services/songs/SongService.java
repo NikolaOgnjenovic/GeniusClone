@@ -4,8 +4,12 @@ import com.mmul.geniusclone.dtos.song.SongCreateRequest;
 import com.mmul.geniusclone.dtos.song.SongUpdateRequest;
 import com.mmul.geniusclone.models.Song;
 import com.mmul.geniusclone.repositories.albums.AlbumRepository;
+import com.mmul.geniusclone.repositories.playlists.PlaylistRepository;
+import com.mmul.geniusclone.repositories.reviews.ReviewRepository;
 import com.mmul.geniusclone.repositories.songs.SongRepository;
 import com.mmul.geniusclone.services.interfaces.ISongService;
+import com.mmul.geniusclone.services.playlists.PlaylistService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,10 @@ public class SongService implements ISongService {
     private SongRepository songRepository;
     @Autowired
     private AlbumRepository albumRepository;
+    @Autowired
+    private PlaylistRepository playlistRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Override
     public Song create(SongCreateRequest request) {
@@ -46,8 +54,16 @@ public class SongService implements ISongService {
         return songRepository.findAll();
     }
 
+    @Transactional
     @Override
-    public void delete(UUID id) {
-        songRepository.deleteById(id);
+    public void delete(UUID songId) {
+        this.playlistRepository.findAll().forEach(playlist -> {
+            playlist.getSongs().removeIf(song -> song.getId().equals(songId));
+            playlistRepository.save(playlist);
+        });
+        reviewRepository.findBySongId(songId).forEach(review -> {
+            reviewRepository.delete(review);
+        });
+        songRepository.deleteById(songId);
     }
 }
