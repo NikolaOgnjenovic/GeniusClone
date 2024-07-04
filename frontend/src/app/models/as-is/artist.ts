@@ -1,8 +1,7 @@
 import { Band } from "./band";
+import { Performer } from "./performer";
 
-export interface Artist {
-  id: string;
-  name: string;
+export interface Artist extends Performer {
   surname: string;
   birthday: string;
   description: string;

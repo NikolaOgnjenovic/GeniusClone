@@ -31,7 +31,7 @@ public class Album {
     private List<Genre> genres;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "performer_id")
     private Performer performer;
 

@@ -23,6 +23,8 @@ public class Song {
 
     private String title;
 
+    private String image;
+
     public Song() { }
 
 
@@ -31,17 +33,19 @@ public class Song {
     @JoinColumn(name = "album_id")
     private Album album;
 
-    public Song(String link, boolean isPendingReview, String title, Album album) {
+    public Song(String link, boolean isPendingReview, String title, String image, Album album) {
         this.link = link;
         this.isPendingReview = isPendingReview;
         this.title = title;
         this.album = album;
+        this.image = image;
     }
 
-    public Song(String link, boolean isPendingReview, String title) {
+    public Song(String link, boolean isPendingReview, String title, String image) {
         this.link = link;
         this.isPendingReview = isPendingReview;
         this.title = title;
+        this.image = image;
     }
 
     public UUID getId() {
@@ -81,5 +85,13 @@ public class Song {
 
     public void setAlbum(Album album) {
         this.album = album;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

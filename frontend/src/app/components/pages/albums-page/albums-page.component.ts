@@ -8,6 +8,7 @@ import { UpdateAlbumModalComponent } from "./ui/update-album-modal/update-album-
 import { DeleteAlbumModalComponent } from "./ui/delete-album-modal/delete-album-modal.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {AlbumTableComponent} from "./ui/album-table/album-table.component";
+import { AlbumAddPerformerRequest } from '../../../models/albums/album-add-performer-request';
 
 @Component({
   selector: 'app-albums-page',
@@ -60,11 +61,12 @@ export class AlbumsPageComponent implements OnInit {
     this.showCreationModal = false;
   }
 
-  onCreate(request: AlbumCreateRequest): void {
-    this.albumService.create(request).subscribe(
+  onCreate(event: {albumCreateRequest: AlbumCreateRequest, addArtistRequest: AlbumAddPerformerRequest}): void {
+    this.albumService.create(event.albumCreateRequest).subscribe(
       (response: Album) => {
         if (response) {
           this.albums = [...this.albums, response];
+          this.albumService.addPerformerToAlbum(response.id, event.addArtistRequest).subscribe(response => {});
         }
       },
       error => {

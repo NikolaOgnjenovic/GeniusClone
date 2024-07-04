@@ -28,7 +28,8 @@ export class UpdateSongModalComponent implements OnInit {
     this.updateSongForm = this.fb.group({
       title: ['', Validators.required],
       albumId: ['', Validators.required],
-      link: ['', Validators.required]
+      link: ['', Validators.required],
+      image: ['', Validators.required]
     });
   }
 
@@ -56,7 +57,8 @@ export class UpdateSongModalComponent implements OnInit {
       const request: SongUpdateRequest = {
         title: this.updateSongForm.value.title,
         albumId: this.updateSongForm.value.albumId,
-        link: this.updateSongForm.value.link
+        link: this.updateSongForm.value.link,
+        image: this.updateSongForm.value.image
       };
       this.update.emit(request);
     }

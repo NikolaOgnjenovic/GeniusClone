@@ -27,14 +27,14 @@
 
       <div *ngIf="selectedType === 'band'">
         <label for="band">Band</label>
-        <select multiple formControlName="band" id="band">
+        <select multiple="false" formControlName="band" id="band">
           <option *ngFor="let band of bands" [value]="band">{{ band.name }}</option>
         </select>
       </div>
 
       <div *ngIf="selectedType === 'artist'">
         <label for="artist">Performer</label>
-        <select multiple formControlName="artist" id="artist">
+        <select multiple="false" formControlName="artist" id="artist">
           <option *ngFor="let artist of artists" [value]="artist">{{ artist.name }}</option>
         </select>
       </div>

@@ -8,6 +8,7 @@ import { Genre } from "../../../../../models/as-is/genre";
 import {CommonModule, NgForOf} from "@angular/common";
 import {Artist} from "../../../../../models/as-is/artist";
 import {Band} from "../../../../../models/as-is/band";
+import { AlbumAddPerformerRequest } from '../../../../../models/albums/album-add-performer-request';
 
 @Component({
   selector: 'app-create-album-modal',
@@ -23,10 +24,10 @@ import {Band} from "../../../../../models/as-is/band";
 })
 export class CreateAlbumModalComponent implements OnInit {
   createAlbumForm: FormGroup;
-  @Output() create = new EventEmitter<AlbumCreateRequest>();
+  @Output() create = new EventEmitter<{albumCreateRequest: AlbumCreateRequest, addArtistRequest: AlbumAddPerformerRequest}>();
   @Output() close = new EventEmitter<void>();
   genres: Genre[] = [];
-  selectedType: string = "'band'";
+  selectedType: string = "band";
   bands: Band[] =  [];
   artists: Artist[] = [];
 
@@ -64,9 +65,14 @@ export class CreateAlbumModalComponent implements OnInit {
         releaseDate: this.createAlbumForm.value.releaseDate,
         coverArt: this.createAlbumForm.value.coverArt,
         genres: this.createAlbumForm.value.genres,
-
       };
-      this.create.emit(request);
+      const addPerformerReq: AlbumAddPerformerRequest = {
+        performerId: this.selectedType == "band" 
+          ? this.createAlbumForm.value.band.at(0).id 
+          : this.createAlbumForm.value.artist.at(0).id
+      };
+      console.log(this.createAlbumForm.value.band);
+      this.create.emit({albumCreateRequest: request, addArtistRequest: addPerformerReq});
     }
   }
 

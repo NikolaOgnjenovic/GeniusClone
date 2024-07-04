@@ -5,10 +5,6 @@ import { AlbumUpdateRequest } from "../../../../../models/albums/album-update-re
 import { GenreService } from "../../../../../services/genre.service";
 import { Genre } from "../../../../../models/as-is/genre";
 import {NgForOf, NgIf, CommonModule} from "@angular/common";
-import {Artist} from "../../../../../models/as-is/artist";
-import {Band} from "../../../../../models/as-is/band";
-import {BandService} from "../../../../../services/band.service";
-import {ArtistService} from "../../../../../services/artist.service";
 
 @Component({
   selector: 'app-update-album-modal',
@@ -30,30 +26,21 @@ export class UpdateAlbumModalComponent implements OnInit {
 
   updateAlbumForm: FormGroup;
   genres: Genre[] = [];
-  selectedType: string = "'band'";
-  bands: Band[] =  [];
-  artists: Artist[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private genreService: GenreService,
-    private bandService: BandService,
-    private artistService: ArtistService
+    private genreService: GenreService
   ) {
     this.updateAlbumForm = this.fb.group({
       title: ['', Validators.required],
       releaseDate: ['', Validators.required],
       coverArt: ['', Validators.required],
-      genres: [[]],
-      band: [[]],
-      artist: [[]]
+      genres: [[]]
     });
   }
 
   ngOnInit() {
     this.loadGenres();
-    this.loadArtists();
-    this.loadBands();
   }
 
   ngOnChanges() {
@@ -86,18 +73,6 @@ export class UpdateAlbumModalComponent implements OnInit {
   private loadGenres() {
     this.genreService.getAll().subscribe(response => {
       this.genres = response.genres;
-    });
-  }
-
-  private loadBands() {
-    this.bandService.getAll().subscribe(response => {
-      this.bands = response;
-    });
-  }
-
-  private loadArtists() {
-    this.artistService.getAll().subscribe(response => {
-      this.artists = response;
     });
   }
 }
