@@ -1,17 +1,24 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import { Album } from "../../../../../models/as-is/album";
 import { AlbumUpdateRequest } from "../../../../../models/albums/album-update-request";
 import { GenreService } from "../../../../../services/genre.service";
 import { Genre } from "../../../../../models/as-is/genre";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf, CommonModule} from "@angular/common";
+import {Artist} from "../../../../../models/as-is/artist";
+import {Band} from "../../../../../models/as-is/band";
+import {BandService} from "../../../../../services/band.service";
+import {ArtistService} from "../../../../../services/artist.service";
 
 @Component({
   selector: 'app-update-album-modal',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgForOf
+    NgForOf,
+    NgIf,
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './update-album-modal.component.html',
   styleUrl: './update-album-modal.component.css'
@@ -23,21 +30,30 @@ export class UpdateAlbumModalComponent implements OnInit {
 
   updateAlbumForm: FormGroup;
   genres: Genre[] = [];
+  selectedType: string = "'band'";
+  bands: Band[] =  [];
+  artists: Artist[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private genreService: GenreService
+    private genreService: GenreService,
+    private bandService: BandService,
+    private artistService: ArtistService
   ) {
     this.updateAlbumForm = this.fb.group({
       title: ['', Validators.required],
       releaseDate: ['', Validators.required],
       coverArt: ['', Validators.required],
-      genres: [[]]
+      genres: [[]],
+      band: [[]],
+      artist: [[]]
     });
   }
 
   ngOnInit() {
     this.loadGenres();
+    this.loadArtists();
+    this.loadBands();
   }
 
   ngOnChanges() {
@@ -70,6 +86,18 @@ export class UpdateAlbumModalComponent implements OnInit {
   private loadGenres() {
     this.genreService.getAll().subscribe(response => {
       this.genres = response.genres;
+    });
+  }
+
+  private loadBands() {
+    this.bandService.getAll().subscribe(response => {
+      this.bands = response;
+    });
+  }
+
+  private loadArtists() {
+    this.artistService.getAll().subscribe(response => {
+      this.artists = response;
     });
   }
 }
