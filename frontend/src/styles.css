@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #1F2544;    /* Dark Blue */
+  --secondary-color: #474F7A;  /* Slate Blue */
+  --accent-color: #81689D;     /* Purple */
+  --highlight-color: #f5d0ff;  /* Light Pink */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background-color: var(--primary-color);
+  color: var(--highlight-color);
+}

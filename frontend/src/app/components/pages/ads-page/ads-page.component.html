@@ -1,0 +1,9 @@
+<div class="cards-container">
+    <div *ngFor="let ad of ads" class="card">
+      <img [src]="ad.image" alt="Card image" class="card-img">
+      <div class="card-body">
+        <a [href]="ad.link">Check this out!</a>
+      </div>
+    </div>
+  </div>
+  

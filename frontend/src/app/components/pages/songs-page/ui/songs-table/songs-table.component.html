@@ -1,0 +1,25 @@
+<table class="songs-table">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Song Title</th>
+      <th>Album</th>
+      <th>Performer</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let song of songs">
+      <td><img [src]="song.image" alt="Picture"></td>
+      <td>{{ song.title }}</td>
+      <td>{{ song.album.title }}</td>
+      <td>{{ song.album.performer.name }}</td>
+      <td>
+        <div class="button-container">
+          <button (click)="onUpdate(song)">Update</button>
+          <button (click)="onDelete(song)">Delete</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>

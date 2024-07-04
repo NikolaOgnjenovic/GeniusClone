@@ -1,0 +1,13 @@
+<div class="cards-container">
+    <div *ngFor="let playlist of playlists" class="card">
+      <img [src]="playlist.image" alt="Playlist Image" class="card-img">
+      <div class="card-body" (click)="visitPlaylist(playlist)">
+        <h5 class="card-title">{{ playlist.name }}</h5>
+      </div>
+      <div class="button-container">
+        <button (click)="onUpdate(playlist)">Update</button>
+        <button (click)="onDelete(playlist)">Delete</button>
+      </div>
+    </div>
+  </div>
+  

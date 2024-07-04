@@ -1,0 +1,23 @@
+<div class="cards-container">
+  <div *ngFor="let album of albums" class="card">
+    <div class="card">
+      <img [src]="album.coverArt" alt="Album Cover" class="card-img">
+      <div class="card-body">
+        <h5 class="card-title">{{ album.title }}</h5>
+        <p class="card-text">Release Date: {{ album.releaseDate | date }}</p>
+        <p class="card-text">Performer: {{ album.performer.name }}</p>
+        <p class="card-text">
+          Genres:
+          <span *ngFor="let genre of album.genres">
+            {{ genre.name }}
+            <span *ngIf="!last">, </span>
+          </span>
+        </p>
+        <div class="button-container">
+          <button (click)="onUpdate(album)">Update</button>
+          <button (click)="onDelete(album)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
