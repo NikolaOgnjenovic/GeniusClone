@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Album} from "../../../../../models/as-is/album";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {last} from "rxjs";
+import {AuthState} from "../../../../../state/auth-state";
 
 @Component({
   selector: 'app-album-table',
@@ -18,6 +19,8 @@ export class AlbumTableComponent {
   @Input() albums!: Album[];
   @Output() update = new EventEmitter<Album>();
   @Output() delete = new EventEmitter<Album>();
+
+  constructor(protected readonly authState: AuthState) {}
 
   onUpdate(album: Album): void {
     this.update.emit(album);

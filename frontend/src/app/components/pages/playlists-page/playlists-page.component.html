@@ -1,4 +1,4 @@
-<button class="create-button" (click)="onCreatePlaylist()">Create</button>
+<button *ngIf="authState.getCurrentUser()" class="create-button" (click)="onCreatePlaylist()">Create</button>
 <app-playlist-table
 [playlists]="playlists"
 (update)="onUpdatePlaylist($event)"

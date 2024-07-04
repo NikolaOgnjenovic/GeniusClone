@@ -51,6 +51,18 @@ export class AuthState {
     localStorage.removeItem(this.currentUserKey);
   }
 
+  currentUserIsModerator(): boolean {
+    return this.getCurrentUser()?.roles.includes(UserRole.MODERATOR);
+  }
+
+  currentUserIsAdmin(): boolean {
+    return this.getCurrentUser()?.roles.includes(UserRole.ADMIN);
+  }
+
+  currentUserIsAdminOrModerator(): boolean {
+    return this.currentUserIsModerator() || this.currentUserIsAdmin();
+  }
+
   private storeCurrentUser(user: User): void {
     localStorage.setItem(this.currentUserKey, JSON.stringify(user));
   }
@@ -72,5 +84,4 @@ export class AuthState {
     const playlists = 'playlists' in user ? user.playlists : [];
     return { ...user, roles, playlists };
   }
-  
 }
