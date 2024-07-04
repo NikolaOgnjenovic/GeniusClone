@@ -51,6 +51,7 @@ export class PlaylistsPageComponent {
   }
 
   onDeletePlaylist(playlist: Playlist) {
+    console.log(playlist);
     this.selectedPlaylist = playlist;
     this.showDeleteModal = true;
   }
@@ -71,6 +72,7 @@ export class PlaylistsPageComponent {
   }
 
   onVisitPlaylist(playlist: Playlist) { 
+    console.log(playlist);
     this.router.navigate(['/playlists', playlist.id], {state: {playlist: playlist}});
   }
 }

@@ -8,6 +8,7 @@ import { PlaylistCreateRequest } from '../../../../../models/playlists/palylist-
 import { User } from '../../../../../models/as-is/user';
 import { PlaylistService } from '../../../../../services/playlist.service';
 import { PlaylistSongsUpdateRequest } from '../../../../../models/playlists/playlist-songs-request';
+import { AlbumService } from '../../../../../services/albums.service';
 
 @Component({
   selector: 'app-create-playlist-page',
@@ -26,7 +27,8 @@ export class CreatePlaylistPageComponent {
   selectedSongs: Song[] = [];
   user!: User;
 
-  constructor(private playlistService: PlaylistService, private SongService: SongsService, private fb: FormBuilder, private router: Router) {
+  constructor(private playlistService: PlaylistService, private SongService: SongsService,
+     private fb: FormBuilder, private router: Router, private albumService: AlbumService) {
     this.createPlaylistForm = this.fb.group({
     name: ['', Validators.required]
     });
@@ -38,6 +40,22 @@ export class CreatePlaylistPageComponent {
     }
     this.SongService.getAll().subscribe((response) => {
       this.songs = response;
+      var newSongs = [];
+      for(var song of this.songs) {
+        if (typeof song.album === 'string') {
+          for(var foundSong of newSongs) {
+            if (foundSong.album.id === song.album) {
+              var populatedSong: Song;
+              populatedSong = song;
+              populatedSong.album = foundSong.album;
+              newSongs.push(populatedSong);
+            }
+          } 
+        } else {
+          newSongs.push(song);
+        }
+      }
+      this.songs = newSongs;
     })
   }
 
