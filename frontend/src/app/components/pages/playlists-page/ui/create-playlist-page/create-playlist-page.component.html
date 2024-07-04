@@ -12,6 +12,7 @@
     <h2>Selected songs for playlist</h2>
     <div class="cards-container">
         <div *ngFor="let song of selectedSongs" class="card" (click)="removeSong(song)">
+            <img [src]="song.image" alt="Song image" class="card-img">
           <div class="card-body">
             <h5 class="card-title">{{ song.title }}</h5>
             <p class="card-text">{{ song.album.title }}</p>
@@ -22,6 +23,7 @@
     <h2>Available songs</h2>
     <div class="cards-container">
         <div *ngFor="let song of songs" class="card" (click)="addSong(song)">
+            <img [src]="song.image" alt="Song image" class="card-img">
           <div class="card-body">
             <h5 class="card-title">{{ song.title }}</h5>
             <p class="card-text">{{ song.album.title }}</p>
