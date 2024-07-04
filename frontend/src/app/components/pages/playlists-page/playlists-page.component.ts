@@ -35,7 +35,6 @@ export class PlaylistsPageComponent {
     this.playlistService.getByUserId(this.user.id).subscribe(response => {
       if (response) {
         this.playlists = response;
-        console.log(this.playlists);
       }
     });
   }
@@ -52,6 +51,7 @@ export class PlaylistsPageComponent {
   }
 
   onDeletePlaylist(playlist: Playlist) {
+    console.log(playlist);
     this.selectedPlaylist = playlist;
     this.showDeleteModal = true;
   }
@@ -72,6 +72,7 @@ export class PlaylistsPageComponent {
   }
 
   onVisitPlaylist(playlist: Playlist) { 
+    console.log(playlist);
     this.router.navigate(['/playlists', playlist.id], {state: {playlist: playlist}});
   }
 }
