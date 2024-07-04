@@ -17,6 +17,7 @@ public class Playlist {
     @GeneratedValue
     private UUID id;
 
+    private String image;
     private String name;
 
     @JsonIgnoreProperties("playlists")
@@ -33,17 +34,19 @@ public class Playlist {
     )
     private List<Song> songs;
 
-    public Playlist(String name, User user)
+    public Playlist(String name, User user, String image)
     {
         this.name = name;
         this.user = user;
+        this.image = image;
     }
 
-    public Playlist(String name, User user, List<Song> songs)
+    public Playlist(String name, User user, List<Song> songs, String image)
     {
         this.name = name;
         this.user = user;
         this.songs = songs;
+        this.image = image;
     }
 
     public Playlist() {}
@@ -83,4 +86,12 @@ public class Playlist {
     public void addSong(Song song) { this.songs.add(song); }
 
     public void removeSong(Song song) { this.songs.remove(song); }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }

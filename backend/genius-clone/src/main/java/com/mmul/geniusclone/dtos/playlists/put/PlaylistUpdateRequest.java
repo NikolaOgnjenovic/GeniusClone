@@ -5,5 +5,5 @@ import com.mmul.geniusclone.models.User;
 
 import java.util.List;
 
-public record PlaylistUpdateRequest(String name, User user, List<Song> songs) {
+public record PlaylistUpdateRequest(String name, User user, List<Song> songs, String image) {
 }

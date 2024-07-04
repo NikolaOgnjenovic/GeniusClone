@@ -54,7 +54,7 @@ public class PlaylistService implements IPlaylistService {
     @Transactional
     public Playlist create(PlaylistCreateRequest request) {
         User user = authService.getById(request.user().getId());
-        Playlist playlist_req = new Playlist(request.name(), user, request.songs());
+        Playlist playlist_req = new Playlist(request.name(), user, request.songs(), request.image());
         Playlist playlist = playlistRepository.save(playlist_req);
         user.addPlaylist(playlist);
         authService.update(user);
@@ -71,6 +71,7 @@ public class PlaylistService implements IPlaylistService {
         detachedUser.removePlaylist(existingPlaylist);
         existingPlaylist.setName(request.name());
         existingPlaylist.setSongs(request.songs());
+        existingPlaylist.setImage(request.image());
 
         Playlist updatedPlaylist = playlistRepository.save(existingPlaylist);
         detachedUser.addPlaylist(updatedPlaylist);

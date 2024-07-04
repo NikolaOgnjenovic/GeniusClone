@@ -6,4 +6,5 @@ export interface PlaylistGetResponse {
     name: string;
     user: User;
     songs: Song[];
+    image: string;
 }

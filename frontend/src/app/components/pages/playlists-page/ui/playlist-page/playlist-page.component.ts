@@ -26,14 +26,14 @@ export class PlaylistPageComponent {
     }
     var songs: Song[] = [];
     for(var song of this.playlist.songs) {
-      if (typeof song === 'string') {
-        this.songsService.get(song).subscribe(data => {
-          songs.push(data);
-        })
-      } else {
-        songs.push(song);
-      }
+      console.log(song.id);
+      this.songsService.get(song.id).subscribe(data => {
+        console.log(data);
+        songs.push(data);
+      })
+
     }
     this.playlist.songs = songs;
+    console.log(this.playlist.songs);
   }
 }
