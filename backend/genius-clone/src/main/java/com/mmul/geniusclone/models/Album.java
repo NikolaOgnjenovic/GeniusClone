@@ -35,7 +35,7 @@ public class Album {
     @JoinColumn(name = "performer_id")
     private Performer performer;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "album", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Song> songs;
 
 
