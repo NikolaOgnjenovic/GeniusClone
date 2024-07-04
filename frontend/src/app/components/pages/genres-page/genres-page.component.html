@@ -1,4 +1,4 @@
-<button class="create-button" (click)="onCreateGenre()">Create</button>
+<button *ngIf="authState.currentUserIsAdmin()" class="create-button" (click)="onCreateGenre()">Create</button>
 <app-genres-table
   [genres]="genres"
   (update)="onUpdateGenre($event)"

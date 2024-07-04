@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { GenresTableComponent } from './ui/genres-table/genres-table.component';
 import { DeleteGenreModalComponent } from './ui/delete-genre-modal/delete-genre-modal.component';
@@ -8,6 +8,7 @@ import {GenreService} from "../../../services/genre.service";
 import {GetGenresReponse} from "../../../models/genres/genre-get-all-response";
 import {Genre} from "../../../models/as-is/genre";
 import {GenreCreateRequest} from "../../../models/genres/genre-create-request";
+import {AuthState} from "../../../state/auth-state";
 
 @Component({
   selector: 'app-genres-page',
@@ -23,14 +24,14 @@ import {GenreCreateRequest} from "../../../models/genres/genre-create-request";
   templateUrl: './genres-page.component.html',
   styleUrl: './genres-page.component.css'
 })
-export class GenresPageComponent {
+export class GenresPageComponent implements OnInit {
   genres: Genre[] = [];
   showCreationModal = false;
   showUpdateModal = false;
   showDeleteModal = false;
   selectedGenre!: Genre;
 
-  constructor(private readonly genreService: GenreService) { }
+  constructor(private readonly genreService: GenreService, protected readonly authState: AuthState) { }
 
   ngOnInit(): void {
     this.genreService.getAll().subscribe((response: GetGenresReponse) => {

@@ -1,4 +1,4 @@
-<button class="create-button" (click)="onCreateArtist()">Create</button>
+<button *ngIf="authState.currentUserIsAdminOrModerator()" class="create-button" (click)="onCreateArtist()">Create</button>
 <app-artists-table
 [artists]="artists"
 (update)="onUpdateArtist($event)"

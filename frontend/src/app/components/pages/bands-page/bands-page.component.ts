@@ -9,6 +9,7 @@ import {Band} from "../../../models/as-is/band";
 import {BandCreateRequest} from "../../../models/bands/band-create-request";
 import {Artist} from "../../../models/as-is/artist";
 import { ArtistService } from '../../../services/artist.service';
+import {AuthState} from "../../../state/auth-state";
 
 @Component({
   selector: 'app-bands-page',
@@ -31,7 +32,7 @@ export class BandsPageComponent implements OnInit {
   showDeleteModal = false;
   selectedBand!: Band;
 
-  constructor(private readonly bandService: BandService, private readonly artistService: ArtistService) { }
+  constructor(private readonly bandService: BandService, private readonly artistService: ArtistService, protected readonly authState: AuthState) { }
 
   ngOnInit(): void {
     this.bandService.getAll().subscribe((response: Band[]) => {

@@ -15,7 +15,7 @@
       <td>{{ song.album.title }}</td>
       <td>{{ song.album.performer.name }}</td>
       <td>
-        <div class="button-container">
+        <div *ngIf="authState.currentUserIsAdminOrModerator()" class="button-container">
           <button (click)="onUpdate(song)">Update</button>
           <button (click)="onDelete(song)">Delete</button>
         </div>

@@ -1,4 +1,4 @@
-<button class="create-button" (click)="onCreateBand()">Create</button>
+<button *ngIf="authState.currentUserIsAdminOrModerator()" class="create-button" (click)="onCreateBand()">Create</button>
 <app-bands-table
   [bands]="bands"
   (update)="onUpdateBand($event)"

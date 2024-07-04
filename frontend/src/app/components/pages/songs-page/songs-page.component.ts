@@ -8,6 +8,7 @@ import {SongsService} from "../../../services/songs.service";
 import {Song} from "../../../models/as-is/song";
 import {SongCreateRequest} from "../../../models/songs/song-create-request";
 import {SongUpdateRequest} from "../../../models/songs/song-update-request";
+import {AuthState} from "../../../state/auth-state";
 
 @Component({
   selector: 'app-songs-page',
@@ -30,7 +31,7 @@ export class SongsPageComponent implements OnInit {
   showDeleteModal: boolean = false;
   showCreationModal: boolean = false;
 
-  constructor(private songService: SongsService) {}
+  constructor(private songService: SongsService, protected readonly authState: AuthState) {}
 
   ngOnInit(): void {
     this.songService.getAll().subscribe((response: Song[]) => {

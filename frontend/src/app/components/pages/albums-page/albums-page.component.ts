@@ -9,6 +9,7 @@ import { DeleteAlbumModalComponent } from "./ui/delete-album-modal/delete-album-
 import {NgForOf, NgIf} from "@angular/common";
 import {AlbumTableComponent} from "./ui/album-table/album-table.component";
 import { AlbumAddPerformerRequest } from '../../../models/albums/album-add-performer-request';
+import {AuthState} from "../../../state/auth-state";
 
 @Component({
   selector: 'app-albums-page',
@@ -31,7 +32,7 @@ export class AlbumsPageComponent implements OnInit {
   showCreationModal: boolean = false;
   showDeleteModal: boolean = false;
 
-  constructor(private albumService: AlbumService) {}
+  constructor(private albumService: AlbumService, protected readonly authState: AuthState) {}
 
   ngOnInit(): void {
     this.loadAlbums();
