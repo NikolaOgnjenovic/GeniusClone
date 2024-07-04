@@ -39,11 +39,8 @@ public abstract class Performer {
         this.albums.add(album);
     }
 
-    ;
-
     public void removeAlbum(Album album) {
         this.albums.remove(album);
     }
 
-    ;
 }
