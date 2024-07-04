@@ -51,7 +51,7 @@ export class CreatePlaylistPageComponent {
               populatedSong.album = foundSong.album;
               newSongs.push(populatedSong);
             }
-          } 
+          }
         } else {
           newSongs.push(song);
         }
@@ -77,12 +77,21 @@ export class CreatePlaylistPageComponent {
   }
 
   onCreate() {
-    if (!this.createPlaylistForm.valid) 
+    if (!this.createPlaylistForm.valid)
       return;
+    var songsToAdd: Song[] = [];
+    this.selectedSongs.forEach(song => {
+      var newSong = JSON.parse(JSON.stringify(song));
+      // @ts-ignore
+      delete newSong.album;
+      // @ts-ignore
+      newSong.album = undefined;
+      songsToAdd.push(newSong)
+    });
     const request: PlaylistCreateRequest = {
       name: this.createPlaylistForm.value.name,
       user: this.user,
-      songs: this.selectedSongs,
+      songs: songsToAdd,
       image: this.createPlaylistForm.value.image
     }
     this.playlistService.create(request).subscribe(response => {

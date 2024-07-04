@@ -67,11 +67,10 @@ export class CreateAlbumModalComponent implements OnInit {
         genres: this.createAlbumForm.value.genres,
       };
       const addPerformerReq: AlbumAddPerformerRequest = {
-        performerId: this.selectedType == "band" 
-          ? this.createAlbumForm.value.band.at(0).id 
+        performerId: this.selectedType == "band"
+          ? this.createAlbumForm.value.band.at(0).id
           : this.createAlbumForm.value.artist.at(0).id
       };
-      console.log(this.createAlbumForm.value.band);
       this.create.emit({albumCreateRequest: request, addArtistRequest: addPerformerReq});
     }
   }
