@@ -1,6 +1,6 @@
 <div class="albums-page">
   <h2>Albums</h2>
-  <button class="create-button" (click)="onCreateAlbum()">Create</button>
+  <button *ngIf="authState.currentUserIsAdminOrModerator()" class="create-button" (click)="onCreateAlbum()">Create</button>
 
   <app-create-album-modal
     *ngIf="showCreationModal"

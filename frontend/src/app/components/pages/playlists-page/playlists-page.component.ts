@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { PlaylistTableComponent } from './ui/playlist-table/playlist-table.component';
 import { Playlist } from '../../../models/as-is/playlist';
 import { PlaylistService } from '../../../services/playlist.service';
@@ -8,6 +8,7 @@ import { CreatePlaylistPageComponent } from './ui/create-playlist-page/create-pl
 import { PlaylistCreateRequest } from '../../../models/playlists/palylist-create-request';
 import { Router } from '@angular/router';
 import { DeletePlaylistPageComponent } from './ui/delete-playlist-page/delete-playlist-page.component';
+import {AuthState} from "../../../state/auth-state";
 
 @Component({
   selector: 'app-playlists-page',
@@ -22,13 +23,13 @@ import { DeletePlaylistPageComponent } from './ui/delete-playlist-page/delete-pl
   templateUrl: './playlists-page.component.html',
   styleUrl: './playlists-page.component.css'
 })
-export class PlaylistsPageComponent {
+export class PlaylistsPageComponent implements OnInit {
   playlists: Playlist[] = [];
   user!: User;
   showDeleteModal: boolean = false;
   selectedPlaylist!: Playlist;
 
-  constructor(private playlistService: PlaylistService, private router: Router) {}
+  constructor(private playlistService: PlaylistService, private router: Router, protected readonly authState: AuthState) {}
 
   ngOnInit() {
     this.getUser();

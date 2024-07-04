@@ -8,6 +8,7 @@ import {Artist} from "../../../models/as-is/artist";
 import {ArtistService} from "../../../services/artist.service";
 import {ArtistCreateRequest} from "../../../models/artists/artist-create-request";
 import {ArtistUpdateRequest} from "../../../models/artists/artist-update-request";
+import {AuthState} from "../../../state/auth-state";
 
 @Component({
   selector: 'app-artists-page',
@@ -30,7 +31,7 @@ export class ArtistsPageComponent {
   showCreationModal: boolean = false;
   showDeleteModal: boolean = false;
 
-  constructor(private artistService: ArtistService) {}
+  constructor(private artistService: ArtistService, protected readonly authState: AuthState) {}
 
   ngOnInit() {
     this.artistService.getAll().subscribe((response: Artist[]) => {

@@ -6,7 +6,7 @@
       <div *ngFor="let member of band.members">
         <p>{{member.name}}</p>
       </div>
-      <div class="button-container">
+      <div *ngIf="authState.currentUserIsAdminOrModerator()" class="button-container">
         <button (click)="onUpdate(band)">Update</button>
         <button (click)="onDelete(band)">Delete</button>
       </div>
