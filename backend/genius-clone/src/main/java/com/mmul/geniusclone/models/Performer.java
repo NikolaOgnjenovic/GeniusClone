@@ -16,7 +16,7 @@ public abstract class Performer {
     @GeneratedValue
     protected UUID id;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "performer", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "performer", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Album> albums;
 
     public UUID getId() {
