@@ -28,18 +28,11 @@ public class Song {
 
     public Song() { }
 
-
     @JsonIgnoreProperties("songs")
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "album_id")
     private Album album;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "song", cascade = CascadeType.ALL)
-    private List<Review> reviews;
-
-    @JsonIgnoreProperties("songs")
-    @ManyToMany(mappedBy = "songs", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Playlist> playlists;
 
     public Song(String link, boolean isPendingReview, String title, String image, Album album) {
         this.link = link;
