@@ -14,6 +14,7 @@ import com.mmul.geniusclone.models.Performer;
 import com.mmul.geniusclone.repositories.performers.PerformerRepository;
 import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import com.mmul.geniusclone.services.interfaces.IGenreService;
+import com.mmul.geniusclone.services.interfaces.ISongService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +27,13 @@ public class AlbumService implements IAlbumService {
     private final AlbumRepository albumRepository;
     private final PerformerRepository performerRepository;
     private final IGenreService genreService;
+    private final ISongService songService;
 
-    public AlbumService(AlbumRepository albumRepository, PerformerRepository performerRepository, IGenreService genreService) {
+    public AlbumService(AlbumRepository albumRepository, PerformerRepository performerRepository, IGenreService genreService, ISongService songService) {
         this.albumRepository = albumRepository;
         this.performerRepository = performerRepository;
         this.genreService = genreService;
+        this.songService = songService;
     }
 
     @Override
@@ -38,8 +41,13 @@ public class AlbumService implements IAlbumService {
         return albumRepository.findById(id).orElse(null);
     }
 
+
     @Override
+    @Transactional
     public void delete(UUID id) {
+        for(Song song: albumRepository.findById(id).get().songs){
+            songService.delete(song.getId());
+        }
         albumRepository.deleteById(id);
     }
 

@@ -14,12 +14,12 @@ public class Review {
 
     @JsonIgnoreProperties("reviews")
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     User user;
 
     @JsonIgnoreProperties("reviews")
     @ManyToOne
-    @JoinColumn(name = "song_id", nullable = false)
+    @JoinColumn(name = "song_id")
     Song song;
 
     short value;

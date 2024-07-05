@@ -54,8 +54,8 @@ public class SongService implements ISongService {
         return songRepository.findAll();
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void delete(UUID songId) {
         this.playlistRepository.findAll().forEach(playlist -> {
             playlist.getSongs().removeIf(song -> song.getId().equals(songId));

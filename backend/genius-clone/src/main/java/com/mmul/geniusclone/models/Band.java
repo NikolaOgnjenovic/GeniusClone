@@ -16,7 +16,7 @@ public class Band extends Performer {
     }
 
     @JsonIgnoreProperties({"memberOf", "albums"})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "band_artist",
             joinColumns = @JoinColumn(name = "band_id"),

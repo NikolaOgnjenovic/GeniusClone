@@ -4,10 +4,13 @@ import com.mmul.geniusclone.dtos.band.BandAddArtistRequest;
 import com.mmul.geniusclone.dtos.band.BandCreateRequest;
 import com.mmul.geniusclone.dtos.band.BandRemoveArtistRequest;
 import com.mmul.geniusclone.dtos.band.BandUpdateRequest;
+import com.mmul.geniusclone.models.Album;
 import com.mmul.geniusclone.models.Artist;
 import com.mmul.geniusclone.models.Band;
+import com.mmul.geniusclone.models.Song;
 import com.mmul.geniusclone.repositories.artists.ArtistRepository;
 import com.mmul.geniusclone.repositories.band.BandRepository;
+import com.mmul.geniusclone.services.interfaces.IAlbumService;
 import com.mmul.geniusclone.services.interfaces.IBandService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +24,12 @@ public class BandService implements IBandService
 {
     private final BandRepository bandRepository;
     private final ArtistRepository artistRepository;
+    private final IAlbumService albumService;
 
-    public BandService(BandRepository bandRepository, ArtistRepository artistRepository) {
+    public BandService(BandRepository bandRepository, ArtistRepository artistRepository, IAlbumService albumService) {
         this.bandRepository = bandRepository;
         this.artistRepository = artistRepository;
+        this.albumService = albumService;
     }
 
     public Band getById(UUID id) {
@@ -51,7 +56,12 @@ public class BandService implements IBandService
         return bandRepository.findAll();
     }
 
-    public void delete(UUID id) {
+
+    public void delete(UUID id)
+    {
+        for(Album album: bandRepository.findById(id).get().albums){
+            albumService.delete(album.getId());
+        }
         bandRepository.deleteById(id);
     }
 
