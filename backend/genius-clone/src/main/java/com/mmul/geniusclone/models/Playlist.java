@@ -26,8 +26,7 @@ public class Playlist {
     private User user;
 
     @JsonIgnoreProperties("album")
-    @ManyToMan
-    
+    @ManyToMany
     @JoinTable(
             name = "playlist_song",
             joinColumns = @JoinColumn(name = "playlist_id"),
